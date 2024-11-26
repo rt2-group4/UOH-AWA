@@ -1,0 +1,21 @@
+/* css/styles.css */
+
+/* Ensure footer stays at the bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.study-plan-count {
+    font-weight: bold;
+}
