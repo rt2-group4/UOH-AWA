@@ -1,0 +1,120 @@
+<!-- study-plan.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessibleWebApp - Study Plan</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="mb-0">AccessibleWebApp</h1>
+            <nav>
+                <a href="index.html" class="text-white me-3">Home</a>
+                <span>Study Plan (<span class="study-plan-count">0</span>)</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <h2 class="mb-4">Your Study Plan</h2>
+
+        <div class="mb-4">
+            <h4>Studying Now:</h4>
+            <div id="studying-now" class="card p-3">
+                <!-- Currently Studying Topic -->
+            </div>
+        </div>
+
+        <div>
+            <h4>Studying Next:</h4>
+            <div id="studying-next" class="row row-cols-1 row-cols-md-2 g-4">
+                <!-- Study Plan Topics -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-muted py-3">
+        <div class="container">
+            <p>&copy; 2024 AccessibleWebApp Team | University Project</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies (Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script>
+        // Display Studying Now
+        const studyingNow = getStudyingNow();
+        const studyingNowDiv = document.getElementById('studying-now');
+
+        if (studyingNow) {
+            const topic = topics.find(t => t.id === studyingNow.topicId);
+            if (topic) {
+                studyingNowDiv.innerHTML = `
+                    <h5>${topic.title}</h5>
+                    <p>Estimated Time: ${topic.estimatedTime} minutes</p>
+                `;
+            } else {
+                studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
+            }
+        } else {
+            studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
+        }
+
+        // Display Study Plan
+        const studyPlan = getStudyPlan();
+        const studyingNextDiv = document.getElementById('studying-next');
+
+        if (studyPlan.length === 0) {
+            studyingNextDiv.innerHTML = '<p>Your study plan is empty.</p>';
+        } else {
+            studyPlan.forEach(topicId => {
+                const topic = topics.find(t => t.id === topicId);
+                if (topic) {
+                    const col = document.createElement('div');
+                    col.className = 'col';
+
+                    const card = document.createElement('div');
+                    card.className = 'card h-100';
+
+                    const cardBody = document.createElement('div');
+                    cardBody.className = 'card-body';
+
+                    const cardTitle = document.createElement('h5');
+                    cardTitle.className = 'card-title';
+                    cardTitle.textContent = topic.title;
+
+                    const estimatedTime = document.createElement('p');
+                    estimatedTime.className = 'card-text';
+                    estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} minutes`;
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'btn btn-danger';
+                    removeBtn.textContent = 'Remove';
+                    removeBtn.onclick = () => removeFromStudyPlan(topic.id);
+
+                    cardBody.appendChild(cardTitle);
+                    cardBody.appendChild(estimatedTime);
+                    cardBody.appendChild(removeBtn);
+
+                    card.appendChild(cardBody);
+                    col.appendChild(card);
+                    studyingNextDiv.appendChild(col);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
