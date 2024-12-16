@@ -5,7 +5,7 @@ const topics = [
     {
         id: 1,
         title: "Introduction to Accessibility",
-        image: "/UOH-AWA/assets/images/accessibility.webp",
+        image: "/assets/images/accessibility.webp",
         description: "Learn the basics of web accessibility and its importance.",
         estimatedTime: 30,
         prerequisites: [],
@@ -19,7 +19,7 @@ const topics = [
     {
         id: 2,
         title: "Semantic HTML",
-        image: "/UOH-AWA/assets/images/semantic-html.webp",
+        image: "/assets/images/semantic-html.webp",
         description: "Understand the role of semantic HTML in accessibility.",
         estimatedTime: 45,
         prerequisites: [1],
@@ -102,7 +102,7 @@ function addToStudyPlanFromDetails(topicId) {
 // Function to start studying from Topic Details
 function startStudyingFromDetails(topicId) {
     setStudyingNow(topicId);
-    window.location.href = '/UOH-AWA/components/pages/learning-activities.html';
+    window.location.href = '/components/pages/learning-activities.html';
 }
 
 // Function to populate nav links dynamically based on selected page
@@ -113,13 +113,13 @@ function populateNavLinks() {
     // Get the current page's URL
     const currentPage = window.location.pathname;
     const studyPlanLink = {
-        href: '/UOH-AWA/components/pages/study-plan.html',
+        href: '/components/pages/study-plan.html',
         text: 'Study Plan',
         countClass: 'study-plan-count',
         count: studyPlanCount,
         classes: 'text-white me-3',
     };
-    const homeLink = { href: '/UOH-AWA/index.html', text: 'Home', classes: 'text-white me-3' };
+    const homeLink = { href: '/index.html', text: 'Home', classes: 'text-white me-3' };
 
     // Define links for each page
     const links = {
@@ -169,7 +169,7 @@ function populateNavLinks() {
 // Function to dynamically load header component
 async function loadHeader() {
     const headerContainer = document.getElementById('header');
-    const response = await fetch('/UOH-AWA/components/shared/header.html');
+    const response = await fetch('/components/shared/header.html');
     if (response.ok) {
         const headerHTML = await response.text();
         headerContainer.innerHTML = headerHTML;
@@ -184,7 +184,7 @@ async function loadHeader() {
 // Function to dynamically load footer component
 async function loadFooter() {
     const footerContainer = document.getElementById('footer');
-    const response = await fetch('/UOH-AWA/components/shared/footer.html');
+    const response = await fetch('/components/shared/footer.html');
     if (response.ok) {
         const footerHTML = await response.text();
         footerContainer.innerHTML = footerHTML;
