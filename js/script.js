@@ -5,7 +5,7 @@ const topics = [
     {
         id: 1,
         title: "Introduction to Accessibility",
-        image: "images/accessibility.jpg",
+        image: "/assets/images/accessibility.webp",
         description: "Learn the basics of web accessibility and its importance.",
         estimatedTime: 30,
         prerequisites: [],
@@ -19,7 +19,7 @@ const topics = [
     {
         id: 2,
         title: "Semantic HTML",
-        image: "images/semantic-html.jpg",
+        image: "/assets/images/semantic-html.webp",
         description: "Understand the role of semantic HTML in accessibility.",
         estimatedTime: 45,
         prerequisites: [1],
@@ -60,6 +60,15 @@ function addToStudyPlan(topicId) {
     updateStudyPlanCount();
 }
 
+// Function to update Study Plan Count in Navbar
+function updateStudyPlanCount() {
+    const count = getStudyPlan().length;
+    const elements = document.querySelectorAll('.study-plan-count');
+    elements.forEach(el => {
+        el.textContent = count;
+    });
+}
+
 // Function to remove from Study Plan
 function removeFromStudyPlan(topicId) {
     let studyPlan = getStudyPlan();
@@ -93,17 +102,98 @@ function addToStudyPlanFromDetails(topicId) {
 // Function to start studying from Topic Details
 function startStudyingFromDetails(topicId) {
     setStudyingNow(topicId);
-    window.location.href = 'learning-activities.html';
+    window.location.href = '/components/pages/learning-activities.html';
 }
 
-// Function to update Study Plan Count in Navbar
-function updateStudyPlanCount() {
-    const count = getStudyPlan().length;
-    const elements = document.querySelectorAll('.study-plan-count');
-    elements.forEach(el => {
-        el.textContent = count;
-    });
+// Function to populate nav links dynamically based on selected page
+function populateNavLinks() {
+    const navLinks = document.getElementById('nav-links');
+    const studyPlanCount = getStudyPlan().length;
+
+    // Get the current page's URL
+    const currentPage = window.location.pathname;
+    const studyPlanLink = {
+        href: '/components/pages/study-plan.html',
+        text: 'Study Plan',
+        countClass: 'study-plan-count',
+        count: studyPlanCount,
+        classes: 'text-white me-3',
+    };
+    const homeLink = { href: '/index.html', text: 'Home', classes: 'text-white me-3' };
+
+    // Define links for each page
+    const links = {
+        'index.html': [
+            studyPlanLink,
+        ],
+        'components/pages/learning-activities.html': [
+            homeLink,
+            studyPlanLink
+        ],
+        'components/pages/study-plan.html': [
+            homeLink,
+            studyPlanLink
+        ],
+        'components/pages/topic-details.html': [
+            homeLink,
+            studyPlanLink
+        ],
+    };
+
+    // Default links if the current page isn't explicitly listed
+    const defaultLinks = [
+        homeLink,
+        studyPlanLink
+    ];
+
+    // Get links for the current page or fallback to default links
+    const pageLinks = links[currentPage] || defaultLinks;
+
+    navLinks.innerHTML = pageLinks
+        .map(link => {
+            if (link.countClass) {
+                // If the link has a count (e.g., Study Plan)
+                return `
+                    <a href="${link.href}" class="${link.classes}">
+                        ${link.text} (<span class="${link.countClass}">${link.count}</span>)
+                    </a>
+                `;
+            } else {
+                // Regular link
+                return `<a href="${link.href}" class="${link.classes}">${link.text}</a>`;
+            }
+        })
+        .join('');
 }
 
-// Call updateStudyPlanCount on script load
-document.addEventListener('DOMContentLoaded', updateStudyPlanCount);
+// Function to dynamically load header component
+async function loadHeader() {
+    const headerContainer = document.getElementById('header');
+    const response = await fetch('/components/shared/header.html');
+    if (response.ok) {
+        const headerHTML = await response.text();
+        headerContainer.innerHTML = headerHTML;
+
+        // Call function to customize links
+        populateNavLinks();
+    } else {
+        console.error('Failed to load header:', response.statusText);
+    }
+}
+
+// Function to dynamically load footer component
+async function loadFooter() {
+    const footerContainer = document.getElementById('footer');
+    const response = await fetch('/components/shared/footer.html');
+    if (response.ok) {
+        const footerHTML = await response.text();
+        footerContainer.innerHTML = footerHTML;
+    } else {
+        console.error(`Failed to load ${footerComponent}: ${response.statusText}`);
+    }
+}
+
+// Inject header component on script load
+document.addEventListener('DOMContentLoaded', loadHeader);
+// Inject footer component on script load
+document.addEventListener('DOMContentLoaded', loadFooter);
