@@ -5,7 +5,7 @@ const topics = [
     {
         id: 1,
         title: "Introduction to Accessibility",
-        image: "/assets/images/accessibility.webp",
+        image: "./assets/images/accessibility.webp",
         description: "Learn the basics of web accessibility and its importance.",
         estimatedTime: 30,
         prerequisites: [],
@@ -19,7 +19,7 @@ const topics = [
     {
         id: 2,
         title: "Semantic HTML",
-        image: "/assets/images/semantic-html.webp",
+        image: "./assets/images/semantic-html.webp",
         description: "Understand the role of semantic HTML in accessibility.",
         estimatedTime: 45,
         prerequisites: [1],
@@ -169,7 +169,7 @@ function populateNavLinks() {
 // Function to dynamically load header component
 async function loadHeader() {
     const headerContainer = document.getElementById('header');
-    const response = await fetch('/components/shared/header.html');
+    const response = await fetch('./components/shared/header.html');
     if (response.ok) {
         const headerHTML = await response.text();
         headerContainer.innerHTML = headerHTML;
@@ -184,7 +184,7 @@ async function loadHeader() {
 // Function to dynamically load footer component
 async function loadFooter() {
     const footerContainer = document.getElementById('footer');
-    const response = await fetch('/components/shared/footer.html');
+    const response = await fetch('./components/shared/footer.html');
     if (response.ok) {
         const footerHTML = await response.text();
         footerContainer.innerHTML = footerHTML;
