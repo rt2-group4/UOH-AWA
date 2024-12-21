@@ -1,5 +1,3 @@
-<!-- study-plan.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +9,7 @@
     <!-- Custom CSS -->
     <link href="/UOH-AWA/css/styles.css" rel="stylesheet">
 </head>
-<body>
-
+<body data-page="study-plan">
     <!-- Header -->
     <div id="header"></div>
 
@@ -41,68 +38,6 @@
     <!-- Bootstrap JS and dependencies (Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
-    <script src="/UOH-AWA/js/script.js"></script>
-    <script>
-        // Display Studying Now
-        const studyingNow = getStudyingNow();
-        const studyingNowDiv = document.getElementById('studying-now');
-
-        if (studyingNow) {
-            const topic = topics.find(t => t.id === studyingNow.topicId);
-            if (topic) {
-                studyingNowDiv.innerHTML = `
-                    <h5>${topic.title}</h5>
-                    <p>Estimated Time: ${topic.estimatedTime} minutes</p>
-                `;
-            } else {
-                studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
-            }
-        } else {
-            studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
-        }
-
-        // Display Study Plan
-        const studyPlan = getStudyPlan();
-        const studyingNextDiv = document.getElementById('studying-next');
-
-        if (studyPlan.length === 0) {
-            studyingNextDiv.innerHTML = '<p>Your study plan is empty.</p>';
-        } else {
-            studyPlan.forEach(topicId => {
-                const topic = topics.find(t => t.id === topicId);
-                if (topic) {
-                    const col = document.createElement('div');
-                    col.className = 'col';
-
-                    const card = document.createElement('div');
-                    card.className = 'card h-100';
-
-                    const cardBody = document.createElement('div');
-                    cardBody.className = 'card-body';
-
-                    const cardTitle = document.createElement('h5');
-                    cardTitle.className = 'card-title';
-                    cardTitle.textContent = topic.title;
-
-                    const estimatedTime = document.createElement('p');
-                    estimatedTime.className = 'card-text';
-                    estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} minutes`;
-
-                    const removeBtn = document.createElement('button');
-                    removeBtn.className = 'btn btn-danger';
-                    removeBtn.textContent = 'Remove';
-                    removeBtn.onclick = () => removeFromStudyPlan(topic.id);
-
-                    cardBody.appendChild(cardTitle);
-                    cardBody.appendChild(estimatedTime);
-                    cardBody.appendChild(removeBtn);
-
-                    card.appendChild(cardBody);
-                    col.appendChild(card);
-                    studyingNextDiv.appendChild(col);
-                }
-            });
-        }
-    </script>
+    <script type="module" src="/UOH-AWA/js/main.js"></script>
 </body>
 </html>
