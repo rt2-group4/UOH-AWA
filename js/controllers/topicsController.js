@@ -104,6 +104,37 @@ class TopicsController {
                     }
                 ]
             },
+            {
+                id: 6,
+                title: "Assistive Technologies",
+                image: "/UOH-AWA/assets/images/assistive-tech.webp",
+                description: "Become familiar with different assistive technologies used for web accessibility.",
+                estimatedTime: 45,
+                prerequisites: [1, 2],
+                learningMaterials: "<p>View different assistive technologies and how to integrate them.</p>",
+                test: [
+                    {
+                        question: "What is the primary purpose of a screen reader?",
+                        options: ["To make text larger", "To convert text to speech", "To change color contrast"],
+                        answer: 1
+                    },
+                    {
+                        question: "What is ARIA used for in web development?",
+                        options: ["Styling elements", "Providing additional context to assistive technologies", "Adding animations"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which of these helps keyboard-only users navigate a webpage?",
+                        options: ["Skip links", "Hover effects", "Background images"],
+                        answer: 0
+                    },
+                    {
+                        question: "What should developers test their websites with?",
+                        options: ["Multiple browsers only", "Screen readers and keyboard navigation", "Mobile devices only"],
+                        answer: 1
+                    }
+                ]
+            },
             // Add more topics here...
         ];
     }
