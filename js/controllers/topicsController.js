@@ -58,7 +58,7 @@ class TopicsController {
                 image: "/UOH-AWA/assets/images/cognitive-disabilities.webp",
                 description: "A guide to web accessibility for users with cognitive disabilities.",
                 estimatedTime: 35,
-                prerequisites: [1],
+                prerequisites: [3],
                 learningMaterials: "<p>Understanding cognitive disabilities and web accessibility</p>",
                 test: [
                     {
@@ -75,6 +75,32 @@ class TopicsController {
                         question: "Which typography practice helps users with cognitive disabilities?",
                         options: ["Decorative fonts", "Left-aligned text", "Justified text"],
                         answer: 1
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "Hearing Disabilities",
+                image: "/UOH-AWA/assets/images/hearing-disabilities.webp",
+                description: "Study how to make web content accessible for users with hearing impairments.",
+                estimatedTime: 35,
+                prerequisites: [4],
+                learningMaterials: "<p>Learn about hearing disabilities and web accessibility</p>",
+                test: [
+                    {
+                        question: "What is required for video content to be accessible to deaf users?",
+                        options: ["Background music", "Captions", "High-quality audio"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which format should be provided for audio-only content?",
+                        options: ["Video recording", "Transcript", "Sign language"],
+                        answer: 1
+                    },
+                    {
+                        question: "What should accompany audio alerts on websites?",
+                        options: ["Visual indicators", "Louder sounds", "Repeated alerts"],
+                        answer: 0
                     }
                 ]
             },
