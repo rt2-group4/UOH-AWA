@@ -26,6 +26,58 @@ class TopicsController {
                     { question: "Which tag is semantic for navigation?", options: ["<div>", "<nav>", "<span>"], answer: 1 },
                 ]
             },
+            {
+                id: 3,
+                title: "Visual Disabilities",
+                image: "/UOH-AWA/assets/images/visual-disabilities.webp",
+                description: "Learn about web accessibility for users with visual impairments.",
+                estimatedTime: 40,
+                prerequisites: [2],
+                learningMaterials: "<p>Understanding visual disabilities and their impact on web accessibility</p>",
+                test: [
+                    { 
+                        question: "What is the minimum contrast ratio recommended by WCAG for normal text?",
+                        options: ["2.1:1", "4.5:1", "3:1"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which attribute is essential for making images accessible to screen readers?",
+                        options: ["src", "alt", "title"],
+                        answer: 1
+                    },
+                    {
+                        question: "What should you avoid when designing for color-blind users?",
+                        options: ["Using patterns", "Using color alone to convey information", "Using bold text"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Cognitive Disabilities",
+                image: "/UOH-AWA/assets/images/cognitive-disabilities.webp",
+                description: "A guide to web accessibility for users with cognitive disabilities.",
+                estimatedTime: 35,
+                prerequisites: [1],
+                learningMaterials: "<p>Understanding cognitive disabilities and web accessibility</p>",
+                test: [
+                    {
+                        question: "Which of these is most important for users with cognitive disabilities?",
+                        options: ["Fancy animations", "Clear and consistent navigation", "Multiple navigation options"],
+                        answer: 1
+                    },
+                    {
+                        question: "What is a good practice for reducing cognitive load?",
+                        options: ["Breaking content into small chunks", "Using complex terminology", "Adding background music"],
+                        answer: 0
+                    },
+                    {
+                        question: "Which typography practice helps users with cognitive disabilities?",
+                        options: ["Decorative fonts", "Left-aligned text", "Justified text"],
+                        answer: 1
+                    }
+                ]
+            },
             // Add more topics here...
         ];
     }
