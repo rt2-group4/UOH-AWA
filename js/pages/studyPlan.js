@@ -9,6 +9,7 @@ export function initStudyPlan(){
     if (studyingNow) {
         const topic = topicsController.topics.find(t => t.id === studyingNow.topicId);
         if (topic) {
+            studyingNowDiv.classList.add("card", "p-3");
             studyingNowDiv.innerHTML = `
                     <h5>${topic.title}</h5>
                     <p>Estimated Time: ${topic.estimatedTime} minutes</p>
