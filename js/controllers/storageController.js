@@ -68,6 +68,12 @@ class StorageController {
         return JSON.parse(this.storage.getItem('studyingNow'));
     }
 
+    // Function to remove from Study Plan
+    removeStudyingNow(topicId) {
+        this.storage.setItem('studyingNow', JSON.stringify(null));
+        location.reload(); // Reload to update the display
+    }
+
     // Function to add to Study Plan from Topic Details
     addToStudyPlanFromDetails(topicId) {
         this.addToStudyPlan(topicId);
