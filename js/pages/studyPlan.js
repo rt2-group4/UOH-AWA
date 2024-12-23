@@ -14,7 +14,7 @@ function displayStudyingNow() {
     if (studyingNow) {
         const topic = topicsController.topics.find(t => t.id === studyingNow.topicId);
         if (topic && !studyPlan.includes(topic.id)) {
-            const card = createTopicCard(topic, (id) => storageController.removeStudyingNow(id));
+            const card = createTopicCard(topic, (id) => storageController.removeStudyingNow());
             studyingNowDiv.appendChild(card);
         } else {
             studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';

@@ -87,7 +87,7 @@ class StorageController {
     }
 
     // Function to remove from Study Plan
-    removeStudyingNow(topicId) {
+    removeStudyingNow() {
         this.storage.setItem('studyingNow', JSON.stringify(null));
         location.reload(); // Reload to update the display
     }

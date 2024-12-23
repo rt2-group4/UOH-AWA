@@ -36,8 +36,14 @@ function handleStartStudyingClick(topic) {
 
     const currentStudying = storageController.getStudyingNow();
     if (currentStudying) {
-        if (confirm(`You are currently studying "${topicsController.getTopicById(currentStudying.topicId).title}". Do you want to stop it and start studying "${topic.title}"?`)) {
+        let topicDetails = topicsController.getTopicById(currentStudying.topicId);
+        // Handle situation where topic does not exist anymore
+        if (topicDetails == null){
             storageController.setStudyingNow(topic.id);
+        }else{
+            if (confirm(`You are currently studying "${topicDetails.title}". Do you want to stop it and start studying "${topic.title}"?`)) {
+                storageController.setStudyingNow(topic.id);
+            }
         }
     } else {
         storageController.setStudyingNow(topic.id);
