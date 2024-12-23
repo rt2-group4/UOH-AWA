@@ -5,14 +5,13 @@ export function initStudyPlan(){
     // Display Studying Now
     const studyingNow = storageController.getStudyingNow();
     const studyingNowDiv = document.getElementById('studying-now');
+    const studyPlan = storageController.getStudyPlan();
 
     if (studyingNow) {
         const topic = topicsController.topics.find(t => t.id === studyingNow.topicId);
-        if (topic) {
-            studyingNowDiv.innerHTML = `
-                    <h5>${topic.title}</h5>
-                    <p>Estimated Time: ${topic.estimatedTime} minutes</p>
-                `;
+        if (topic && !studyPlan.includes(topic.id)) {
+            const card = createTopicCard(topic, (id) => storageController.removeStudyingNow(id));
+            studyingNowDiv.appendChild(card);
         } else {
             studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
         }
@@ -21,7 +20,6 @@ export function initStudyPlan(){
     }
 
     // Display Study Plan
-    const studyPlan = storageController.getStudyPlan();
     const studyingNextDiv = document.getElementById('studying-next');
 
     if (studyPlan.length === 0) {
@@ -30,36 +28,41 @@ export function initStudyPlan(){
         studyPlan.forEach(topicId => {
             const topic = topicsController.topics.find(t => t.id === topicId);
             if (topic) {
-                const col = document.createElement('div');
-                col.className = 'col';
-
-                const card = document.createElement('div');
-                card.className = 'card h-100';
-
-                const cardBody = document.createElement('div');
-                cardBody.className = 'card-body';
-
-                const cardTitle = document.createElement('h5');
-                cardTitle.className = 'card-title';
-                cardTitle.textContent = topic.title;
-
-                const estimatedTime = document.createElement('p');
-                estimatedTime.className = 'card-text';
-                estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} minutes`;
-
-                const removeBtn = document.createElement('button');
-                removeBtn.className = 'btn btn-danger';
-                removeBtn.textContent = 'Remove';
-                removeBtn.onclick = () => storageController.removeFromStudyPlan(topic.id);
-
-                cardBody.appendChild(cardTitle);
-                cardBody.appendChild(estimatedTime);
-                cardBody.appendChild(removeBtn);
-
-                card.appendChild(cardBody);
-                col.appendChild(card);
-                studyingNextDiv.appendChild(col);
+                const card = createTopicCard(topic, (id) => storageController.removeFromStudyPlan(id));
+                studyingNextDiv.appendChild(card);
             }
         });
     }
+}
+
+function createTopicCard(topic, removeCallback) {
+    const wrapper = document.createElement('div');
+    const card = document.createElement('div');
+    const cardBody = document.createElement('div');
+    
+    // Set classes
+    wrapper.className = 'col';
+    card.className = 'card h-100';
+    cardBody.className = 'card-body';
+    
+    // Create card content
+    const cardTitle = document.createElement('h5');
+    cardTitle.className = 'card-title';
+    cardTitle.textContent = topic.title;
+    
+    const estimatedTime = document.createElement('p');
+    estimatedTime.className = 'card-text';
+    estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} minutes`;
+    
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'btn btn-danger';
+    removeBtn.textContent = 'Remove';
+    removeBtn.onclick = () => removeCallback.bind(storageController)(topic.id);
+    
+    // Assemble the card
+    cardBody.append(cardTitle, estimatedTime, removeBtn);
+    card.appendChild(cardBody);
+    wrapper.appendChild(card);
+    
+    return wrapper;
 }
