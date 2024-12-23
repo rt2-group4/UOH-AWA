@@ -1,5 +1,5 @@
 import storageController from './controllers/storageController.js';
-import { initIndex } from './pages/index.js'
+import { initHome } from './pages/home.js'
 import { initStudyPlan } from './pages/studyPlan.js'
 import { initTopicDetails } from './pages/topicDetails.js'
 import { initLearningActivities } from './pages/learningActivities.js'
@@ -10,7 +10,7 @@ function loadContent(){
 
     switch (page) {
         case 'index':
-            initIndex();
+            initHome();
             break;
         case 'study-plan':
             initStudyPlan();
