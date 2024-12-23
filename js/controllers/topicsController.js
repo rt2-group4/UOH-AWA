@@ -151,9 +151,56 @@ class TopicsController {
                         answer: 1
                     }
                 ]
-            },
+            }
             // Add more topics here...
         ];
+
+        this.loadAllLearningMaterials()
+    }
+
+    async loadAllLearningMaterials() {
+    try {
+        // Fetch the HTML content once
+        const response = await fetch('/UOH-AWA/components/shared/learning-materials.html');
+        if (!response.ok) {
+            throw new Error('Failed to load HTML file');
+        }
+
+        const htmlContent = await response.text();
+
+        // Parse the HTML content
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+
+        // Check if topics exist in this controller
+        if (!this.topics || !Array.isArray(this.topics)) {
+            console.warn('No topics found in TopicsController');
+            return;
+        }
+
+        // Iterate over all topics
+        this.topics.forEach(topic => {
+            const topicId = topic.id;
+            if (!topicId) {
+                console.warn('Topic without an id found. Skipping...');
+                return;
+            }
+
+            // Get the content element for the current topic
+            const contentElement = doc.getElementById(`content-${topicId}`);
+            if (contentElement) {
+                // If content is found, update the topic's learningMaterials
+                topic.learningMaterials = `"${contentElement.innerHTML}"`;
+                console.log(`Updated id = ${topicId}`);
+                console.log(topic.learningMaterials);
+            } else {
+                // Warn if content is missing for a topic
+                console.warn(`Warning: Content with id 'content-${topicId}' not found in the HTML file`);
+            }
+        });
+    } catch (error) {
+        console.error('Error loading learning materials:', error);
+    }
     }
 
     // Method to fetch a topic by ID
