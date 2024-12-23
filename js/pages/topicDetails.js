@@ -1,5 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
+import { createCommonElements } from '../utils/domUtils.js';
 
 export function initTopicDetails(){
     // Get Topic ID from URL
@@ -12,17 +13,7 @@ export function initTopicDetails(){
     if (!topic) {
         document.getElementById('topic-details').innerHTML = '<p>Topic not found.</p>';
     } else {
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body';
-
-        const title = document.createElement('h2');
-        title.className = 'card-title';
-        title.textContent = topic.title;
-
-        const img = document.createElement('img');
-        img.src = topic.image;
-        img.className = 'img-fluid mb-3';
-        img.alt = topic.title;
+        const cardBody = createCommonElements(topic);
 
         const description = document.createElement('p');
         description.className = 'card-text';
@@ -62,8 +53,6 @@ export function initTopicDetails(){
         startStudyingBtn.textContent = 'Start Studying';
         startStudyingBtn.onclick = () => storageController.startStudyingFromDetails(topic.id);
 
-        cardBody.appendChild(title);
-        cardBody.appendChild(img);
         cardBody.appendChild(description);
         cardBody.appendChild(estimatedTime);
         cardBody.appendChild(prerequisites);

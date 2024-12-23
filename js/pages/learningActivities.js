@@ -1,8 +1,8 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
+import { createCommonElements } from '../utils/domUtils.js';
 
-export function initLearningActivities(){
-    // Get Studying Now
+export function initLearningActivities() {
     const studyingNow = storageController.getStudyingNow();
 
     if (!studyingNow) {
@@ -12,21 +12,22 @@ export function initLearningActivities(){
         if (!topic) {
             document.getElementById('learning-activities').innerHTML = '<p>Topic not found.</p>';
         } else {
-            const cardBody = document.createElement('div');
-            cardBody.className = 'card-body';
-
-            const title = document.createElement('h2');
-            title.className = 'card-title';
-            title.textContent = topic.title;
-
-            const img = document.createElement('img');
-            img.src = topic.image;
-            img.className = 'img-fluid mb-3';
-            img.alt = topic.title;
+            const cardBody = createCommonElements(topic);
 
             const learningMaterials = document.createElement('div');
             learningMaterials.className = 'mb-4';
-            learningMaterials.innerHTML = `<h4>Learning Materials</h4>${topic.learningMaterials}`;
+            learningMaterials.innerHTML = '<h4>Learning Materials</h4><div id="learning-materials-content">Loading...</div>';
+
+            // Fetch and insert learning materials
+            topicsController.getLearningMaterials(topic.id)
+                .then(content => {
+                    document.getElementById('learning-materials-content').innerHTML = content;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('learning-materials-content').innerHTML =
+                        '<p>Error loading learning materials.</p>';
+                });
 
             const testSection = document.createElement('div');
             testSection.innerHTML = `<h4>Objective Test</h4>`;
@@ -80,8 +81,6 @@ export function initLearningActivities(){
 
             testSection.appendChild(resultDiv);
 
-            cardBody.appendChild(title);
-            cardBody.appendChild(img);
             cardBody.appendChild(learningMaterials);
             cardBody.appendChild(testSection);
 
