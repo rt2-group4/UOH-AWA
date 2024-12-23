@@ -18,6 +18,10 @@ class StorageController {
         return JSON.parse(this.storage.getItem('studyPlan'));
     }
 
+    isTopicInStudyPlan(topicId) {
+        return this.getStudyPlan().includes(topicId);
+    }
+
     getStudyPlanCount(){
         return this.getStudyPlan().length;
     }
@@ -25,14 +29,14 @@ class StorageController {
     // Function to add to Study Plan
     addToStudyPlan(topicId) {
         let studyPlan = this.getStudyPlan();
-        if (!studyPlan.includes(topicId)) {
+        if (!this.isTopicInStudyPlan(topicId)) {
             studyPlan.push(topicId);
             this.storage.setItem('studyPlan', JSON.stringify(studyPlan));
-            alert('Added to Study Plan!');
         } else {
-            alert('Topic is already in Study Plan.');
+            location.reload();
         }
         this.updateStudyPlanCount();
+        location.reload();
     }
 
     // Function to remove from Study Plan
@@ -41,17 +45,23 @@ class StorageController {
         studyPlan = studyPlan.filter(id => id !== topicId);
         this.storage.setItem('studyPlan', JSON.stringify(studyPlan));
         this.updateStudyPlanCount();
-        location.reload(); // Reload to update the display
+        location.reload();
     }
 
     // Function to set Studying Now
     setStudyingNow(topicId) {
+        if (topicId === null) {
+            this.storage.setItem('studyingNow', JSON.stringify(null));
+            location.reload();
+            return;
+        }
         const studyingNow = { topicId: topicId, startedAt: new Date().toISOString() };
         this.storage.setItem('studyingNow', JSON.stringify(studyingNow));
         let studyPlan = this.getStudyPlan();
         studyPlan = studyPlan.filter(id => id !== topicId);
         this.storage.setItem('studyPlan', JSON.stringify(studyPlan));
         this.updateStudyPlanCount();
+        location.reload();
     }
 
     // Function to update Study Plan Count in Navbar
@@ -66,6 +76,14 @@ class StorageController {
     // Function to get Studying Now
     getStudyingNow() {
         return JSON.parse(this.storage.getItem('studyingNow'));
+    }
+
+    isStudyingNow(topicId){
+        let studyingNow = this.getStudyingNow();
+        if(studyingNow == null){
+            return false;
+        }
+        return studyingNow.topicId === topicId;
     }
 
     // Function to remove from Study Plan
