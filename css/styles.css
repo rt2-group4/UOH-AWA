@@ -19,3 +19,14 @@ main {
 .study-plan-count {
     font-weight: bold;
 }
+
+.card .card-img-top {
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.card .card-img-top img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}

@@ -1,6 +1,7 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 import { createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js'
+import { createTopicTitle, createTopicImage } from '../utils/topicUtils.js';
 
 export function initTopicDetails() {
     const topicId = getTopicIdFromURL();
@@ -28,15 +29,15 @@ function renderTopicNotFoundMessage() {
 
 function renderTopicDetails(topic) {
     const container = document.createElement('div');
-    container.className = 'd-flex flex-column flex-md-row align-items-start';
+    container.className = 'card';
 
     const imgWrapper = document.createElement('div');
-    imgWrapper.className = 'me-md-3 mb-3 mb-md-0';
+    imgWrapper.className = 'card-img-top';
     const img = createTopicImage(topic);
     imgWrapper.appendChild(img);
 
     const detailsWrapper = document.createElement('div');
-    detailsWrapper.className = 'd-flex flex-column';
+    detailsWrapper.className = 'card-body';
 
     const title = createTopicTitle(topic);
     const description = createTopicDescription(topic);
@@ -59,21 +60,6 @@ function renderTopicDetails(topic) {
     container.append(imgWrapper, detailsWrapper);
 
     document.getElementById('topic-details').appendChild(container);
-}
-
-function createTopicTitle(topic) {
-    const title = document.createElement('h2');
-    title.className = 'card-title';
-    title.textContent = topic.title;
-    return title;
-}
-
-function createTopicImage(topic) {
-    const img = document.createElement('img');
-    img.src = topic.image;
-    img.className = 'img-fluid';
-    img.alt = topic.title;
-    return img;
 }
 
 function createTopicDescription(topic) {
