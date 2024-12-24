@@ -2,6 +2,7 @@ class StorageController {
     constructor() {
         this.storage = window['localStorage'];
 
+
         const defaultLang = 'en-GB';
 
         // Initialize Study Plan in localStorage if not present
@@ -14,7 +15,7 @@ class StorageController {
             this.storage.setItem('studyingNow', JSON.stringify(null));
         }
 
-        // Initialize preferred language
+        // Initialize default translation
         if (!this.storage.getItem("prefLang")) {
             this.storage.setItem('prefLang', defaultLang);
         }
@@ -114,6 +115,11 @@ class StorageController {
     changePreferredLanguage(languageId) {
         this.storage.setItem('prefLang', languageId);
         location.reload(); // Reload to update the display
+    }
+
+    // Retrieve current preferred language
+    getPreferredLanguage() {
+        return this.storage.getItem('prefLang');
     }
 }
 
