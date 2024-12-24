@@ -28,15 +28,15 @@ function renderTopicNotFoundMessage() {
 
 function renderTopicDetails(topic) {
     const container = document.createElement('div');
-    container.className = 'd-flex flex-column flex-md-row align-items-start';
+    container.className = 'card';
 
     const imgWrapper = document.createElement('div');
-    imgWrapper.className = 'me-md-3 mb-3 mb-md-0';
+    imgWrapper.className = 'card-img-top';
     const img = createTopicImage(topic);
     imgWrapper.appendChild(img);
 
     const detailsWrapper = document.createElement('div');
-    detailsWrapper.className = 'd-flex flex-column';
+    detailsWrapper.className = 'card-body';
 
     const title = createTopicTitle(topic);
     const description = createTopicDescription(topic);
@@ -71,7 +71,9 @@ function createTopicTitle(topic) {
 function createTopicImage(topic) {
     const img = document.createElement('img');
     img.src = topic.image;
-    img.className = 'img-fluid';
+    img.className = 'w-100';
+    img.style.height = '300px';
+    img.style.objectFit = 'cover';
     img.alt = topic.title;
     return img;
 }

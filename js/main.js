@@ -56,7 +56,7 @@ function populateNavLinks() {
             homeLink,
             studyPlanLink
         ],
-        '/UOH-AWA/components/pages/topic-details.html': [
+        '/UOH-AWA/topic-details.html': [
             homeLink,
             studyPlanLink
         ],

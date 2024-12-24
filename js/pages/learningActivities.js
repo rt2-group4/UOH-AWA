@@ -1,7 +1,7 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 
-export function initLearningActivities() {
+export async function initLearningActivities() {
     const studyingNow = storageController.getStudyingNow();
 
     if (!studyingNow) {
@@ -12,7 +12,7 @@ export function initLearningActivities() {
         if (!topic) {
             renderTopicNotFoundMessage();
         } else {
-            renderLearningActivities(topic);
+            await renderLearningActivities(topic);
         }
     }
 }
@@ -25,21 +25,30 @@ function renderTopicNotFoundMessage() {
     document.getElementById('learning-activities').innerHTML = '<p>Topic not found.</p>';
 }
 
-function renderLearningActivities(topic) {
+async function renderLearningActivities(topic) {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const imgWrapper = document.createElement('div');
+    imgWrapper.className = 'card-img-top';
+    const img = createTopicImage(topic);
+    imgWrapper.appendChild(img);
+
     const cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
     const title = createTopicTitle(topic);
-    const img = createTopicImage(topic);
-    const learningMaterials = createLearningMaterials(topic);
+    const learningMaterials = await createLearningMaterials(topic);
     const testSection = createTestSection(topic);
 
     cardBody.appendChild(title);
-    cardBody.appendChild(img);
     cardBody.appendChild(learningMaterials);
     cardBody.appendChild(testSection);
 
-    document.getElementById('learning-activities').appendChild(cardBody);
+    card.appendChild(imgWrapper);
+    card.appendChild(cardBody);
+
+    document.getElementById('learning-activities').appendChild(card);
 }
 
 function createTopicTitle(topic) {
@@ -52,15 +61,19 @@ function createTopicTitle(topic) {
 function createTopicImage(topic) {
     const img = document.createElement('img');
     img.src = topic.image;
-    img.className = 'img-fluid mb-3';
+    img.className = 'w-100';
+    img.style.height = '300px';
+    img.style.objectFit = 'cover';
     img.alt = topic.title;
     return img;
 }
 
-function createLearningMaterials(topic) {
+async function createLearningMaterials(topic) {
     const learningMaterials = document.createElement('div');
     learningMaterials.className = 'mb-4';
-    learningMaterials.innerHTML = `<h4>Learning Materials</h4>${topic.learningMaterials}`;
+    
+    const content = await topicsController.getLearningMaterials(topic.id);
+    learningMaterials.innerHTML = `${content}`;
     return learningMaterials;
 }
 
