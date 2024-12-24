@@ -3,6 +3,7 @@ import { initHome } from './pages/home.js'
 import { initStudyPlan } from './pages/studyPlan.js'
 import { initTopicDetails } from './pages/topicDetails.js'
 import { initLearningActivities } from './pages/learningActivities.js'
+import { initLanguage } from "./utils/language.js"
 
 // Function to dynamically load page content
 function loadContent(){
@@ -98,6 +99,9 @@ async function loadHeader() {
 
         // Call function to customize links
         populateNavLinks();
+
+        //
+        initLanguage();
     } else {
         console.error('Failed to load header:', response.statusText);
     }

@@ -19,3 +19,24 @@ main {
 .study-plan-count {
     font-weight: bold;
 }
+
+/* Force dropdown menu to inherit dropdown toggle width */
+.dropdown-menu {
+    min-width:inherit;
+}
+
+.dropdown-menu a {
+    transition: color .15s ease-in-out,background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+/* Set dropdown menu hover background to Bootstrap primary */
+.dropdown-menu a:hover {
+    color: #fff;
+    background-color: #0d6efd;
+}
+
+@media screen and (max-width: 360px) {
+    .logo-text {
+        font-size: 18px !important;
+    }
+}
