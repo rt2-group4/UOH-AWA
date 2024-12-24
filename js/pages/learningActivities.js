@@ -1,5 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
+import { createTopicTitle, createTopicImage } from '../utils/topicUtils.js';
 
 export async function initLearningActivities() {
     const studyingNow = storageController.getStudyingNow();
@@ -49,23 +50,6 @@ async function renderLearningActivities(topic) {
     card.appendChild(cardBody);
 
     document.getElementById('learning-activities').appendChild(card);
-}
-
-function createTopicTitle(topic) {
-    const title = document.createElement('h2');
-    title.className = 'card-title';
-    title.textContent = topic.title;
-    return title;
-}
-
-function createTopicImage(topic) {
-    const img = document.createElement('img');
-    img.src = topic.image;
-    img.className = 'w-100';
-    img.style.height = '300px';
-    img.style.objectFit = 'cover';
-    img.alt = topic.title;
-    return img;
 }
 
 async function createLearningMaterials(topic) {

@@ -1,8 +1,8 @@
 import storageController from './controllers/storageController.js';
-import { initHome } from './pages/home.js'
-import { initStudyPlan } from './pages/studyPlan.js'
-import { initTopicDetails } from './pages/topicDetails.js'
-import { initLearningActivities } from './pages/learningActivities.js'
+import {initHome} from './pages/home.js'
+import {initStudyPlan} from './pages/studyPlan.js'
+import {initTopicDetails} from './pages/topicDetails.js'
+import {initLearningActivities} from './pages/learningActivities.js'
 
 // Function to dynamically load page content
 function loadContent(){
@@ -35,7 +35,7 @@ function populateNavLinks() {
     // Get the current page's URL
     const currentPage = window.location.pathname;
     const studyPlanLink = {
-        href: '/UOH-AWA/components/pages/study-plan.html',
+        href: '/UOH-AWA/study-plan.html',
         text: 'Study Plan',
         countClass: 'study-plan-count',
         count: studyPlanCount,
@@ -52,7 +52,7 @@ function populateNavLinks() {
             homeLink,
             studyPlanLink
         ],
-        '/UOH-AWA/components/pages/study-plan.html': [
+        '/UOH-AWA/study-plan.html': [
             homeLink,
             studyPlanLink
         ],
@@ -93,8 +93,7 @@ async function loadHeader() {
     const headerContainer = document.getElementById('header');
     const response = await fetch('/UOH-AWA/components/shared/header.html');
     if (response.ok) {
-        const headerHTML = await response.text();
-        headerContainer.innerHTML = headerHTML;
+        headerContainer.innerHTML = await response.text();
 
         // Call function to customize links
         populateNavLinks();
