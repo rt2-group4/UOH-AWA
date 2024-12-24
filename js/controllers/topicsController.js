@@ -146,8 +146,18 @@ class TopicsController {
                 learningMaterials: "/UOH-AWA/components/learning-materials/topic-7.html",
                 test: [
                     {
-                        question: "Question1",
-                        options: ["OptionA", "OptionB", "OptionC"],
+                        question: "What is the main purpose of the Convention on the Rights of Persons with Disabilities (CRPD)?",
+                        options: ["To provide financial aid", "To ensure equal rights and freedoms for persons with disabilities", "To establish medical standards"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which of these is one of the key principles of CRPD?",
+                        options: ["Economic growth", "Accessibility", "Environmental protection"],
+                        answer: 1
+                    },
+                    {
+                        question: "When was the CRPD adopted by the United Nations General Assembly?",
+                        options: ["2004", "2006", "2008"],
                         answer: 1
                     }
                 ]
