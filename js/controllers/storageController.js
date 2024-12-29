@@ -2,6 +2,9 @@ class StorageController {
     constructor() {
         this.storage = window['localStorage'];
 
+
+        const defaultLang = 'en-GB';
+
         // Initialize Study Plan in localStorage if not present
         if (!this.storage.getItem('studyPlan')) {
             this.storage.setItem('studyPlan', JSON.stringify([]));
@@ -10,6 +13,11 @@ class StorageController {
         // Initialize Studying Now in localStorage if not present
         if (!this.storage.getItem('studyingNow')) {
             this.storage.setItem('studyingNow', JSON.stringify(null));
+        }
+
+        // Initialize default translation
+        if (!this.storage.getItem("prefLang")) {
+            this.storage.setItem('prefLang', defaultLang);
         }
     }
 
@@ -101,6 +109,17 @@ class StorageController {
     startStudyingFromDetails(topicId) {
         this.setStudyingNow(topicId);
         window.location.href = '/UOH-AWA/components/pages/learning-activities.html';
+    }
+
+    // Change preferred language
+    changePreferredLanguage(languageId) {
+        this.storage.setItem('prefLang', languageId);
+        location.reload(); // Reload to update the display
+    }
+
+    // Retrieve current preferred language
+    getPreferredLanguage() {
+        return this.storage.getItem('prefLang');
     }
 }
 
