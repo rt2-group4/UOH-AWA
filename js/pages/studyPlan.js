@@ -1,5 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
+import {createShowDetailsOrGoToTopicButton} from '../utils/buttonUtils.js';
 
 export function initStudyPlan() {
     displayStudyingNow();
@@ -52,9 +53,10 @@ function createTopicCard(topic, studyNow = false, removeCallback) {
 
     const cardTitle = createCardTitle(topic);
     const estimatedTime = createEstimatedTime(topic);
+    const showDetailsOrGoToTopicButton = createShowDetailsOrGoToTopicButton(topic);
     const removeBtn = createRemoveButton(topic, studyNow, removeCallback);
 
-    cardBody.append(cardTitle, estimatedTime, removeBtn);
+    cardBody.append(cardTitle, estimatedTime, showDetailsOrGoToTopicButton, removeBtn);
     card.appendChild(cardBody);
     wrapper.appendChild(card);
 

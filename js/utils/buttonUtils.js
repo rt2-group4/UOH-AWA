@@ -1,13 +1,24 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 
-export function createShowDetailsButton(topic) {
-    const showDetailsBtn = document.createElement('a');
-    showDetailsBtn.href = `components/pages/topic-details.html?id=${topic.id}`;
-    showDetailsBtn.className = 'btn btn-primary me-2';
-    showDetailsBtn.textContent = 'Show Details';
-    showDetailsBtn.setAttribute('tabindex', '0');
+const studyNowPath = "UOH-AWA/components/pages/learning-activities.html";
 
+export function createShowDetailsOrGoToTopicButton(topic) {
+    const isStudying = storageController.isStudyingNow(topic.id);
+    const showDetailsBtn = document.createElement('a');
+
+    showDetailsBtn.className = 'btn btn-primary me-2';
+
+    if (isStudying) {
+        showDetailsBtn.textContent = 'Open Content';
+        const url = new URL(window.location.href);
+        url.pathname = studyNowPath;
+        showDetailsBtn.href = url.toString();
+    } else {
+        showDetailsBtn.href = `/UOH-AWA/components/pages/topic-details.html?id=${topic.id}`;
+        showDetailsBtn.textContent = 'Show Details';
+    }
+    showDetailsBtn.setAttribute('tabindex', '0');
     return showDetailsBtn;
 }
 
@@ -49,7 +60,7 @@ function handleStartStudyingClick(topic) {
         storageController.setStudyingNow(topic.id);
     }
     const url = new URL(window.location.href);
-    url.pathname = "UOH-AWA/components/pages/learning-activities.html";
+    url.pathname = studyNowPath;
     window.location.href = url.toString();
 }
 
