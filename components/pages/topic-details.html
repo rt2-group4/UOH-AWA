@@ -3,34 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AccessibleWebApp - Study Plan</title>
+    <title>AccessibleWebApp - Topic Details</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
     <!-- Favicon Link -->
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
 </head>
-<body data-page="study-plan">
+<body data-page="topic-details">
     <!-- Header -->
     <div id="header"></div>
 
     <!-- Main Content -->
     <main class="container my-5">
-        <h2 class="mb-4">Your Study Plan</h2>
-
-        <div class="mb-4">
-            <h4>Studying Now:</h4>
-            <div id="studying-now">
-                <!-- Currently Studying Topic -->
-            </div>
-        </div>
-
-        <div>
-            <h4>Studying Next:</h4>
-            <div id="studying-next" class="row row-cols-1 row-cols-md-2 g-4">
-                <!-- Study Plan Topics -->
-            </div>
+        <div id="topic-details" class="mb-4 p-4">
+            <!-- Topic details will be injected here by JavaScript -->
         </div>
     </main>
 
@@ -40,6 +28,6 @@
     <!-- Bootstrap JS and dependencies (Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../../js/main.js"></script>
 </body>
 </html>

@@ -86,7 +86,7 @@ function createPrerequisites(topic) {
             const preTopic = topicsController.topics.find(t => t.id === preId);
             if (preTopic) {
                 const link = document.createElement('a');
-                link.href = `topic-details.html?id=${preTopic.id}`;
+                link.href = `components/pages/topic-details.html?id=${preTopic.id}`;
                 link.textContent = preTopic.title;
                 prerequisites.appendChild(link);
                 if (index < topic.prerequisites.length - 1) {

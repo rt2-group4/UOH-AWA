@@ -35,7 +35,7 @@ function populateNavLinks() {
     // Get the current page's URL
     const currentPage = window.location.pathname;
     const studyPlanLink = {
-        href: '/UOH-AWA/study-plan.html',
+        href: '/UOH-AWA/components/pages/study-plan.html',
         text: 'Study Plan',
         countClass: 'study-plan-count',
         count: studyPlanCount,
@@ -52,11 +52,11 @@ function populateNavLinks() {
             homeLink,
             studyPlanLink
         ],
-        '/UOH-AWA/study-plan.html': [
+        '/UOH-AWA/components/pages/study-plan.html': [
             homeLink,
             studyPlanLink
         ],
-        '/UOH-AWA/topic-details.html': [
+        '/UOH-AWA/components/pages/topic-details.html': [
             homeLink,
             studyPlanLink
         ],

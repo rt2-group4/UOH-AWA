@@ -3,7 +3,7 @@ import storageController from '../controllers/storageController.js';
 
 export function createShowDetailsButton(topic) {
     const showDetailsBtn = document.createElement('a');
-    showDetailsBtn.href = `topic-details.html?id=${topic.id}`;
+    showDetailsBtn.href = `components/pages/topic-details.html?id=${topic.id}`;
     showDetailsBtn.className = 'btn btn-primary me-2';
     showDetailsBtn.textContent = 'Show Details';
     showDetailsBtn.setAttribute('tabindex', '0');
@@ -48,7 +48,9 @@ function handleStartStudyingClick(topic) {
     } else {
         storageController.setStudyingNow(topic.id);
     }
-    window.location.href = "learning-activities.html";
+    const url = new URL(window.location.href);
+    url.pathname = "UOH-AWA/components/pages/learning-activities.html";
+    window.location.href = url.toString();
 }
 
 export function createStudyLaterButton(topic) {
