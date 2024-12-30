@@ -40,3 +40,13 @@ main {
         font-size: 18px !important;
     }
 }
+.card .card-img-top {
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.card .card-img-top img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}

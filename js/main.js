@@ -94,13 +94,10 @@ async function loadHeader() {
     const headerContainer = document.getElementById('header');
     const response = await fetch('/UOH-AWA/components/shared/header.html');
     if (response.ok) {
-        const headerHTML = await response.text();
-        headerContainer.innerHTML = headerHTML;
+        headerContainer.innerHTML = await response.text();
 
         // Call function to customize links
         populateNavLinks();
-
-        //
         initLanguage();
     } else {
         console.error('Failed to load header:', response.statusText);

@@ -48,6 +48,9 @@ function handleStartStudyingClick(topic) {
     } else {
         storageController.setStudyingNow(topic.id);
     }
+    const url = new URL(window.location.href);
+    url.pathname = "UOH-AWA/components/pages/learning-activities.html";
+    window.location.href = url.toString();
 }
 
 export function createStudyLaterButton(topic) {
