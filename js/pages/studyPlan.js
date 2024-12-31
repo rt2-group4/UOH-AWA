@@ -1,5 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
+import {createShowDetailsOrGoToTopicButton} from '../utils/buttonUtils.js';
 
 export function initStudyPlan() {
     displayStudyingNow();
@@ -14,7 +15,7 @@ function displayStudyingNow() {
     if (studyingNow) {
         const topic = topicsController.topics.find(t => t.id === studyingNow.topicId);
         if (topic && !studyPlan.includes(topic.id)) {
-            const card = createTopicCard(topic, (id) => storageController.removeStudyingNow());
+            const card = createTopicCard(topic, true, (id) => storageController.removeStudyingNow());
             studyingNowDiv.appendChild(card);
         } else {
             studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
@@ -34,14 +35,14 @@ function displayStudyPlan() {
         studyPlan.forEach(topicId => {
             const topic = topicsController.topics.find(t => t.id === topicId);
             if (topic) {
-                const card = createTopicCard(topic, (id) => storageController.removeFromStudyPlan(id));
+                const card = createTopicCard(topic, false,(id) => storageController.removeFromStudyPlan(id));
                 studyingNextDiv.appendChild(card);
             }
         });
     }
 }
 
-function createTopicCard(topic, removeCallback) {
+function createTopicCard(topic, studyNow = false, removeCallback) {
     const wrapper = document.createElement('div');
     const card = document.createElement('div');
     const cardBody = document.createElement('div');
@@ -52,9 +53,10 @@ function createTopicCard(topic, removeCallback) {
 
     const cardTitle = createCardTitle(topic);
     const estimatedTime = createEstimatedTime(topic);
-    const removeBtn = createRemoveButton(topic, removeCallback);
+    const showDetailsOrGoToTopicButton = createShowDetailsOrGoToTopicButton(topic);
+    const removeBtn = createRemoveButton(topic, studyNow, removeCallback);
 
-    cardBody.append(cardTitle, estimatedTime, removeBtn);
+    cardBody.append(cardTitle, estimatedTime, showDetailsOrGoToTopicButton, removeBtn);
     card.appendChild(cardBody);
     wrapper.appendChild(card);
 
@@ -75,10 +77,14 @@ function createEstimatedTime(topic) {
     return estimatedTime;
 }
 
-function createRemoveButton(topic, removeCallback) {
+function createRemoveButton(topic, studyNow = false, removeCallback) {
     const removeBtn = document.createElement('button');
     removeBtn.className = 'btn btn-danger';
-    removeBtn.textContent = 'Remove';
+    if (studyNow) {
+        removeBtn.textContent = 'Stop Studying';
+    } else {
+        removeBtn.textContent = 'Remove from Study Plan';
+    }
     removeBtn.onclick = () => removeCallback.bind(storageController)(topic.id);
     return removeBtn;
 }

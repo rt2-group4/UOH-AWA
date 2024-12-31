@@ -1,6 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
-import { createShowDetailsButton, createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js'
+import { createShowDetailsOrGoToTopicButton, createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js'
 
 export function initHome() {
     const topicsContainer = document.querySelector('.row');
@@ -44,14 +44,14 @@ function createCardBody(topic) {
     const cardTitle = createCardTitle(topic);
     const cardText = createCardText(topic);
     const estimatedTime = createEstimatedTime(topic);
-    const showDetailsBtn = createShowDetailsButton(topic);
+    const ShowDetailsOrGoToTopicBtn = createShowDetailsOrGoToTopicButton(topic);
     const startStudyingBtn = createStartStudyingButton(topic);
     const studyLaterBtn = createStudyLaterButton(topic);
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     cardBody.appendChild(estimatedTime);
-    cardBody.appendChild(showDetailsBtn);
+    cardBody.appendChild(ShowDetailsOrGoToTopicBtn);
     cardBody.appendChild(startStudyingBtn);
     if (!storageController.isStudyingNow(topic.id)) {
         cardBody.appendChild(studyLaterBtn);
