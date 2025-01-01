@@ -14,6 +14,7 @@ main {
 .card-img-top {
     height: 200px;
     object-fit: cover;
+    margin-bottom: 2rem;
 }
 
 .study-plan-count {
@@ -63,6 +64,8 @@ main {
     font-weight: 600;
     color: #2c3e50;
     margin-bottom: 1rem;
+    position: relative;
+    background: white;
 }
 
 .card-text {
@@ -72,6 +75,8 @@ main {
 
 .card-body {
     padding: 1.5rem;
+    position: relative;
+    background: white;
 }
 
 @media screen and (max-width: 360px) {
@@ -199,5 +204,161 @@ main {
     
     .nav-link {
         padding: 0.3rem 0.6rem;
+    }
+}
+
+/* Study Plan Page Styles */
+.study-plan-section {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+.study-plan-heading {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.study-card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    height: auto;
+}
+
+.study-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(13,110,253,0.15);
+}
+
+.study-card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.study-card-title {
+    color: #0d6efd;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.study-time {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.study-time::before {
+    content: "🕒";
+    margin-right: 0.5rem;
+}
+
+.study-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0;
+}
+
+.btn-study {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-study:hover {
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .study-plan-section {
+        padding: 1.5rem;
+    }
+    
+    .study-card-body {
+        padding: 1.25rem;
+    }
+}
+
+.study-card-image {
+    height: 120px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Study Now Card Styles */
+.study-now-card {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    height: 140px;
+}
+
+.study-now-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(13,110,253,0.15);
+}
+
+.study-now-image {
+    width: 400px;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.study-now-body {
+    flex: 1;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    justify-content: space-between;
+}
+
+.study-now-body .study-card-title {
+    margin-bottom: 0.5rem;
+}
+
+.study-now-body .study-time {
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.study-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .study-now-card {
+        height: auto;
+        flex-direction: column;
+    }
+    
+    .study-now-image {
+        width: 100%;
+        height: 140px;
+    }
+    
+    .study-now-body {
+        min-width: auto;
     }
 }
