@@ -28,19 +28,24 @@ function renderTopicNotFoundMessage() {
 
 async function renderLearningActivities(topic) {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'learning-content-card';
 
     const imgWrapper = document.createElement('div');
-    imgWrapper.className = 'card-img-top';
     const img = createTopicImage(topic);
+    img.className = 'learning-content-image';
     imgWrapper.appendChild(img);
 
     const cardBody = document.createElement('div');
-    cardBody.className = 'card-body';
+    cardBody.className = 'learning-content-body';
 
     const title = createTopicTitle(topic);
+    title.className = 'mb-4';
+    
     const learningMaterials = await createLearningMaterials(topic);
+    learningMaterials.className = 'learning-materials';
+    
     const testSection = createTestSection(topic);
+    testSection.className = 'test-section';
 
     cardBody.appendChild(title);
     cardBody.appendChild(learningMaterials);
@@ -99,17 +104,22 @@ function createTestForm(topic) {
 
 function createQuestionDiv(question, index) {
     const questionDiv = document.createElement('div');
-    questionDiv.className = 'mb-3';
+    questionDiv.className = 'test-question';
 
     const questionText = document.createElement('p');
+    questionText.className = 'h5 mb-4';
     questionText.textContent = `${index + 1}. ${question.question}`;
     questionDiv.appendChild(questionText);
 
+    const optionsDiv = document.createElement('div');
+    optionsDiv.className = 'test-options';
+
     question.options.forEach((option, optIndex) => {
         const optionDiv = createOptionDiv(option, index, optIndex);
-        questionDiv.appendChild(optionDiv);
+        optionsDiv.appendChild(optionDiv);
     });
 
+    questionDiv.appendChild(optionsDiv);
     return questionDiv;
 }
 
@@ -155,5 +165,12 @@ function handleTestSubmission(event, topic) {
         }
     });
 
-    resultDiv.innerHTML = `<p>Your score: ${score} / ${topic.test.length}</p>`;
+    const percentage = (score / topic.test.length) * 100;
+    const resultClass = percentage >= 70 ? 'success' : 'warning';
+    
+    resultDiv.className = `test-result ${resultClass}`;
+    resultDiv.innerHTML = `
+        <p>Your score: ${score} / ${topic.test.length} (${percentage}%)</p>
+        <p>${percentage >= 70 ? 'Great job! You\'ve passed the test.' : 'Keep studying and try again!'}</p>
+    `;
 }
