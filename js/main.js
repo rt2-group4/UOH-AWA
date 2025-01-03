@@ -31,7 +31,7 @@ function loadContent(){
 // Function to populate nav links dynamically based on selected page
 function populateNavLinks() {
     const navLinks = document.getElementById('nav-links');
-    const studyPlanCount = storageController.getStudyPlanCount();
+    const topicStudyCount = storageController.getTopicStudyCount();
 
     // Get the current page's URL
     const currentPage = window.location.pathname;
@@ -39,7 +39,7 @@ function populateNavLinks() {
         href: '/UOH-AWA/components/pages/study-plan.html',
         text: 'Study Plan',
         countClass: 'study-plan-count',
-        count: studyPlanCount,
+        count: topicStudyCount,
         classes: 'text-white me-3',
     };
     const homeLink = { href: '/UOH-AWA/index.html', text: 'Home', classes: 'text-white me-3' };
