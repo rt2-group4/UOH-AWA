@@ -1,15 +1,21 @@
-<header class="bg-primary text-white py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="mb-0 logo-text">AccessibleWebApp</h1>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <nav id="nav-links">
-                <!-- Links will be injected here by JS -->
-            </nav>
-            <div class="lang-dropdown" id="lang-dropdown">
-                <button type="button" class="btn btn-light dropdown-toggle btn-sm" id="menu-btn" data-bs-toggle="dropdown">
-                </button>
-                <div class="dropdown-menu dropdown-menu-right text-right btn-sm" id="dropdown-menu">
-                    <!--Menu will be injected by JS -->
+<header class="site-header">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="/UOH-AWA/index.html" class="text-decoration-none">
+                <h1 class="site-title">AccessibleWebApp</h1>
+            </a>
+            
+            <div class="d-flex align-items-center gap-3">
+                <nav id="nav-links" class="nav-links-container">
+                    <!-- Links will be injected here by JS -->
+                </nav>
+                
+                <div class="lang-dropdown" id="lang-dropdown">
+                    <button type="button" class="language-selector dropdown-toggle" id="menu-btn" data-bs-toggle="dropdown">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" id="dropdown-menu">
+                        <!--Menu will be injected by JS -->
+                    </div>
                 </div>
             </div>
         </div>

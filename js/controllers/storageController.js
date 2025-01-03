@@ -40,11 +40,8 @@ class StorageController {
         if (!this.isTopicInStudyPlan(topicId)) {
             studyPlan.push(topicId);
             this.storage.setItem('studyPlan', JSON.stringify(studyPlan));
-        } else {
-            location.reload();
         }
         this.updateStudyPlanCount();
-        location.reload();
     }
 
     // Function to remove from Study Plan
@@ -53,7 +50,6 @@ class StorageController {
         studyPlan = studyPlan.filter(id => id !== topicId);
         this.storage.setItem('studyPlan', JSON.stringify(studyPlan));
         this.updateStudyPlanCount();
-        location.reload();
     }
 
     // Function to set Studying Now
