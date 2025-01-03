@@ -68,23 +68,23 @@ export function createStudyLaterButton(topic) {
     const studyLaterBtn = document.createElement('button');
     const isInStudyPlan = storageController.isTopicInStudyPlan(topic.id);
 
-    studyLaterBtn.textContent = isInStudyPlan ? 'Remove from Study Plan' : 'Study Later';
-    studyLaterBtn.className = isInStudyPlan ? 'btn btn-warning me-2' : 'btn btn-secondary me-2';
+    function updateButtonAppearance(isInPlan) {
+        studyLaterBtn.textContent = isInPlan ? 'Remove from Study Plan' : 'Study Later';
+        studyLaterBtn.className = `btn ${isInPlan ? 'btn-warning' : 'btn-secondary'} w-100`;
+    }
+
+    updateButtonAppearance(isInStudyPlan);
     studyLaterBtn.setAttribute('tabindex', '0');
 
     studyLaterBtn.onclick = () => {
-        handleStudyLaterClick(topic);
+        const isInPlan = storageController.isTopicInStudyPlan(topic.id);
+        if (isInPlan) {
+            storageController.removeFromStudyPlan(topic.id);
+        } else {
+            storageController.addToStudyPlan(topic.id);
+        }
+        updateButtonAppearance(!isInPlan);
     };
 
     return studyLaterBtn;
-}
-
-function handleStudyLaterClick(topic) {
-    const isInStudyPlan = storageController.isTopicInStudyPlan(topic.id);
-
-    if (isInStudyPlan) {
-        storageController.removeFromStudyPlan(topic.id);
-    } else {
-        storageController.addToStudyPlan(topic.id);
-    }
 }

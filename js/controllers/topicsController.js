@@ -139,8 +139,6 @@ class TopicsController {
                 id: 7,
                 title: "The Legal Aspect of Accessibility",
                 image: "/UOH-AWA/assets/images/accessibility-law.webp",
-                // description: "Learn about the legal component of accessibility with particular focus on the United Nations'" +
-                //     "Convention on the Rights of Persons with Disabilities (2008) and the UK's Equality Act (2010)",
                 description: "Learn about the legal component of accessibility.",
                 estimatedTime: 60,
                 prerequisites: [1],

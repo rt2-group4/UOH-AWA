@@ -47,6 +47,7 @@ function createTopicCard(topic, studyNow = false, removeCallback) {
     const card = document.createElement('div');
     
     wrapper.className = studyNow ? '' : 'col';
+    wrapper.id = `topic-wrapper-${topic.id}`;
     card.className = studyNow ? 'study-now-card' : 'study-card';
 
     // Create and add image
@@ -72,7 +73,19 @@ function createTopicCard(topic, studyNow = false, removeCallback) {
     const showDetailsOrGoToTopicButton = createShowDetailsOrGoToTopicButton(topic);
     showDetailsOrGoToTopicButton.className = 'btn btn-primary btn-study';
     
-    const removeBtn = createRemoveButton(topic, studyNow, removeCallback);
+    const removeBtn = createRemoveButton(topic, studyNow, (id) => {
+        removeCallback(id);
+        // Remove the card from the UI
+        const element = document.getElementById(`topic-wrapper-${id}`);
+        if (element) {
+            element.remove();
+            // If no more topics, show empty message
+            const studyingNextDiv = document.getElementById('studying-next');
+            if (studyingNextDiv.children.length === 0) {
+                studyingNextDiv.innerHTML = '<p>Your study plan is empty.</p>';
+            }
+        }
+    });
     removeBtn.className = 'btn btn-danger btn-study';
 
     actionsDiv.append(showDetailsOrGoToTopicButton, removeBtn);
