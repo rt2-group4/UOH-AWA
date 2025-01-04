@@ -36,7 +36,10 @@ const translationTexts = {
                     description: "Learn the basics of web accessibility and its importance.",
                     estimatedTime: 30,
                     prerequisites: [],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-1.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-1.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         { question: "What does WCAG stand for?", options: ["Web Content Accessibility Guidelines", "Web Content Application Guide", "World Content Accessibility Group"], answer: 0 },
                         { question: "Why is accessibility important?", options: ["Legal compliance", "Inclusive user experience", "Both"], answer: 2 },
@@ -49,7 +52,10 @@ const translationTexts = {
                     description: "Understand the role of semantic HTML in accessibility.",
                     estimatedTime: 45,
                     prerequisites: [1],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-2.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-2.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         { question: "Which tag is semantic for navigation?", options: ["<div>", "<nav>", "<span>"], answer: 1 },
                     ]
@@ -61,7 +67,10 @@ const translationTexts = {
                     description: "Learn about web accessibility for users with visual impairments.",
                     estimatedTime: 40,
                     prerequisites: [2],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-3.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-3.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "What is the minimum contrast ratio recommended by WCAG for normal text?",
@@ -87,7 +96,10 @@ const translationTexts = {
                     description: "A guide to web accessibility for users with cognitive disabilities.",
                     estimatedTime: 35,
                     prerequisites: [3],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-4.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-4.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Which of these is most important for users with cognitive disabilities?",
@@ -113,7 +125,10 @@ const translationTexts = {
                     description: "Study how to make web content accessible for users with hearing impairments.",
                     estimatedTime: 35,
                     prerequisites: [4],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-5.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-5.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "What is required for video content to be accessible to deaf users?",
@@ -139,7 +154,10 @@ const translationTexts = {
                     description: "Become familiar with different assistive technologies used for web accessibility.",
                     estimatedTime: 45,
                     prerequisites: [1, 2],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-6.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-6.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "What is the primary purpose of a screen reader?",
@@ -171,7 +189,37 @@ const translationTexts = {
                         "Convention on the Rights of Persons with Disabilities (2008) and the UK's Equality Act (2010)",
                     estimatedTime: 60,
                     prerequisites: [1],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-7.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-7.html",
+                        "htmlVars":{
+                            "h5-1": "Introduction",
+                            "p-1": "There is an obvious ethical argument to make digital content accessible to everyone, regardless of ability.\n" +
+                                "        Designing digital technologies for all is even mentioned in several professional Codes of Conduct. However,\n" +
+                                "        ethics\n" +
+                                "        and the law do not always go hand in hand. This section will focus on the legality surrounding digital\n" +
+                                "        accessibility.",
+                            "h5-2": "Convention on the Rights of the Persons with Disabilities (CRPD)",
+                            "p-2": "The CRPD is an international treaty that was adopted by the United Nations General Assembly in 2006. The purpose\n" +
+                                "        of the convention is to:",
+                            "blq-1": "Promote, protect and ensure the full and equal enjoyment of all human rights and fundamental freedoms by\n" +
+                                "        all persons with disabilities, and to promote respect for their inherent dignity.",
+                            "p-3": "The treaty has several key principles:",
+                            "ul-1": "<li>Respect for inherent dignity, individual autonomy including the freedom to make one's own choices, and\n" +
+                                "            independence of persons\n" +
+                                "        </li>\n" +
+                                "        <li>Non-discrimination</li>\n" +
+                                "        <li>Full and effective participation and inclusion in society</li>\n" +
+                                "        <li>Respect for difference and acceptance of persons with disabilities as part of human diversity and humanity\n" +
+                                "        </li>\n" +
+                                "        <li>Equality of opportunity</li>\n" +
+                                "        <li><b>Accessibility</b></li>\n" +
+                                "        <li>Equality between men and women</li>\n" +
+                                "        <li>Respect for the evolving capacities of children with disabilities and respect for the right of children with\n" +
+                                "            disabilities to preserve their identities\n" +
+                                "        </li>",
+                            "p-4": "Here is a brief video that summarises CRPD:",
+                        }
+                    },
                     test: [
                         {
                             question: "What is the main purpose of the Convention on the Rights of Persons with Disabilities (CRPD)?",
@@ -232,7 +280,10 @@ const translationTexts = {
                     description: "Apprenez les bases de l’accessibilité Web et son importance.",
                     estimatedTime: 30,
                     prerequisites: [],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-1.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-1.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         { question: "Que signifie WCAG?", options: ["Directives d'accessibilité du contenu Web", "Guide des applications de contenu Web", "Groupe mondial pour l'accessibilité du contenu"], answer: 0 },
                         { question: "Pourquoi l’accessibilité est-elle importante?", options: ["Conformité légale", "Expérience utilisateur inclusive", "Les deux"], answer: 2 },
@@ -245,7 +296,10 @@ const translationTexts = {
                     description: "Comprendre le rôle du HTML sémantique dans l'accessibilité.",
                     estimatedTime: 45,
                     prerequisites: [1],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-2.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-2.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         { question: "Quelle balise est sémantique pour la navigation?", options: ["<div>", "<nav>", "<span>"], answer: 1 },
                     ]
@@ -257,7 +311,10 @@ const translationTexts = {
                     description: "Découvrez l’accessibilité du Web pour les utilisateurs ayant une déficience visuelle.",
                     estimatedTime: 40,
                     prerequisites: [2],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-3.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-3.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Quel est le rapport de contraste minimum recommandé par les WCAG pour un texte normal?",
@@ -283,7 +340,10 @@ const translationTexts = {
                     description: "Un guide sur l'accessibilité du Web pour les utilisateurs ayant une déficience cognitive.",
                     estimatedTime: 35,
                     prerequisites: [3],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-4.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-4.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Lequel de ces éléments est le plus important pour les utilisateurs ayant des déficiences cognitives?",
@@ -309,7 +369,10 @@ const translationTexts = {
                     description: "Étudiez comment rendre le contenu Web accessible aux utilisateurs malentendants.",
                     estimatedTime: 35,
                     prerequisites: [4],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-5.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-5.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Que faut-il pour que le contenu vidéo soit accessible aux utilisateurs sourds?",
@@ -335,7 +398,10 @@ const translationTexts = {
                     description: "Familiarisez-vous avec les différentes technologies d’assistance utilisées pour l’accessibilité du Web.",
                     estimatedTime: 45,
                     prerequisites: [1, 2],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-6.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-6.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Quel est l’objectif principal d’un lecteur d’écran?",
@@ -367,7 +433,29 @@ const translationTexts = {
                         "Convention relative aux droits des personnes handicapées (2008) et loi britannique sur l'égalité (2010)",
                     estimatedTime: 60,
                     prerequisites: [1],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-7.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-7.html",
+                        "htmlVars": {
+                            "h5-1": "Introduction",
+                            "p-1": "Il existe un argument éthique évident pour rendre le contenu numérique accessible à tous, quelles que soient leurs capacités. " +
+                                "La conception de technologies numériques pour tous est même mentionnée dans plusieurs codes de conduite professionnels. Cependant, " +
+                                "l'éthique et la loi ne vont pas toujours de pair. Cette section se concentrera sur la légalité entourant l'accessibilité numérique.",
+                            "h5-2": "Convention relative aux droits des personnes handicapées (CDPH)",
+                            "p-2": "La CDPH est un traité international adopté par l’Assemblée générale des Nations Unies en 2006. L’objectif de la convention est de :",
+                            "blq-1": "Promouvoir, protéger et assurer la jouissance pleine et égale de tous les droits de l’homme et de toutes les libertés fondamentales " +
+                                "par toutes les personnes handicapées, et promouvoir le respect de leur dignité inhérente.",
+                            "p-3": "Le traité contient plusieurs principes clés :",
+                            "ul-1": "<li>Respect de la dignité inhérente, de l’autonomie individuelle, y compris la liberté de faire ses propres choix, et de l’indépendance des personnes</li>\n" +
+                                "        <li>Non-discrimination</li>\n" +
+                                "        <li>Participation et inclusion pleines et effectives dans la société</li>\n" +
+                                "        <li>Respect de la différence et acceptation des personnes handicapées en tant qu’élément de la diversité humaine et de l’humanité</li>\n" +
+                                "        <li>Égalité des chances</li>\n" +
+                                "        <li><b>Accessibilité</b></li>\n" +
+                                "        <li>Égalité entre les hommes et les femmes</li>\n" +
+                                "        <li>Respect des capacités évolutives des enfants handicapés et respect du droit des enfants handicapés à préserver leur identité</li>",
+                            "p-4": "Voici une brève vidéo qui résume la CDPH :",
+                        }
+                    },
                     test: [
                         {
                             question: "Quel est l’objectif principal de la Convention relative aux droits des personnes handicapées (CRPD)?",
@@ -428,7 +516,37 @@ const translationTexts = {
                     description: "Erfahren Sie mehr über die Grundlagen der Barrierefreiheit im Internet und ihre Bedeutung.",
                     estimatedTime: 30,
                     prerequisites: [],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-1.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-1.html",
+                        "htmlVars": {
+                            "h5-1": "Introduction",
+                            "p-1": "There is an obvious ethical argument to make digital content accessible to everyone, regardless of ability.\n" +
+                                "        Designing digital technologies for all is even mentioned in several professional Codes of Conduct. However,\n" +
+                                "        ethics\n" +
+                                "        and the law do not always go hand in hand. This section will focus on the legality surrounding digital\n" +
+                                "        accessibility.",
+                            "h5-2": "Convention on the Rights of the Persons with Disabilities (CRPD)",
+                            "p-2": "The CRPD is an international treaty that was adopted by the United Nations General Assembly in 2006. The purpose\n" +
+                                "        of the convention is to:",
+                            "blq-1": "Promote, protect and ensure the full and equal enjoyment of all human rights and fundamental freedoms by\n" +
+                                "        all persons with disabilities, and to promote respect for their inherent dignity.",
+                            "p-3": "The treaty has several key principles:",
+                            "ul-1": "<li>Respect for inherent dignity, individual autonomy including the freedom to make one's own choices, and\n" +
+                                "            independence of persons\n" +
+                                "        </li>\n" +
+                                "        <li>Non-discrimination</li>\n" +
+                                "        <li>Full and effective participation and inclusion in society</li>\n" +
+                                "        <li>Respect for difference and acceptance of persons with disabilities as part of human diversity and humanity\n" +
+                                "        </li>\n" +
+                                "        <li>Equality of opportunity</li>\n" +
+                                "        <li><b>Accessibility</b></li>\n" +
+                                "        <li>Equality between men and women</li>\n" +
+                                "        <li>Respect for the evolving capacities of children with disabilities and respect for the right of children with\n" +
+                                "            disabilities to preserve their identities\n" +
+                                "        </li>",
+                            "p-4": "Here is a brief video that summarises CRPD:",
+                        }
+                    },
                     test: [
                         { question: "Wofür steht WCAG?", options: ["Richtlinien zur Barrierefreiheit von Webinhalten", "Leitfaden zur Webinhaltsanwendung", "Weltweite Gruppe für Barrierefreiheit bei Inhalten"], answer: 0 },
                         { question: "Warum ist Barrierefreiheit wichtig?", options: ["Einhaltung gesetzlicher Vorschriften", "Inklusive Benutzererfahrung", "Beide"], answer: 2 },
@@ -441,7 +559,10 @@ const translationTexts = {
                     description: "Verstehen Sie die Rolle von semantischem HTML bei der Barrierefreiheit.",
                     estimatedTime: 45,
                     prerequisites: [1],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-2.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-2.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         { question: "Welches Tag ist für die Navigation semantisch?", options: ["<div>", "<nav>", "<span>"], answer: 1 },
                     ]
@@ -453,7 +574,10 @@ const translationTexts = {
                     description: "Informieren Sie sich über die Barrierefreiheit im Internet für Benutzer mit Sehbehinderungen.",
                     estimatedTime: 40,
                     prerequisites: [2],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-3.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-3.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Welches ist das von WCAG empfohlene Mindestkontrastverhältnis für normalen Text?",
@@ -479,7 +603,10 @@ const translationTexts = {
                     description: "Ein Leitfaden zur Barrierefreiheit im Internet für Benutzer mit kognitiven Behinderungen.",
                     estimatedTime: 35,
                     prerequisites: [3],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-4.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-4.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Was davon ist für Benutzer mit kognitiven Behinderungen am wichtigsten?",
@@ -505,7 +632,10 @@ const translationTexts = {
                     description: "Informieren Sie sich darüber, wie Sie Webinhalte für Benutzer mit Hörbehinderung zugänglich machen können.",
                     estimatedTime: 35,
                     prerequisites: [4],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-5.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-5.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Was ist erforderlich, damit Videoinhalte für gehörlose Benutzer zugänglich sind?",
@@ -531,7 +661,10 @@ const translationTexts = {
                     description: "Machen Sie sich mit den verschiedenen unterstützenden Technologien vertraut, die für die Barrierefreiheit im Internet verwendet werden.",
                     estimatedTime: 45,
                     prerequisites: [1, 2],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-6.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-6.html",
+                        "htmlVars": {}
+                    },
                     test: [
                         {
                             question: "Was ist der Hauptzweck eines Screenreaders?",
@@ -563,7 +696,31 @@ const translationTexts = {
                         "Übereinkommen über die Rechte von Menschen mit Behinderungen (2008) und britisches Gleichstellungsgesetz (2010)",
                     estimatedTime: 60,
                     prerequisites: [1],
-                    learningMaterials: "/UOH-AWA/components/learning-materials/topic-7.html",
+                    learningMaterials: {
+                        "filePath": "/UOH-AWA/components/learning-materials/topic-7.html",
+                        "htmlVars": {
+                            "h5-1": "Einführung",
+                            "p-1": "Es gibt ein offensichtliches ethisches Argument dafür, digitale Inhalte für alle zugänglich zu machen, unabhängig " +
+                                "von ihren Fähigkeiten. Die Entwicklung digitaler Technologien für alle wird sogar in mehreren professionellen " +
+                                "Verhaltenskodizes erwähnt. Ethik und Recht gehen jedoch nicht immer Hand in Hand. Dieser Abschnitt konzentriert sich auf " +
+                                "die rechtlichen Aspekte der digitalen Zugänglichkeit.",
+                            "h5-2": "Übereinkommen über die Rechte von Menschen mit Behinderungen (CRPD)",
+                            "p-2": "The CRPD is an international treaty that was adopted by the United Nations General Assembly in 2006. The purpose of the convention is to:",
+                            "blq-1": "Förderung, Schutz und Gewährleistung der uneingeschränkten und gleichberechtigten Wahrnehmung aller " +
+                                "Menschenrechte und Grundfreiheiten durch alle Menschen mit Behinderungen und Förderung der Achtung ihrer innewohnenden Würde.",
+                            "p-3": "Der Vertrag enthält mehrere Grundprinzipien:",
+                            "ul-1": "<li>Respekt für die inhärente Würde, die individuelle Autonomie einschließlich der Freiheit, eigene Entscheidungen zu treffen, und die Unabhängigkeit der Personen</li>" +
+                                "<li>Nichtdiskriminierung</li>\n" +
+                                "        <li>Vollständige und wirksame Teilhabe und Einbeziehung in die Gesellschaft</li>\n" +
+                                "        <li>Respekt für die Andersartigkeit und Akzeptanz von Menschen mit Behinderungen als Teil der menschlichen Vielfalt und Menschlichkeit</li>\n" +
+                                "        <li>Chancengleichheit</li>\n" +
+                                "        <li><b>Zugänglichkeit</b></li>\n" +
+                                "        <li>Gleichstellung von Mann und Frau</li>\n" +
+                                "        <li>Respekt für die sich entwickelnden Fähigkeiten von Kindern mit Behinderungen und Respekt für das Recht von Kindern mit Behinderungen, " +
+                                "ihre Identität zu bewahren</li>",
+                            "p-4": "Hier ist ein kurzes Video, das die CRPD zusammenfasst:",
+                        }
+                    },
                     test: [
                         {
                             question: "Was ist der Hauptzweck des Übereinkommens über die Rechte von Menschen mit Behinderungen (CRPD)?",

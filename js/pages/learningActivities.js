@@ -66,13 +66,32 @@ async function renderLearningActivities(topic) {
     document.getElementById('learning-activities').appendChild(card);
 }
 
+const processHtmlDocContent = (htmlString, varsValuesObj) => {
+    // this function process content of an HTML string
+    // by replacing variable (e.g {{myVar}}) with the values
+    // stored for those variables in the translation dictionary
+    for (let line of htmlString.split("\n")) {
+        const pattern = /\{\{[\w\-]+}}/g
+        const tempVar = line.match(pattern)
+        if (tempVar) {
+            const tempVarValue = varsValuesObj[tempVar[0]
+                .replaceAll('{', '')
+                .replaceAll('}', '')]
+            htmlString = tempVarValue ? htmlString.replace(tempVar.toString(), tempVarValue) :
+                htmlString.replace(tempVar.toString(), "");
+        }
+    }
+    return htmlString;
+}
+
 async function createLearningMaterials(topic) {
     const learningMaterials = document.createElement('div');
     learningMaterials.className = 'mb-4';
     learningMaterials.setAttribute('aria-labelledby', 'learning-materials');
 
-    const content = await topicsController.getLearningMaterials(topic.id);
-    learningMaterials.innerHTML = `${content}`;
+    let content = await topicsController.getLearningMaterials(topic.id);
+    const processedContent = processHtmlDocContent(content, topic.learningMaterials['htmlVars'])
+    learningMaterials.innerHTML = `${processedContent}`;
     return learningMaterials;
 }
 
