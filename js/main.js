@@ -86,7 +86,7 @@ function populateNavLinks() {
                 // If the link has a count (e.g., Study Plan)
                 return `
                     <a href="${link.href}" class="${link.classes}">
-                        ${link.text}<span class="${link.countClass}">${link.count}</span>
+                        ${link.text} (<span class="${link.countClass}">${link.count}</span>)
                     </a>
                 `;
             } else {
