@@ -1,5 +1,9 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
+import { translationData } from "./translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"]
 
 const studyNowPath = "UOH-AWA/components/pages/learning-activities.html";
 
@@ -10,13 +14,13 @@ export function createShowDetailsOrGoToTopicButton(topic) {
     showDetailsBtn.className = 'btn btn-primary me-2';
 
     if (isStudying) {
-        showDetailsBtn.textContent = 'Open Content';
+        showDetailsBtn.textContent = translationData[prefLang]['openContent'];
         const url = new URL(window.location.href);
         url.pathname = studyNowPath;
         showDetailsBtn.href = url.toString();
     } else {
         showDetailsBtn.href = `/UOH-AWA/components/pages/topic-details.html?id=${topic.id}`;
-        showDetailsBtn.textContent = 'Show Details';
+        showDetailsBtn.textContent = translationData[prefLang]['showDetails'];
     }
     showDetailsBtn.setAttribute('tabindex', '0');
     return showDetailsBtn;
@@ -26,7 +30,7 @@ export function createStartStudyingButton(topic) {
     const startStudyingBtn = document.createElement('button');
     const isStudying = storageController.isStudyingNow(topic.id);
 
-    startStudyingBtn.textContent = isStudying ? 'Stop Studying' : 'Start Studying';
+    startStudyingBtn.textContent = isStudying ?  translationData[prefLang]['stopStudying'] : translationData[prefLang]['startStudying'];
     startStudyingBtn.className = isStudying ? 'btn btn-danger me-2' : 'btn btn-success me-2';
     startStudyingBtn.setAttribute('tabindex', '0');
 
@@ -52,7 +56,7 @@ function handleStartStudyingClick(topic) {
         if (topicDetails == null){
             storageController.setStudyingNow(topic.id);
         }else{
-            if (confirm(`You are currently studying "${topicDetails.title}". Do you want to stop it and start studying "${topic.title}"?`)) {
+            if (confirm(`${translationData[prefLang]['currentlyStudying1']} "${topicDetails.title}". ${translationData[prefLang]['currentlyStudying2']} "${topic.title}"?`)) {
                 storageController.setStudyingNow(topic.id);
             }
         }
@@ -68,23 +72,23 @@ export function createStudyLaterButton(topic) {
     const studyLaterBtn = document.createElement('button');
     const isInStudyPlan = storageController.isTopicInStudyPlan(topic.id);
 
-    function updateButtonAppearance(isInPlan) {
-        studyLaterBtn.textContent = isInPlan ? 'Remove from Study Plan' : 'Study Later';
-        studyLaterBtn.className = `btn ${isInPlan ? 'btn-warning' : 'btn-secondary'} w-100`;
-    }
-
-    updateButtonAppearance(isInStudyPlan);
+    studyLaterBtn.textContent = isInStudyPlan ? translationData[prefLang]['removeFromPlan'] : translationData[prefLang]['studyLater'];
+    studyLaterBtn.className = isInStudyPlan ? 'btn btn-warning me-2' : 'btn btn-secondary me-2';
     studyLaterBtn.setAttribute('tabindex', '0');
 
     studyLaterBtn.onclick = () => {
-        const isInPlan = storageController.isTopicInStudyPlan(topic.id);
-        if (isInPlan) {
-            storageController.removeFromStudyPlan(topic.id);
-        } else {
-            storageController.addToStudyPlan(topic.id);
-        }
-        updateButtonAppearance(!isInPlan);
+        handleStudyLaterClick(topic);
     };
 
     return studyLaterBtn;
+}
+
+function handleStudyLaterClick(topic) {
+    const isInStudyPlan = storageController.isTopicInStudyPlan(topic.id);
+
+    if (isInStudyPlan) {
+        storageController.removeFromStudyPlan(topic.id);
+    } else {
+        storageController.addToStudyPlan(topic.id);
+    }
 }

@@ -1,6 +1,10 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
-import { createShowDetailsOrGoToTopicButton, createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js'
+import { createShowDetailsOrGoToTopicButton, createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js';
+import {translationData} from "../utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"]
 
 export function initHome() {
     const track = document.querySelector('.topics-track');
@@ -169,7 +173,7 @@ function createCardText(topic) {
 function createEstimatedTime(topic) {
     const estimatedTime = document.createElement('p');
     estimatedTime.className = 'card-text';
-    estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} minutes`;
+    estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} ${translationData[prefLang]['minutes']}`;
 
     return estimatedTime;
 }

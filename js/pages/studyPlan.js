@@ -1,10 +1,15 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 import {createShowDetailsOrGoToTopicButton} from '../utils/buttonUtils.js';
+import {translationData} from "../utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 export function initStudyPlan() {
     displayStudyingNow();
     displayStudyPlan();
+    translateTexts()
 }
 
 function displayStudyingNow() {
@@ -18,10 +23,10 @@ function displayStudyingNow() {
             const card = createTopicCard(topic, true, (id) => storageController.removeStudyingNow());
             studyingNowDiv.appendChild(card);
         } else {
-            studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
+            studyingNowDiv.innerHTML = `<p>${translationData[prefLang]['notStudying']}</p>`;
         }
     } else {
-        studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
+        studyingNowDiv.innerHTML = `<p>${translationData[prefLang]['notStudying']}</p>`;
     }
 }
 
@@ -30,7 +35,7 @@ function displayStudyPlan() {
     const studyPlan = storageController.getStudyPlan();
 
     if (studyPlan.length === 0) {
-        studyingNextDiv.innerHTML = '<p>Your study plan is empty.</p>';
+        studyingNextDiv.innerHTML = `<p>${translationData[prefLang]['emptyStudyPlan']}</p>`;
     } else {
         studyPlan.forEach(topicId => {
             const topic = topicsController.topics.find(t => t.id === topicId);
@@ -45,65 +50,58 @@ function displayStudyPlan() {
 function createTopicCard(topic, studyNow = false, removeCallback) {
     const wrapper = document.createElement('div');
     const card = document.createElement('div');
-    
-    wrapper.className = studyNow ? '' : 'col';
-    wrapper.id = `topic-wrapper-${topic.id}`;
-    card.className = studyNow ? 'study-now-card' : 'study-card';
-
-    // Create and add image
-    const img = document.createElement('img');
-    img.src = topic.image;
-    img.className = studyNow ? 'study-now-image' : 'study-card-image';
-    img.alt = topic.title;
-
     const cardBody = document.createElement('div');
-    cardBody.className = studyNow ? 'study-now-body' : 'study-card-body d-flex flex-column';
 
-    const cardTitle = document.createElement('h5');
-    cardTitle.className = 'study-card-title';
-    cardTitle.textContent = topic.title;
+    wrapper.className = 'col';
+    card.className = 'card h-100';
+    cardBody.className = 'card-body';
 
-    const estimatedTime = document.createElement('div');
-    estimatedTime.className = 'study-time';
-    estimatedTime.textContent = `${topic.estimatedTime} minutes`;
-
-    const actionsDiv = document.createElement('div');
-    actionsDiv.className = 'study-actions';
-
+    const cardTitle = createCardTitle(topic);
+    const estimatedTime = createEstimatedTime(topic);
     const showDetailsOrGoToTopicButton = createShowDetailsOrGoToTopicButton(topic);
-    showDetailsOrGoToTopicButton.className = 'btn btn-primary btn-study';
-    
-    const removeBtn = createRemoveButton(topic, studyNow, (id) => {
-        removeCallback(id);
-        // Remove the card from the UI
-        const element = document.getElementById(`topic-wrapper-${id}`);
-        if (element) {
-            element.remove();
-            // If no more topics, show empty message
-            const studyingNextDiv = document.getElementById('studying-next');
-            if (studyingNextDiv.children.length === 0) {
-                studyingNextDiv.innerHTML = '<p>Your study plan is empty.</p>';
-            }
-        }
-    });
-    removeBtn.className = 'btn btn-danger btn-study';
+    const removeBtn = createRemoveButton(topic, studyNow, removeCallback);
 
-    actionsDiv.append(showDetailsOrGoToTopicButton, removeBtn);
-    cardBody.append(cardTitle, estimatedTime, actionsDiv);
-    card.append(img, cardBody);
+    cardBody.append(cardTitle, estimatedTime, showDetailsOrGoToTopicButton, removeBtn);
+    card.appendChild(cardBody);
     wrapper.appendChild(card);
 
     return wrapper;
+}
+
+function createCardTitle(topic) {
+    const cardTitle = document.createElement('h5');
+    cardTitle.className = 'card-title';
+    cardTitle.textContent = topic.title;
+    return cardTitle;
+}
+
+function createEstimatedTime(topic) {
+    const estimatedTime = document.createElement('p');
+    estimatedTime.className = 'card-text';
+    estimatedTime.innerHTML = `<strong>${translationData[prefLang]['estimatedStudyTime']}:</strong> ${topic.estimatedTime} ${translationData[prefLang]['minutes']}`;
+    return estimatedTime;
 }
 
 function createRemoveButton(topic, studyNow = false, removeCallback) {
     const removeBtn = document.createElement('button');
     removeBtn.className = 'btn btn-danger';
     if (studyNow) {
-        removeBtn.textContent = 'Stop Studying';
+        removeBtn.textContent = translationData[prefLang]['stopStudying'];
     } else {
-        removeBtn.textContent = 'Remove from Study Plan';
+        removeBtn.textContent = translationData[prefLang]['removeFromPlan'];
     }
     removeBtn.onclick = () => removeCallback.bind(storageController)(topic.id);
     return removeBtn;
+}
+
+
+const translateTexts = () => {
+    document.title = translationData[prefLang]['studyPlanTitle'];
+
+    const studyingNowHeader = document.getElementById('studyingNowHeader');
+    studyingNowHeader ? studyingNowHeader.innerText = translationData[prefLang]['studyPlanTxt'] : null;
+
+    const studyingNextHeader = document.getElementById('studyingNextHeader');
+    studyingNextHeader ? studyingNextHeader.innerText = translationData[prefLang]['studyingNextHeader'] : null;
+
 }
