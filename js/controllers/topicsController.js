@@ -162,6 +162,58 @@ class TopicsController {
                     }
                 ]
             },
+            {
+                id: 8,
+                title: "Motor Disabilities",
+                image: "/UOH-AWA/assets/images/motor-disabilities.webp",
+                description: "Learn the basics of web accessibility for users with different motor disabilities.",
+                estimatedTime: 40,
+                prerequisites: [5],
+                learningMaterials: "/UOH-AWA/components/learning-materials/topic-8.html",
+                test: [
+                    {
+                        question: "Which is the key principle of web accessibility for users with motor disabilities?",
+                        options: ["Operable", "Precise", "Perceivable", "Understandable"],
+                        answer: 0
+                    },
+                    {
+                        question: "Which of these is NOT a way to make websites accessible?",
+                        options: ["Support Effective Keyboard Navigation", "Reduce Actions that Require Too Many Keypresses", "Add a Search Field to Your Website", "Use small links"],
+                        answer: 3
+                    },
+                    {
+                        question: "Which assistive technology relies on neck muscle movements for navigation?",
+                        options: ["Sip-and-puff switches", "Head wand", "Mouth stick", "Single switches"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 9,
+                title: "Color Design",
+                image: "/UOH-AWA/assets/images/color-design.webp",
+                description: "Learn about the different ways you can use colors to make your web product more accessible",
+                estimatedTime: 40,
+                prerequisites: [3, 4],
+                learningMaterials: "/UOH-AWA/components/learning-materials/topic-9.html",
+                test: [
+                    {
+                        question: "Why is it important to provide customization options for web users ?",
+                        options: ["To make the design more visually appealing to the user", "To address a variety of individual needs, such as visual impairments and cognitive conditions", "To increase the loading speed of the website", "To reduce the website's size and make it more efficient"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which of the following is a benefit of customization options for users with low vision?",
+                        options: ["They can change the website's layout to a more complex design", "They can speed up page load times", "They can adjust text size, contrast, and background color for improved readability", "They can change the website's overall aesthetic to fit current trends"],
+                        answer: 2
+                    },
+                    {
+                        question: "What is one key principle of accessible web design related to color?",
+                        options: ["Color should be used to make the design visually complex", "Color choices should rely solely on aesthetic preferences", "Color combinations should be chosen to be distinguishable by users with color blindness", "All design elements should be the same color to avoid confusion"],
+                        answer: 2
+                    }
+                ]
+            },
             // Add more topics here...
         ];
     }
