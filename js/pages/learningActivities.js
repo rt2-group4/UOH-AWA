@@ -1,6 +1,10 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 import { createTopicTitle, createTopicImage } from '../utils/topicUtils.js';
+import {translationData} from "../utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 export async function initLearningActivities() {
     const studyingNow = storageController.getStudyingNow();
@@ -16,14 +20,15 @@ export async function initLearningActivities() {
             await renderLearningActivities(topic);
         }
     }
+    translateTexts()
 }
 
 function renderNoTopicMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p role="alert">No topic is currently being studied.</p>';
+    document.getElementById('learning-activities').innerHTML = `<p role="alert">${translationData[prefLang]['submitAnswers']['notStudying']}</p>`;
 }
 
 function renderTopicNotFoundMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p role="alert">Topic not found.</p>';
+    document.getElementById('learning-activities').innerHTML = `<p role="alert">${translationData[prefLang]['submitAnswers']['missingTopic']}</p>`;
 }
 
 async function renderLearningActivities(topic) {
@@ -96,7 +101,7 @@ function createTestForm(topic) {
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.className = 'btn btn-primary';
-    submitBtn.textContent = 'Submit Answers';
+    submitBtn.textContent = translationData[prefLang]["submitAnswers"];
 
     form.appendChild(submitBtn);
 
@@ -182,7 +187,11 @@ function handleTestSubmission(event, topic) {
 
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
-        <p>Your score: ${score} / ${topic.test.length} (${percentage}%)</p>
+        <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
         <p>${percentage >= 70 ? 'Great job! You\'ve passed the test.' : 'Keep studying and try again!'}</p>
     `;
+}
+
+const translateTexts = () => {
+    document.title = translationData[prefLang]['learningActTitle'];
 }

@@ -1,9 +1,13 @@
 import storageController from './controllers/storageController.js';
-import { initHome } from './pages/home.js'
-import { initStudyPlan } from './pages/studyPlan.js'
-import { initTopicDetails } from './pages/topicDetails.js'
-import { initLearningActivities } from './pages/learningActivities.js'
-import { initLanguage } from "./utils/language.js"
+import { initHome } from './pages/home.js';
+import { initStudyPlan } from './pages/studyPlan.js';
+import { initTopicDetails } from './pages/topicDetails.js';
+import { initLearningActivities } from './pages/learningActivities.js';
+import { initLanguage } from "./utils/language.js";
+import { translationData } from "./utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 // Function to dynamically load page content
 function loadContent(){
@@ -37,14 +41,14 @@ function populateNavLinks() {
     const currentPage = window.location.pathname;
     const studyPlanLink = {
         href: '/UOH-AWA/components/pages/study-plan.html',
-        text: 'Study Plan',
+        text: translationData[prefLang]["studyPlan"],
         countClass: 'study-plan-count',
         count: topicStudyCount,
         classes: 'nav-link',
     };
     const homeLink = { 
         href: '/UOH-AWA/index.html', 
-        text: 'Home', 
+        text: translationData[prefLang]['home'],
         classes: 'nav-link' 
     };
 
@@ -82,7 +86,7 @@ function populateNavLinks() {
                 // If the link has a count (e.g., Study Plan)
                 return `
                     <a href="${link.href}" class="${link.classes}">
-                        ${link.text}<span class="${link.countClass}">${link.count}</span>
+                        ${link.text} (<span class="${link.countClass}">${link.count}</span>)
                     </a>
                 `;
             } else {
@@ -116,11 +120,19 @@ async function loadFooter() {
         let footerHTML = await response.text();
         // Replace the {{year}} placeholder with the current year
         const currentYear = new Date().getFullYear();
-        footerHTML = footerHTML.replace('{{year}}', currentYear);
+        footerHTML = footerHTML.replace('{{year}}', currentYear).replace(
+            "{{footer_text}}", translationData[prefLang]['footerTxt']);
         footerContainer.innerHTML = footerHTML;
     } else {
         console.error(`Failed to load ${footerComponent}: ${response.statusText}`);
     }
+}
+
+const translateTexts = () => {
+    document.title = translationData[prefLang]['homeTitle']
+
+    const topicsHeader = document.getElementById("topicsHeader");
+    topicsHeader ? topicsHeader.innerText = translationData[prefLang]['topics'] : null;
 }
 
 // Inject header component on script load
@@ -129,3 +141,6 @@ document.addEventListener('DOMContentLoaded', loadHeader);
 document.addEventListener('DOMContentLoaded', loadFooter);
 // Inject content on script load
 document.addEventListener('DOMContentLoaded', loadContent);
+//Translate Texts
+document.addEventListener('DOMContentLoaded', translateTexts)
+
