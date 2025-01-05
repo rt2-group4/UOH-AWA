@@ -188,7 +188,6 @@ function createCardBody(topic) {
     if (isStudying) {
         // If studying, we only have 2 buttons - stack them vertically
         ShowDetailsOrGoToTopicBtn.className = 'btn btn-primary w-100';
-        startStudyingBtn.className = 'btn btn-success w-100';
         buttonGroup.appendChild(ShowDetailsOrGoToTopicBtn);
         buttonGroup.appendChild(startStudyingBtn);
     } else {
