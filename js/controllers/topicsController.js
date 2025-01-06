@@ -1,3 +1,5 @@
+import { translationData } from "../utils/translations.js";
+
 class TopicsController {
     constructor() {
         // retrieve user's preferred language

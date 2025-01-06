@@ -20,10 +20,22 @@
     <div id="header"></div>
 
     <!-- Main Content -->
-    <main class="container my-5">
-        <h2 class="mb-4" id="topicsHeader"></h2>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <!-- Topics will be injected here by JavaScript -->
+    <main class="container-fluid my-5">
+        <div class="container">
+            <h2 class="section-title mb-4" id="topicsHeader"></h2>
+            <div class="topics-carousel-container position-relative">
+                <button class="carousel-control prev" id="prevButton" aria-label="Previous topics">
+                    <span class="carousel-control-icon">‹</span>
+                </button>
+                <div class="topics-carousel">
+                    <div class="topics-track">
+                        <!-- Topics will be injected here by JavaScript -->
+                    </div>
+                </div>
+                <button class="carousel-control next" id="nextButton" aria-label="Next topics">
+                    <span class="carousel-control-icon">›</span>
+                </button>
+            </div>
         </div>
     </main>
 
