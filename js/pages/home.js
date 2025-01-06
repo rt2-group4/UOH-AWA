@@ -95,7 +95,7 @@ function createTopicImage(topic) {
     const img = document.createElement('img');
     img.src = topic.image;
     img.className = 'card-img-top';
-    img.alt = topic.title;
+    img.alt = "";
 
     return img;
 }
