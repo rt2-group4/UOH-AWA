@@ -153,6 +153,12 @@ main {
     width: 80%;
 }
 
+.nav-link:focus-visible {
+    outline-color: Highlight !important;
+    outline-style: auto !important;
+    outline-width: initial !important;
+}
+
 /* Study Plan Count Badge */
 .study-plan-count {
     display: inline-flex;
@@ -684,33 +690,50 @@ main {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: white;
-    border: 1px solid #dee2e6;
+    width: 80px;
+    height: 80px;
+    border: none;
     border-radius: 50%;
+    background: transparent;
     cursor: pointer;
-    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
-.carousel-control:hover {
-    background: #f8f9fa;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.carousel-control:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control:active:not(:disabled) {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-control.prev {
-    left: 0;
+    left: -40px;
 }
 
 .carousel-control.next {
-    right: 0;
+    right: -40px;
 }
 
 .carousel-control-icon {
-    font-size: 24px;
-    line-height: 1;
+    font-size: 72px;
     color: #0d6efd;
+    line-height: 1;
+    font-weight: bold;
+}
+
+/* Disabled state styling */
+.carousel-control:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background: transparent;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 @media (max-width: 992px) {
@@ -724,5 +747,22 @@ main {
     .topic-item {
         flex: 0 0 calc(100% - 1rem);
         min-width: calc(100% - 1rem);
+    }
+
+    .carousel-control {
+        width: 60px;
+        height: 60px;
+    }
+
+    .carousel-control.prev {
+        left: -30px;
+    }
+
+    .carousel-control.next {
+        right: -30px;
+    }
+
+    .carousel-control-icon {
+        font-size: 48px;
     }
 }

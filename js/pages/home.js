@@ -16,72 +16,9 @@ export function initHome() {
         track.appendChild(topicItem);
     });
 
-    // Clone first few cards and append them to the end
-    const itemsToClone = 3;
-    for (let i = 0; i < itemsToClone; i++) {
-        const topicItem = track.children[i].cloneNode(true);
-        // Reattach event listeners to cloned buttons
-        const topicId = topicItem.querySelector('.card').getAttribute('data-topic-id');
-        const topic = topicsController.getTopicById(parseInt(topicId));
-        
-        if (topic) {
-            const buttonGroup = topicItem.querySelector('.button-group');
-            buttonGroup.innerHTML = ''; // Clear existing buttons
-            
-            const actionRow = document.createElement('div');
-            actionRow.className = 'button-row';
-            
-            const showDetailsBtn = createShowDetailsOrGoToTopicButton(topic);
-            const startStudyingBtn = createStartStudyingButton(topic);
-            
-            actionRow.appendChild(showDetailsBtn);
-            actionRow.appendChild(startStudyingBtn);
-            buttonGroup.appendChild(actionRow);
-
-            const studyLaterRow = document.createElement('div');
-            studyLaterRow.className = 'button-row';
-            const studyLaterBtn = createStudyLaterButton(topic);
-            studyLaterRow.appendChild(studyLaterBtn);
-            buttonGroup.appendChild(studyLaterRow);
-        }
-        
-        track.appendChild(topicItem);
-    }
-
-    // Clone last few cards and prepend them to the start
-    const totalItems = topicsController.topics.length;
-    for (let i = 0; i < itemsToClone; i++) {
-        const topicItem = track.children[totalItems - 1 - i].cloneNode(true);
-        // Reattach event listeners to cloned buttons
-        const topicId = topicItem.querySelector('.card').getAttribute('data-topic-id');
-        const topic = topicsController.getTopicById(parseInt(topicId));
-        
-        if (topic) {
-            const buttonGroup = topicItem.querySelector('.button-group');
-            buttonGroup.innerHTML = ''; // Clear existing buttons
-            
-            const actionRow = document.createElement('div');
-            actionRow.className = 'button-row';
-            
-            const showDetailsBtn = createShowDetailsOrGoToTopicButton(topic);
-            const startStudyingBtn = createStartStudyingButton(topic);
-            
-            actionRow.appendChild(showDetailsBtn);
-            actionRow.appendChild(startStudyingBtn);
-            buttonGroup.appendChild(actionRow);
-
-            const studyLaterRow = document.createElement('div');
-            studyLaterRow.className = 'button-row';
-            const studyLaterBtn = createStudyLaterButton(topic);
-            studyLaterRow.appendChild(studyLaterBtn);
-            buttonGroup.appendChild(studyLaterRow);
-        }
-        
-        track.insertBefore(topicItem, track.firstChild);
-    }
-
-    let currentIndex = itemsToClone;
+    let currentIndex = 0;
     const itemsPerView = getItemsPerView();
+    const maxIndex = Math.max(0, topicsController.topics.length - itemsPerView);
 
     function getItemsPerView() {
         if (window.innerWidth < 768) return 1;
@@ -94,34 +31,30 @@ export function initHome() {
         const offset = -(currentIndex * itemWidth);
         track.style.transition = transition ? 'transform 0.5s ease-in-out' : 'none';
         track.style.transform = `translateX(${offset}%)`;
+        
+        // Update button states
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex >= maxIndex;
+        
+        // Add visual feedback for disabled state
+        prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        nextButton.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
     }
 
-    // Initial position
+    // Initial position and button states
     updateCarousel(false);
 
     prevButton.addEventListener('click', () => {
-        currentIndex--;
-        updateCarousel();
-
-        // Reset to end when reaching start
-        if (currentIndex < itemsToClone) {
-            setTimeout(() => {
-                currentIndex = totalItems + itemsToClone - 1;
-                updateCarousel(false);
-            }, 500);
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
         }
     });
 
     nextButton.addEventListener('click', () => {
-        currentIndex++;
-        updateCarousel();
-
-        // Reset to start when reaching end
-        if (currentIndex >= totalItems + itemsToClone) {
-            setTimeout(() => {
-                currentIndex = itemsToClone;
-                updateCarousel(false);
-            }, 500);
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateCarousel();
         }
     });
 
