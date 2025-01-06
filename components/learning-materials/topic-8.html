@@ -1,53 +1,71 @@
 <div id="content-topic-8">
     <section class="intro-heading">
         <h3 id="intro-heading">Introduction</h3>
-        <p>Motor disabilities can be a result of many different causes, causing similar challenges to users when they navigate the web.</p>
-        <p>The main idea of web accessibility for people with motor disabilities is making websites <strong>Operable</strong> since not everyone can use a mouse, click tiny links, or easily control interactive features. This section will focus on what we can do to build an accessible web product for people with motor disabilities.</p>
+        <p>Color plays a crucial role in web design, impacting aesthetics, usability, and accessibility.</p>
+        <p>Designing with accessibility in mind ensures that your product is usable by a diverse audience, including people with visual impairments or color vision deficiencies.</p>
+        <p>This section will focus on key principles and best practices for creating an accessible color design for web products.</p>
     </section>
-    <section aria-labelledby="assistive-tech-heading">
-        <h3 id="assistive-tech-heading">Assistive Technologies</h3>
-        <p>There are many assistive technologies that can be used to make it easier for people with motor disabilities to navigate through the web. Some of them include:</p>
+    <section aria-labelledby="color-contrast-heading">
+        <h3 id="color-contrast-heading">Color Contrast</h3>
+        <p>Text and interactive elements should have a high contrast ratio against their background to ensure readability for users with low vision or color blindness. Some of them include:</p>
         <ul>
-            <li>Head wands</li>
-            <li>Mouth sticks</li>
-            <li>Sip-and-puff switches</li>
-            <li>Single switches</li>
+            <li>For normal text, a contrast ratio of at least 4.5:1 is recommended</li>
+            <li>For large text (18pt or larger), a ratio of 3:1 is acceptable</li>
         </ul>
-        <p>However, these assistive technologies alone are not enough to make the web accessible to users with disabilities. Here are three ways to improve accessibility:</p>
+        <p>Tools like the WebAIM Color Contrast Checker can help assess and adjust contrast levels.</p>
     </section>
-    <section aria-labelledby="keyboard-navigation-heading">
-        <h4 id="keyboard-navigation-heading">1. Support Effective Keyboard Navigation</h4>
-        <p>People with motor disabilities often find it impossible to use a mouse. By making your website effectively usable with a keyboard, you open up access to users of these assistive technologies. Specifically, ensure that the keyboard focus elements are visible on your page using CSS.</p>
+    <section aria-labelledby="conveying-information-heading">
+        <h3 id="conveying-information-heading">Avoid Relying Solely on Color to Convey Information</h3>
+        <p>conveying-information</p>
+        <p>Relying on color alone can make it difficult for these users to understand content.</p>
+        <p>To achieve it, you have to use:</p>
+        <ul>
+            <li>text labels</li>
+            <li>patterns</li>
+            <li>icons</li>
+            <li>shapes </li>
+        </ul>
+        <p> For example, a red warning message should also include a symbol like an exclamation mark or the word "Warning" in text.</p>
     </section>
 
-    <section aria-labelledby="reduce-keypress-heading">
-        <h4 id="reduce-keypress-heading">2. Reduce Actions that Require Too Many Keypresses</h4>
-        <p>Most motor-assistive tools rely on small, specific muscle groups. For example:</p>
+    <section aria-labelledby="color-combinations-heading">
+        <h3 id="color-combinations-heading">Use Color Combinations That Are Accessible to Colorblind Users</h3>
+        <p> Certain color combinations, such as red-green or blue-yellow, are problematic for colorblind users.</p>
+        <p>In order to make sure that your web product is accessible for everyone, you have to: </p>
         <ul>
-            <li>Head wand users rely on their neck muscles for every action.</li>
-            <li>Mouth stick users use mouth movements to select keys on a virtual keyboard.</li>
-        </ul>
-        <p>To reduce fatigue, provide practical ways to navigate your site with fewer actions. For example:</p>
-        <ul>
-            <li>Allow skipping to the end of long pages or lists with a single click.</li>
-            <li>Structure navigation menus as multi-level trees.</li>
+            <li>Test color palettes using color blindness simulators to ensure that your color choices are distinguishable for users with different types of color vision deficiencies.</li>
+            <li>Use tools like the Color Oracle or Coblis (Color Blindness Simulator) to help you identify problematic combinations.</li>
         </ul>
     </section>
 
-    <section aria-labelledby="search-field-heading">
-        <h4 id="search-field-heading">3. Add a Search Field to Your Website</h4>
-        <p>Some users with motor disabilities rely on voice recognition systems. While these systems simplify navigation, it’s usually easier to type a phrase into a text field using speech recognition than to select specific elements on the page with voice commands.</p>
-        <p>Optimize search functionality by ensuring your pages are indexed and search results are sorted in a user-friendly way.</p>
+    <section aria-labelledby="color-context-heading">
+        <h3 id="color-context-heading">Consider Color Context</h3>
+        <p>The meaning and effectiveness of color can change depending on the surrounding colors and design context.</p>
+        <p>Always check how colors interact with each other, ensuring they do not cause visual confusion or overload.</p>
+        <p>For instance, avoid placing two high-contrast colors next to each other, as they might create visual discomfort or strain.</p>
     </section>
 
+    <section aria-labelledby="color-customization-heading">
+        <h3 id="color-customization-heading">Offer Customization Options</h3>
+        <p>Customization options can provide flexibility to users and help address a variety of individual needs and preferences, which can vary significantly among users.</p>
+        <p>In order to allow users to adjust color schemes can make a website more accessible for people with specific needs or preferences.</p>
+        <p>In order to make sure that your web product is accessible for everyone, you have to: </p>
+        <ul>
+            <li>Implement customizable themes</li>
+            <li>Include high-contrast or dark mode options</li>
+            <li>Provide clear instructions on how users can switch between these modes</li>
+            <li>Ensure that these options don’t interfere with content readability or functionality</li>
+        </ul>
+    </section>
     <section>
-    <h5>Here is a brief video that discusses the best practices for making your app easier to use and talk about testing for accessibility to improve your app's user experience for all users.</h5>
-    <iframe
-        class="embed-youtube-video"
-        title="Video explaining best practices for developing accessible apps"
-        src="https://www.youtube.com/embed/ElifzykHt7U?si=3KJsO9R85KOQLJGC"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-</section>
+        <h3>Best Practices</h3>
+        <p>Here is a brief video that discusses the best practices for making your app easier to use and explains how testing for accessibility can improve your app's user experience for all users.</p>
+        <iframe
+            class="embed-youtube-video"
+            title="Video about what web accessibility is and why it is important"
+            src="https://www.youtube.com/embed/VhO_dD5mkFA?si=pWPPic2iRhXtGgTV"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </section>
 </div>

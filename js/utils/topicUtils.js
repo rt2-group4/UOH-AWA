@@ -11,6 +11,6 @@ export function createTopicImage(topic) {
     img.className = 'w-100';
     img.style.height = '300px';
     img.style.objectFit = 'cover';
-    img.alt = topic.title;
+    img.alt = "";
     return img;
 } 
