@@ -518,34 +518,7 @@ const translationTexts = {
                     prerequisites: [],
                     learningMaterials: {
                         "filePath": "/UOH-AWA/components/learning-materials/topic-1.html",
-                        "htmlVars": {
-                            "h5-1": "Introduction",
-                            "p-1": "There is an obvious ethical argument to make digital content accessible to everyone, regardless of ability.\n" +
-                                "        Designing digital technologies for all is even mentioned in several professional Codes of Conduct. However,\n" +
-                                "        ethics\n" +
-                                "        and the law do not always go hand in hand. This section will focus on the legality surrounding digital\n" +
-                                "        accessibility.",
-                            "h5-2": "Convention on the Rights of the Persons with Disabilities (CRPD)",
-                            "p-2": "The CRPD is an international treaty that was adopted by the United Nations General Assembly in 2006. The purpose\n" +
-                                "        of the convention is to:",
-                            "blq-1": "Promote, protect and ensure the full and equal enjoyment of all human rights and fundamental freedoms by\n" +
-                                "        all persons with disabilities, and to promote respect for their inherent dignity.",
-                            "p-3": "The treaty has several key principles:",
-                            "ul-1": "<li>Respect for inherent dignity, individual autonomy including the freedom to make one's own choices, and\n" +
-                                "            independence of persons\n" +
-                                "        </li>\n" +
-                                "        <li>Non-discrimination</li>\n" +
-                                "        <li>Full and effective participation and inclusion in society</li>\n" +
-                                "        <li>Respect for difference and acceptance of persons with disabilities as part of human diversity and humanity\n" +
-                                "        </li>\n" +
-                                "        <li>Equality of opportunity</li>\n" +
-                                "        <li><b>Accessibility</b></li>\n" +
-                                "        <li>Equality between men and women</li>\n" +
-                                "        <li>Respect for the evolving capacities of children with disabilities and respect for the right of children with\n" +
-                                "            disabilities to preserve their identities\n" +
-                                "        </li>",
-                            "p-4": "Here is a brief video that summarises CRPD:",
-                        }
+                        "htmlVars": {}
                     },
                     test: [
                         { question: "Wofür steht WCAG?", options: ["Richtlinien zur Barrierefreiheit von Webinhalten", "Leitfaden zur Webinhaltsanwendung", "Weltweite Gruppe für Barrierefreiheit bei Inhalten"], answer: 0 },

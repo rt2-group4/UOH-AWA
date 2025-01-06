@@ -59,8 +59,6 @@ async function renderLearningActivities(topic) {
 
 const processHtmlDocContent = (htmlString, varsValuesObj) => {
     // this function process content of an HTML string
-    // by replacing variable (e.g {{myVar}}) with the values
-    // stored for those variables in the translation dictionary
     for (let line of htmlString.split("\n")) {
         const pattern = /\{\{[\w\-]+}}/g
         const tempVar = line.match(pattern)
