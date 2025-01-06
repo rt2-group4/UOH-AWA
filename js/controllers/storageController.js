@@ -30,13 +30,9 @@ class StorageController {
         return this.getStudyPlan().includes(topicId);
     }
 
-    checkIfObject(value) {
-        return (typeof value === 'object' && value !== null) ? 1 : 0;
-    }
-
     getTopicStudyCount() {
         const studyPlanLength = (this.getStudyPlan()?.length ?? 0);
-        const studyingNowLength = this.checkIfObject(this.getStudyingNow());
+        const studyingNowLength = (typeof this.getStudyingNow() === 'object' && this.getStudyingNow() !== null) ? 1 : 0;
         return studyPlanLength + studyingNowLength;
     }
 
