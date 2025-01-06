@@ -29,35 +29,44 @@ function renderTopicNotFoundMessage() {
 
 function renderTopicDetails(topic) {
     const container = document.createElement('div');
-    container.className = 'card';
+    container.className = 'topic-details-container';
 
-    const imgWrapper = document.createElement('div');
-    imgWrapper.className = 'card-img-top';
+    const card = document.createElement('div');
+    card.className = 'topic-details-card';
+
     const img = createTopicImage(topic);
-    imgWrapper.appendChild(img);
+    img.className = 'topic-details-image';
 
-    const detailsWrapper = document.createElement('div');
-    detailsWrapper.className = 'card-body';
+    const content = document.createElement('div');
+    content.className = 'topic-details-content';
 
     const title = createTopicTitle(topic);
+    title.className = 'topic-details-title';
+
     const description = createTopicDescription(topic);
+    description.className = 'topic-details-description';
+
+    const metaInfo = document.createElement('div');
+    metaInfo.className = 'topic-details-meta';
+    
     const estimatedTime = createEstimatedTime(topic);
     const prerequisites = createPrerequisites(topic);
+    metaInfo.append(estimatedTime, prerequisites);
 
-    const buttonsWrapper = document.createElement('div');
-    buttonsWrapper.className = 'd-flex flex-column gap-2 mt-3';
+    const actionsWrapper = document.createElement('div');
+    actionsWrapper.className = 'topic-details-actions';
 
-    const studyLaterBtn = createStudyLaterButton(topic);
     const startStudyingBtn = createStartStudyingButton(topic);
+    const studyLaterBtn = createStudyLaterButton(topic);
 
-    buttonsWrapper.append(startStudyingBtn);
+    actionsWrapper.append(startStudyingBtn);
     if (!storageController.isStudyingNow(topic.id)) {
-        buttonsWrapper.appendChild(studyLaterBtn);
+        actionsWrapper.appendChild(studyLaterBtn);
     }
 
-    detailsWrapper.append(title, description, estimatedTime, prerequisites, buttonsWrapper);
-
-    container.append(imgWrapper, detailsWrapper);
+    content.append(title, description, metaInfo, actionsWrapper);
+    card.append(img, content);
+    container.appendChild(card);
 
     document.getElementById('topic-details').appendChild(container);
 }

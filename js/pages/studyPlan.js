@@ -45,36 +45,55 @@ function displayStudyPlan() {
 function createTopicCard(topic, studyNow = false, removeCallback) {
     const wrapper = document.createElement('div');
     const card = document.createElement('div');
+    
+    wrapper.className = studyNow ? '' : 'col';
+    wrapper.id = `topic-wrapper-${topic.id}`;
+    card.className = studyNow ? 'study-now-card' : 'study-card';
+
+    // Create and add image
+    const img = document.createElement('img');
+    img.src = topic.image;
+    img.className = studyNow ? 'study-now-image' : 'study-card-image';
+    img.alt = topic.title;
+
     const cardBody = document.createElement('div');
+    cardBody.className = studyNow ? 'study-now-body' : 'study-card-body d-flex flex-column';
 
-    wrapper.className = 'col';
-    card.className = 'card h-100';
-    cardBody.className = 'card-body';
+    const cardTitle = document.createElement('h5');
+    cardTitle.className = 'study-card-title';
+    cardTitle.textContent = topic.title;
 
-    const cardTitle = createCardTitle(topic);
-    const estimatedTime = createEstimatedTime(topic);
+    const estimatedTime = document.createElement('div');
+    estimatedTime.className = 'study-time';
+    estimatedTime.textContent = `${topic.estimatedTime} minutes`;
+
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'study-actions';
+
     const showDetailsOrGoToTopicButton = createShowDetailsOrGoToTopicButton(topic);
-    const removeBtn = createRemoveButton(topic, studyNow, removeCallback);
+    showDetailsOrGoToTopicButton.className = 'btn btn-primary btn-study';
+    
+    const removeBtn = createRemoveButton(topic, studyNow, (id) => {
+        removeCallback(id);
+        // Remove the card from the UI
+        const element = document.getElementById(`topic-wrapper-${id}`);
+        if (element) {
+            element.remove();
+            // If no more topics, show empty message
+            const studyingNextDiv = document.getElementById('studying-next');
+            if (studyingNextDiv.children.length === 0) {
+                studyingNextDiv.innerHTML = '<p>Your study plan is empty.</p>';
+            }
+        }
+    });
+    removeBtn.className = 'btn btn-danger btn-study';
 
-    cardBody.append(cardTitle, estimatedTime, showDetailsOrGoToTopicButton, removeBtn);
-    card.appendChild(cardBody);
+    actionsDiv.append(showDetailsOrGoToTopicButton, removeBtn);
+    cardBody.append(cardTitle, estimatedTime, actionsDiv);
+    card.append(img, cardBody);
     wrapper.appendChild(card);
 
     return wrapper;
-}
-
-function createCardTitle(topic) {
-    const cardTitle = document.createElement('h5');
-    cardTitle.className = 'card-title';
-    cardTitle.textContent = topic.title;
-    return cardTitle;
-}
-
-function createEstimatedTime(topic) {
-    const estimatedTime = document.createElement('p');
-    estimatedTime.className = 'card-text';
-    estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} minutes`;
-    return estimatedTime;
 }
 
 function createRemoveButton(topic, studyNow = false, removeCallback) {
