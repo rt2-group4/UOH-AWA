@@ -501,6 +501,18 @@ main {
     object-fit: cover;
 }
 
+.embed-youtube-video {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 2px solid #000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    display: block;
+}
+
 .learning-content-body {
     padding: 2.5rem;
 }

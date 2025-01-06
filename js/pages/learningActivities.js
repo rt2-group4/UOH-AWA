@@ -68,7 +68,7 @@ async function createLearningMaterials(topic) {
 
 function createTestSection(topic) {
     const testSection = document.createElement('div');
-    testSection.innerHTML = `<h4>Objective Test</h4>`;
+    testSection.innerHTML = `<h2>Objective Test</h2>`;
 
     const form = createTestForm(topic);
     const resultDiv = createResultDiv();
@@ -106,10 +106,12 @@ function createQuestionDiv(question, index) {
     const questionDiv = document.createElement('div');
     questionDiv.className = 'test-question';
 
-    const questionText = document.createElement('p');
-    questionText.className = 'h5 mb-4';
-    questionText.textContent = `${index + 1}. ${question.question}`;
-    questionDiv.appendChild(questionText);
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'form-fieldset';
+
+    const legend = document.createElement('legend');
+    legend.textContent = `${index + 1}. ${question.question}`;
+    fieldset.appendChild(legend);
 
     const optionsDiv = document.createElement('div');
     optionsDiv.className = 'test-options';
@@ -119,7 +121,10 @@ function createQuestionDiv(question, index) {
         optionsDiv.appendChild(optionDiv);
     });
 
-    questionDiv.appendChild(optionsDiv);
+    fieldset.appendChild(optionsDiv);
+
+    questionDiv.appendChild(fieldset);
+
     return questionDiv;
 }
 

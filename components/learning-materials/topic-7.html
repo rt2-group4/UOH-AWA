@@ -1,39 +1,53 @@
 <div id="content-topic-7">
-    <h5>Introduction</h5>
-    <p>There is an obvious ethical argument to make digital content accessible to everyone, regardless of ability.
-        Designing digital technologies for all is even mentioned in several professional Codes of Conduct. However,
-        ethics
-        and the law do not always go hand in hand. This section will focus on the legality surrounding digital
-        accessibility.</p>
-    <h5>Convention on the Rights of the Persons with Disabilities (CRPD)</h5>
-    <p>The CRPD is an international treaty that was adopted by the United Nations General Assembly in 2006. The purpose
-        of the convention is to:</p>
-    <blockquote>Promote, protect and ensure the full and equal enjoyment of all human rights and fundamental freedoms by
-        all persons with disabilities, and to promote respect for their inherent dignity.
-    </blockquote>
-    <p>The treaty has several key principles:</p>
-    <ul>
-        <li>Respect for inherent dignity, individual autonomy including the freedom to make one's own choices, and
-            independence of persons
-        </li>
-        <li>Non-discrimination</li>
-        <li>Full and effective participation and inclusion in society</li>
-        <li>Respect for difference and acceptance of persons with disabilities as part of human diversity and humanity
-        </li>
-        <li>Equality of opportunity</li>
-        <li><b>Accessibility</b></li>
-        <li>Equality between men and women</li>
-        <li>Respect for the evolving capacities of children with disabilities and respect for the right of children with
-            disabilities to preserve their identities
-        </li>
-    </ul>
-    <p>Here is a brief video that summarises CRPD:</p>
+    <section class="intro-heading">
+        <h3 id="intro-heading">Introduction</h3>
+        <p>Motor disabilities can be a result of many different causes, causing similar challenges to users when they navigate the web.</p>
+        <p>The main idea of web accessibility for people with motor disabilities is making websites <strong>Operable</strong> since not everyone can use a mouse, click tiny links, or easily control interactive features. This section will focus on what we can do to build an accessible web product for people with motor disabilities.</p>
+    </section>
+    <section aria-labelledby="assistive-tech-heading">
+        <h3 id="assistive-tech-heading">Assistive Technologies</h3>
+        <p>There are many assistive technologies that can be used to make it easier for people with motor disabilities to navigate through the web. Some of them include:</p>
+        <ul>
+            <li>Head wands</li>
+            <li>Mouth sticks</li>
+            <li>Sip-and-puff switches</li>
+            <li>Single switches</li>
+        </ul>
+        <p>However, these assistive technologies alone are not enough to make the web accessible to users with disabilities. Here are three ways to improve accessibility:</p>
+    </section>
+    <section aria-labelledby="keyboard-navigation-heading">
+        <h4 id="keyboard-navigation-heading">1. Support Effective Keyboard Navigation</h4>
+        <p>People with motor disabilities often find it impossible to use a mouse. By making your website effectively usable with a keyboard, you open up access to users of these assistive technologies. Specifically, ensure that the keyboard focus elements are visible on your page using CSS.</p>
+    </section>
 
+    <section aria-labelledby="reduce-keypress-heading">
+        <h4 id="reduce-keypress-heading">2. Reduce Actions that Require Too Many Keypresses</h4>
+        <p>Most motor-assistive tools rely on small, specific muscle groups. For example:</p>
+        <ul>
+            <li>Head wand users rely on their neck muscles for every action.</li>
+            <li>Mouth stick users use mouth movements to select keys on a virtual keyboard.</li>
+        </ul>
+        <p>To reduce fatigue, provide practical ways to navigate your site with fewer actions. For example:</p>
+        <ul>
+            <li>Allow skipping to the end of long pages or lists with a single click.</li>
+            <li>Structure navigation menus as multi-level trees.</li>
+        </ul>
+    </section>
+
+    <section aria-labelledby="search-field-heading">
+        <h4 id="search-field-heading">3. Add a Search Field to Your Website</h4>
+        <p>Some users with motor disabilities rely on voice recognition systems. While these systems simplify navigation, it’s usually easier to type a phrase into a text field using speech recognition than to select specific elements on the page with voice commands.</p>
+        <p>Optimize search functionality by ensuring your pages are indexed and search results are sorted in a user-friendly way.</p>
+    </section>
+
+    <section>
+    <h5>Here is a brief video that discusses the best practices for making your app easier to use and talk about testing for accessibility to improve your app's user experience for all users.</h5>
     <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/St61pEPUuFw"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
+        class="embed-youtube-video"
+        title="Video explaining best practices for developing accessible apps"
+        src="https://www.youtube.com/embed/ElifzykHt7U?si=3KJsO9R85KOQLJGC"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
     </iframe>
+</section>
 </div>

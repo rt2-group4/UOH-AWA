@@ -54,7 +54,7 @@ function createTopicCard(topic, studyNow = false, removeCallback) {
     const img = document.createElement('img');
     img.src = topic.image;
     img.className = studyNow ? 'study-now-image' : 'study-card-image';
-    img.alt = topic.title;
+    img.alt = "";
 
     const cardBody = document.createElement('div');
     cardBody.className = studyNow ? 'study-now-body' : 'study-card-body d-flex flex-column';
