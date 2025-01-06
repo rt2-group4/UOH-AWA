@@ -27,6 +27,8 @@ export const english = {
         "yourScore": "Your Score:",
         "learningActTitle": "AccessibleWebApp - Learning Activities",
         "footerTxt": "AccessibleWebApp Team | University Project",
+        "passRemark": "'Great job! You\\'ve passed the test.'",
+        "retryRemark": "'Keep studying and try again!'",
         "topicsData": [
             {
                 id: 1,

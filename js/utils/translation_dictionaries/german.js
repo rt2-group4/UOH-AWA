@@ -27,6 +27,8 @@ export const german = {
         "yourScore": "Ihr Punktestand:",
         "learningActTitle": "AccessibleWebApp - Lernaktivitäten",
         "footerTxt": "AccessibleWebApp Team | Universitätsprojekt",
+        "passRemark": "'Tolle Arbeit! Sie haben die Prüfung bestanden.'",
+        "retryRemark": "'Lernen Sie weiter und versuchen Sie es erneut!'",
         "topicsData": [
             {
                 id: 1,

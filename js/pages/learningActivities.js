@@ -149,7 +149,7 @@ function createQuestionDiv(question, index) {
 
     question.options.forEach((option, optIndex) => {
         const optionDiv = createOptionDiv(option, index, optIndex);
-        optionsDiv.appendChild(optionDiv);
+        questionDiv.appendChild(optionDiv);
     });
 
     fieldset.appendChild(optionsDiv);
@@ -207,7 +207,7 @@ function handleTestSubmission(event, topic) {
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
         <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
-        <p>${percentage >= 70 ? 'Great job! You\'ve passed the test.' : 'Keep studying and try again!'}</p>
+        <p>${percentage >= 70 ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
     `;
 }
 

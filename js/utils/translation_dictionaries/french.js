@@ -27,6 +27,8 @@ export const french = {
         "yourScore": "Votre note:",
         "learningActTitle": "AccessibleWebApp - Activités d'apprentissage",
         "footerTxt": "AccessibleWebApp Équipe | Projet universitaire",
+        "passRemark": "Super travail ! Vous avez réussi le test.",
+        "retryRemark": "Continuez à étudier et réessayez!",
         "topicsData": [
             {
                 id: 1,
