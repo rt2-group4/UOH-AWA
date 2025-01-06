@@ -30,8 +30,10 @@ class StorageController {
         return this.getStudyPlan().includes(topicId);
     }
 
-    getStudyPlanCount(){
-        return this.getStudyPlan().length;
+    getTopicStudyCount() {
+        const studyPlanLength = (this.getStudyPlan()?.length ?? 0);
+        const studyingNowLength = (typeof this.getStudyingNow() === 'object' && this.getStudyingNow() !== null) ? 1 : 0;
+        return studyPlanLength + studyingNowLength;
     }
 
     // Function to add to Study Plan
@@ -70,7 +72,7 @@ class StorageController {
 
     // Function to update Study Plan Count in Navbar
     updateStudyPlanCount() {
-        const count = this.getStudyPlanCount();
+        const count = this.getTopicStudyCount();
         const elements = document.querySelectorAll('.study-plan-count');
         elements.forEach(el => {
             el.textContent = count;
