@@ -1,5 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
+import { showCustomDialog } from './dialogueUtils.js';
 
 const studyNowPath = "UOH-AWA/components/pages/learning-activities.html";
 
@@ -48,17 +49,25 @@ function handleStartStudyingClick(topic) {
     const currentStudying = storageController.getStudyingNow();
     if (currentStudying) {
         let topicDetails = topicsController.getTopicById(currentStudying.topicId);
-        // Handle situation where topic does not exist anymore
-        if (topicDetails == null){
+
+        if (topicDetails == null) {
             storageController.setStudyingNow(topic.id);
-        }else{
-            if (confirm(`You are currently studying "${topicDetails.title}". Do you want to stop it and start studying "${topic.title}"?`)) {
-                storageController.setStudyingNow(topic.id);
-            }
+            redirectToStudyNow();
+        } else {
+            showCustomDialog(`You are currently studying "${topicDetails.title}". Do you want to stop it and start studying "${topic.title}"?`,
+                () => {
+                    storageController.setStudyingNow(topic.id);
+                    redirectToStudyNow();
+                }
+            );
         }
     } else {
         storageController.setStudyingNow(topic.id);
+        redirectToStudyNow();
     }
+}
+
+function redirectToStudyNow() {
     const url = new URL(window.location.href);
     url.pathname = studyNowPath;
     window.location.href = url.toString();

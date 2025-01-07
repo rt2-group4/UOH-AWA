@@ -151,7 +151,7 @@ function createCardBody(topic) {
     return cardBody;
 }
 function createCardTitle(topic) {
-    const cardTitle = document.createElement('h5');
+    const cardTitle = document.createElement('h3');
     cardTitle.className = 'card-title';
     cardTitle.textContent = topic.title;
 

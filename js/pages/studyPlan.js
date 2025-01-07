@@ -59,7 +59,7 @@ function createTopicCard(topic, studyNow = false, removeCallback) {
     const cardBody = document.createElement('div');
     cardBody.className = studyNow ? 'study-now-body' : 'study-card-body d-flex flex-column';
 
-    const cardTitle = document.createElement('h5');
+    const cardTitle = document.createElement('h3');
     cardTitle.className = 'study-card-title';
     cardTitle.textContent = topic.title;
 

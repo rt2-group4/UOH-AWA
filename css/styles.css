@@ -777,4 +777,10 @@ main {
     .carousel-control-icon {
         font-size: 48px;
     }
+/* 
+    #confirmButton:focus,
+    #cancelButton:focus {
+        outline: 3px solid #007BFF;
+        outline-offset: 2px;
+    } */
 }
