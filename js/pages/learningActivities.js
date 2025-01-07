@@ -153,6 +153,7 @@ function createQuestionDiv(question, index) {
     });
 
     fieldset.appendChild(optionsDiv);
+
     questionDiv.appendChild(fieldset);
 
     return questionDiv;
