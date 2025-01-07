@@ -41,7 +41,7 @@ function populateNavLinks() {
     const currentPage = window.location.pathname;
     const studyPlanLink = {
         href: '/UOH-AWA/components/pages/study-plan.html',
-        text: translationData[prefLang]["studyPlan"],
+        text: translationData[prefLang]['studyPlan'],
         countClass: 'study-plan-count',
         count: topicStudyCount,
         classes: 'nav-link',
@@ -86,7 +86,7 @@ function populateNavLinks() {
                 // If the link has a count (e.g., Study Plan)
                 return `
                     <a href="${link.href}" class="${link.classes}">
-                        ${link.text} (<span class="${link.countClass}">${link.count}</span>)
+                        ${link.text} <span class="${link.countClass}">${link.count}</span>
                     </a>
                 `;
             } else {
