@@ -28,7 +28,7 @@ export function createStartStudyingButton(topic) {
     const isStudying = storageController.isStudyingNow(topic.id);
 
     startStudyingBtn.textContent = isStudying ? 'Stop Studying' : 'Start Studying';
-    startStudyingBtn.className = isStudying ? 'btn btn-danger me-2' : 'btn btn-success me-2';
+    startStudyingBtn.className = isStudying ? 'btn btn-danger w-100' : 'btn btn-success me-2';
     startStudyingBtn.setAttribute('tabindex', '0');
 
     startStudyingBtn.onclick = () => {
