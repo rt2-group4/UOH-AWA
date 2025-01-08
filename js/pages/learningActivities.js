@@ -19,11 +19,11 @@ export async function initLearningActivities() {
 }
 
 function renderNoTopicMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p>No topic is currently being studied.</p>';
+    document.getElementById('learning-activities').innerHTML = '<p role="alert">No topic is currently being studied.</p>';
 }
 
 function renderTopicNotFoundMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p>Topic not found.</p>';
+    document.getElementById('learning-activities').innerHTML = '<p role="alert">Topic not found.</p>';
 }
 
 async function renderLearningActivities(topic) {
@@ -33,6 +33,9 @@ async function renderLearningActivities(topic) {
     const imgWrapper = document.createElement('div');
     const img = createTopicImage(topic);
     img.className = 'learning-content-image';
+    // Image properties to comply with WCAG:1.1.1.d
+    img.alt = '';
+    img.setAttribute('role', 'presentation');
     imgWrapper.appendChild(img);
 
     const cardBody = document.createElement('div');
@@ -40,10 +43,11 @@ async function renderLearningActivities(topic) {
 
     const title = createTopicTitle(topic);
     title.className = 'mb-4';
-    
+    title.setAttribute('aria-level', '2');
+
     const learningMaterials = await createLearningMaterials(topic);
     learningMaterials.className = 'learning-materials';
-    
+
     const testSection = createTestSection(topic);
     testSection.className = 'test-section';
 
@@ -60,7 +64,8 @@ async function renderLearningActivities(topic) {
 async function createLearningMaterials(topic) {
     const learningMaterials = document.createElement('div');
     learningMaterials.className = 'mb-4';
-    
+    learningMaterials.setAttribute('aria-labelledby', 'learning-materials');
+
     const content = await topicsController.getLearningMaterials(topic.id);
     learningMaterials.innerHTML = `${content}`;
     return learningMaterials;
@@ -108,8 +113,10 @@ function createQuestionDiv(question, index) {
 
     const fieldset = document.createElement('fieldset');
     fieldset.className = 'form-fieldset';
+    fieldset.setAttribute('aria-labelledby', `question-legend-${index}`); // Associate fieldset with legend
 
     const legend = document.createElement('legend');
+    legend.id = `question-legend-${index}`;
     legend.textContent = `${index + 1}. ${question.question}`;
     fieldset.appendChild(legend);
 
@@ -122,7 +129,6 @@ function createQuestionDiv(question, index) {
     });
 
     fieldset.appendChild(optionsDiv);
-
     questionDiv.appendChild(fieldset);
 
     return questionDiv;
@@ -154,6 +160,7 @@ function createResultDiv() {
     const resultDiv = document.createElement('div');
     resultDiv.id = 'test-result';
     resultDiv.className = 'mt-3';
+    resultDiv.setAttribute('aria-live', 'polite');
     return resultDiv;
 }
 
@@ -172,7 +179,7 @@ function handleTestSubmission(event, topic) {
 
     const percentage = (score / topic.test.length) * 100;
     const resultClass = percentage >= 70 ? 'success' : 'warning';
-    
+
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
         <p>Your score: ${score} / ${topic.test.length} (${percentage}%)</p>
