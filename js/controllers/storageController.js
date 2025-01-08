@@ -2,6 +2,7 @@ class StorageController {
     constructor() {
         this.storage = window['localStorage'];
 
+
         const defaultLang = 'en-GB';
 
         // Initialize Study Plan in localStorage if not present
@@ -60,7 +61,7 @@ class StorageController {
             location.reload();
             return;
         }
-        const studyingNow = { topicId: topicId };
+        const studyingNow = { topicId: topicId, startedAt: new Date().toISOString() };
         this.storage.setItem('studyingNow', JSON.stringify(studyingNow));
         let studyPlan = this.getStudyPlan();
         studyPlan = studyPlan.filter(id => id !== topicId);

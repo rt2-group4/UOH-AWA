@@ -1,17 +1,16 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
-import { createShowDetailsOrGoToTopicButton, createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js';
+import { createShowDetailsOrGoToTopicButton, createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js'
 
 export function initHome() {
     const track = document.querySelector('.topics-track');
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
-
+    
     // Create and append topic cards
     topicsController.topics.forEach(topic => {
         const topicItem = document.createElement('div');
         topicItem.className = 'topic-item';
-        topicItem.setAttribute('tabindex', '0');
         const card = createTopicCard(topic);
         topicItem.appendChild(card);
         track.appendChild(topicItem);
@@ -32,20 +31,18 @@ export function initHome() {
         const offset = -(currentIndex * itemWidth);
         track.style.transition = transition ? 'transform 0.5s ease-in-out' : 'none';
         track.style.transform = `translateX(${offset}%)`;
-
+        
         // Update button states
         prevButton.disabled = currentIndex === 0;
         nextButton.disabled = currentIndex >= maxIndex;
-
+        
+        // Add visual feedback for disabled state
         prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
         nextButton.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
     }
 
     // Initial position and button states
     updateCarousel(false);
-
-    prevButton.setAttribute('aria-label', 'Previous topics');
-    nextButton.setAttribute('aria-label', 'Next topics');
 
     prevButton.addEventListener('click', () => {
         if (currentIndex > 0) {
@@ -98,9 +95,7 @@ function createTopicImage(topic) {
     const img = document.createElement('img');
     img.src = topic.image;
     img.className = 'card-img-top';
-    // Image properties to comply with WCAG:1.1.1.d
-    img.alt = '';
-    img.setAttribute('role', 'presentation');
+    img.alt = "";
 
     return img;
 }
@@ -112,12 +107,12 @@ function createCardBody(topic) {
     const cardTitle = createCardTitle(topic);
     const cardText = createCardText(topic);
     const estimatedTime = createEstimatedTime(topic);
-
+    
     // Create button group container
     const buttonGroup = document.createElement('div');
     buttonGroup.className = 'button-group';
 
-    const showDetailsOrGoToTopicBtn = createShowDetailsOrGoToTopicButton(topic);
+    const ShowDetailsOrGoToTopicBtn = createShowDetailsOrGoToTopicButton(topic);
     const startStudyingBtn = createStartStudyingButton(topic);
 
     // Check if we're currently studying this topic
@@ -125,22 +120,18 @@ function createCardBody(topic) {
 
     if (isStudying) {
         // If studying, we only have 2 buttons - stack them vertically
-        showDetailsOrGoToTopicBtn.className = 'btn btn-primary w-100';
-        showDetailsOrGoToTopicBtn.setAttribute('aria-label', `Go to topic content page: ${topic.title}`);
-        startStudyingBtn.setAttribute('aria-label', `Stop studying topic: ${topic.title}`);
-        buttonGroup.appendChild(showDetailsOrGoToTopicBtn);
+        ShowDetailsOrGoToTopicBtn.className = 'btn btn-primary w-100';
+        buttonGroup.appendChild(ShowDetailsOrGoToTopicBtn);
         buttonGroup.appendChild(startStudyingBtn);
     } else {
         // If not studying, we have 3 buttons - use the original layout
         const actionRow = document.createElement('div');
         actionRow.className = 'button-row';
-
-        showDetailsOrGoToTopicBtn.className = 'btn btn-primary';
-        showDetailsOrGoToTopicBtn.setAttribute('aria-label', `Go to the topic details page: ${topic.title}`);
+        
+        ShowDetailsOrGoToTopicBtn.className = 'btn btn-primary';
         startStudyingBtn.className = 'btn btn-success';
-        startStudyingBtn.setAttribute('aria-label', `Start studying topic: ${topic.title}`);
-
-        actionRow.appendChild(showDetailsOrGoToTopicBtn);
+        
+        actionRow.appendChild(ShowDetailsOrGoToTopicBtn);
         actionRow.appendChild(startStudyingBtn);
         buttonGroup.appendChild(actionRow);
 
@@ -148,7 +139,6 @@ function createCardBody(topic) {
         const studyLaterRow = document.createElement('div');
         studyLaterRow.className = 'button-row';
         const studyLaterBtn = createStudyLaterButton(topic);
-        studyLaterBtn.setAttribute('aria-label', `Add topic: ${topic.title} to study plan`);
         studyLaterRow.appendChild(studyLaterBtn);
         buttonGroup.appendChild(studyLaterRow);
     }
@@ -160,9 +150,8 @@ function createCardBody(topic) {
 
     return cardBody;
 }
-
 function createCardTitle(topic) {
-    const cardTitle = document.createElement('h3');
+    const cardTitle = document.createElement('h5');
     cardTitle.className = 'card-title';
     cardTitle.textContent = topic.title;
 
