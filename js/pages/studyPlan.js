@@ -1,6 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
-import {createShowDetailsOrGoToTopicButton} from '../utils/buttonUtils.js';
+import { createShowDetailsOrGoToTopicButton } from '../utils/buttonUtils.js';
 
 export function initStudyPlan() {
     displayStudyingNow();
@@ -35,7 +35,7 @@ function displayStudyPlan() {
         studyPlan.forEach(topicId => {
             const topic = topicsController.topics.find(t => t.id === topicId);
             if (topic) {
-                const card = createTopicCard(topic, false,(id) => storageController.removeFromStudyPlan(id));
+                const card = createTopicCard(topic, false, (id) => storageController.removeFromStudyPlan(id));
                 studyingNextDiv.appendChild(card);
             }
         });
@@ -45,7 +45,7 @@ function displayStudyPlan() {
 function createTopicCard(topic, studyNow = false, removeCallback) {
     const wrapper = document.createElement('div');
     const card = document.createElement('div');
-    
+
     wrapper.className = studyNow ? '' : 'col';
     wrapper.id = `topic-wrapper-${topic.id}`;
     card.className = studyNow ? 'study-now-card' : 'study-card';
@@ -54,25 +54,29 @@ function createTopicCard(topic, studyNow = false, removeCallback) {
     const img = document.createElement('img');
     img.src = topic.image;
     img.className = studyNow ? 'study-now-image' : 'study-card-image';
-    img.alt = "";
+    img.alt = '';
+    img.setAttribute('role', 'presentation');
 
     const cardBody = document.createElement('div');
     cardBody.className = studyNow ? 'study-now-body' : 'study-card-body d-flex flex-column';
 
-    const cardTitle = document.createElement('h5');
+    const cardTitle = document.createElement('h3');
     cardTitle.className = 'study-card-title';
     cardTitle.textContent = topic.title;
+    cardTitle.setAttribute('aria-label', `Topic: ${topic.title}`);
 
     const estimatedTime = document.createElement('div');
     estimatedTime.className = 'study-time';
     estimatedTime.textContent = `${topic.estimatedTime} minutes`;
+    estimatedTime.setAttribute('aria-label', `Estimated time to study: ${topic.estimatedTime} minutes`);
 
     const actionsDiv = document.createElement('div');
     actionsDiv.className = 'study-actions';
 
     const showDetailsOrGoToTopicButton = createShowDetailsOrGoToTopicButton(topic);
     showDetailsOrGoToTopicButton.className = 'btn btn-primary btn-study';
-    
+    showDetailsOrGoToTopicButton.setAttribute('aria-label', studyNow ? `Go to topic content page: ${topic.title}` : `Go to the topic details page: ${topic.title}`);
+
     const removeBtn = createRemoveButton(topic, studyNow, (id) => {
         removeCallback(id);
         // Remove the card from the UI
@@ -105,5 +109,6 @@ function createRemoveButton(topic, studyNow = false, removeCallback) {
         removeBtn.textContent = 'Remove from Study Plan';
     }
     removeBtn.onclick = () => removeCallback.bind(storageController)(topic.id);
+    removeBtn.setAttribute('aria-label', studyNow ? `Stop studying topic: ${topic.title}` : `Remove topic: ${topic.title} from study plan`);
     return removeBtn;
 }
