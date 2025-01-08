@@ -1,12 +1,20 @@
+// Import necessary modules and controllers
 import storageController from './controllers/storageController.js';
-import { initHome } from './pages/home.js'
-import { initStudyPlan } from './pages/studyPlan.js'
-import { initTopicDetails } from './pages/topicDetails.js'
-import { initLearningActivities } from './pages/learningActivities.js'
-import { initLanguage } from "./utils/language.js"
+import { initHome } from './pages/home.js';
+import { initStudyPlan } from './pages/studyPlan.js';
+import { initTopicDetails } from './pages/topicDetails.js';
+import { initLearningActivities } from './pages/learningActivities.js';
+import { initLanguage } from "./utils/language.js";
+import { initialiseAccessibilityToolbar } from './utils/accessibilityToolbar.js';
 
-// Function to dynamically load page content
-function loadContent(){
+/* ==========================================
+   Content Loading Functions
+========================================== */
+
+/**
+ * Dynamically loads page-specific content based on the current page.
+ */
+function loadContent() {
     const page = document.body.dataset.page;
 
     switch (page) {
@@ -28,13 +36,17 @@ function loadContent(){
     }
 }
 
-// Function to populate nav links dynamically based on selected page
+/**
+ * Populates navigation links dynamically based on the selected page.
+ */
 function populateNavLinks() {
     const navLinks = document.getElementById('nav-links');
     const topicStudyCount = storageController.getTopicStudyCount();
 
-    // Get the current page's URL
+    // Get the current page's URL path
     const currentPage = window.location.pathname;
+
+    // Define individual navigation links
     const studyPlanLink = {
         href: '/UOH-AWA/components/pages/study-plan.html',
         text: 'Study Plan',
@@ -48,7 +60,7 @@ function populateNavLinks() {
         classes: 'nav-link' 
     };
 
-    // Define links for each page
+    // Define links for specific pages
     const links = {
         '/UOH-AWA/index.html': [
             studyPlanLink,
@@ -67,65 +79,170 @@ function populateNavLinks() {
         ],
     };
 
-    // Default links if the current page isn't explicitly listed
+    // Default navigation links if the current page isn't explicitly listed
     const defaultLinks = [
         homeLink,
         studyPlanLink
     ];
 
-    // Get links for the current page or fallback to default links
+    // Determine which links to display based on the current page
     const pageLinks = links[currentPage] || defaultLinks;
 
+    // Generate and inject the HTML for navigation links
     navLinks.innerHTML = pageLinks
         .map(link => {
             if (link.countClass) {
-                // If the link has a count (e.g., Study Plan)
+                // If the link includes a count (e.g., Study Plan with a study count)
                 return `
                     <a href="${link.href}" class="${link.classes}">
                         ${link.text}<span class="${link.countClass}">${link.count}</span>
                     </a>
                 `;
             } else {
-                // Regular link
+                // Regular navigation link without a count
                 return `<a href="${link.href}" class="${link.classes}">${link.text}</a>`;
             }
         })
         .join('');
 }
 
-// Function to dynamically load header component
+/* ==========================================
+   Accessibility Toolbar Functions
+========================================== */
+
+/**
+ * Dynamically loads the accessibility toolbar into the DOM.
+ * Retries loading if the toolbar container isn't found immediately.
+ * @param {number} retries - Number of retry attempts remaining.
+ * @param {number} delay - Delay between retries in milliseconds.
+ */
+async function loadAccessibilityToolbar(retries = 5, delay = 500) {
+    /**
+     * Injects the accessibility toolbar HTML into the toolbar container.
+     */
+    async function injectToolbar() {
+        const toolbarContainer = document.getElementById('accessibility-toolbar');
+        
+        if (!toolbarContainer) {
+            if (retries > 0) {
+                console.warn(`[Accessibility Toolbar] Retry loading in ${delay}ms. Retries left: ${retries}`);
+                setTimeout(() => loadAccessibilityToolbar(retries - 1, delay), delay);
+            } else {
+                console.error('[Accessibility Toolbar] Failed after maximum retries. Aborting...');
+            }
+            return;
+        }
+
+        try {
+            const response = await fetch('/UOH-AWA/components/shared/accessibility-toolbar.html');
+            if (response.ok) {
+                toolbarContainer.innerHTML = await response.text();
+                console.log('[Accessibility Toolbar] Successfully loaded into DOM.');
+            } else {
+                console.error(`[Accessibility Toolbar] Failed to load. HTTP Status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('[Accessibility Toolbar] Fetch Error:', error.message);
+        }
+    }
+
+    // Check if the accessibility toolbar element exists in the DOM
+    if (!document.getElementById('accessibility-toolbar')) {
+        // Observe the DOM for changes to detect when the toolbar is added
+        const observer = new MutationObserver((mutations, observer) => {
+            if (document.getElementById('accessibility-toolbar')) {
+                observer.disconnect();
+                injectToolbar();
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    } else {
+        // If the toolbar already exists, inject its content immediately
+        injectToolbar();
+    }
+}
+
+/**
+ * Initializes the accessibility toolbar with retry logic.
+ * Ensures the toolbar is initialized after it's loaded into the DOM.
+ * @param {number} retries - Number of retry attempts remaining.
+ * @param {number} delay - Delay between retries in milliseconds.
+ */
+function InitialiseAccessibilityToolbar(retries = 5, delay = 500) {
+    console.log(`[Main.js] Attempting to initialize Accessibility Toolbar. Retries left: ${retries}`);
+
+    const toolbar = document.getElementById('accessibility-toolbar');
+    
+    if (toolbar) {
+        console.log('[Main.js] Accessibility Toolbar found. Initializing...');
+        initialiseAccessibilityToolbar();
+    } else if (retries > 0) {
+        console.warn(`[Main.js] #accessibility-toolbar not found. Retrying in ${delay}ms...`);
+        setTimeout(() => InitialiseAccessibilityToolbar(retries - 1, delay), delay);
+    } else {
+        console.error('[Main.js] Failed to initialize Accessibility Toolbar after maximum retries.');
+    }
+}
+
+/* ==========================================
+   Header and Footer Loading Functions
+========================================== */
+
+/**
+ * Dynamically loads the header component into the DOM.
+ * Also populates navigation links and initializes language settings.
+ */
 async function loadHeader() {
     const headerContainer = document.getElementById('header');
-    const response = await fetch('/UOH-AWA/components/shared/header.html');
-    if (response.ok) {
-        headerContainer.innerHTML = await response.text();
+    try {
+        const response = await fetch('/UOH-AWA/components/shared/header.html');
+        if (response.ok) {
+            headerContainer.innerHTML = await response.text();
 
-        // Call function to customize links
-        populateNavLinks();
-        initLanguage();
-    } else {
-        console.error('Failed to load header:', response.statusText);
+            // Customize navigation links and initialize language settings
+            populateNavLinks();
+            initLanguage();
+        } else {
+            console.error('Failed to load header:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error loading header:', error);
     }
 }
 
-// Function to dynamically load footer component
+/**
+ * Dynamically loads the footer component into the DOM.
+ * Replaces placeholders with dynamic content such as the current year.
+ */
 async function loadFooter() {
     const footerContainer = document.getElementById('footer');
-    const response = await fetch('/UOH-AWA/components/shared/footer.html');
-    if (response.ok) {
-        let footerHTML = await response.text();
-        // Replace the {{year}} placeholder with the current year
-        const currentYear = new Date().getFullYear();
-        footerHTML = footerHTML.replace('{{year}}', currentYear);
-        footerContainer.innerHTML = footerHTML;
-    } else {
-        console.error(`Failed to load ${footerComponent}: ${response.statusText}`);
+    try {
+        const response = await fetch('/UOH-AWA/components/shared/footer.html');
+        if (response.ok) {
+            let footerHTML = await response.text();
+            // Replace the {{year}} placeholder with the current year
+            const currentYear = new Date().getFullYear();
+            footerHTML = footerHTML.replace('{{year}}', currentYear);
+            footerContainer.innerHTML = footerHTML;
+        } else {
+            console.error('Failed to load footer:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error loading footer:', error);
     }
 }
 
-// Inject header component on script load
-document.addEventListener('DOMContentLoaded', loadHeader);
-// Inject footer component on script load
-document.addEventListener('DOMContentLoaded', loadFooter);
-// Inject content on script load
-document.addEventListener('DOMContentLoaded', loadContent);
+/* ==========================================
+   DOM Content Loaded Event Listener
+========================================== */
+
+/**
+ * Initializes various components once the DOM is fully loaded.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    loadHeader();
+    loadFooter();
+    loadContent();
+    loadAccessibilityToolbar();
+    InitialiseAccessibilityToolbar();
+});
