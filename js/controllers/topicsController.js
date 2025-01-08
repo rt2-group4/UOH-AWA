@@ -12,6 +12,7 @@ class TopicsController {
                 test: [
                     { question: "What does WCAG stand for?", options: ["Web Content Accessibility Guidelines", "Web Content Application Guide", "World Content Accessibility Group"], answer: 0 },
                     { question: "Why is accessibility important?", options: ["Legal compliance", "Inclusive user experience", "Both"], answer: 2 },
+                    { question: "Which is NOT a principle of accessibility in WCAG?", options: ["Perceivable", "Operable", "Sophisticated", "Understandable"], answer: 2 },
                 ]
             },
             {
@@ -23,7 +24,26 @@ class TopicsController {
                 prerequisites: [1],
                 learningMaterials: "/UOH-AWA/components/learning-materials/topic-2.html",
                 test: [
-                    { question: "Which tag is semantic for navigation?", options: ["<div>", "<nav>", "<span>"], answer: 1 },
+                    { 
+                        question: "Which tag is semantic for navigation?", 
+                        options: ["<div>", "<nav>", "<span>"], 
+                        answer: 1 
+                    },
+                    { 
+                        question: "Which of the following is a type of HTML element?", 
+                        options: ["non-semantic", "semantic", "both", "none"], 
+                        answer: 2 
+                    },
+                    { 
+                        question: "Which of the following is NOT a semantic element?", 
+                        options: ["<form>", "<article>", "<div>", "<table>"], 
+                        answer: 2 
+                    },
+                    { 
+                        question: "What is the difference between semantic and non-semantic elements?", 
+                        options: ["Semantic elements are only for developers, while non-semantic elements are for users.", "Semantic elements describe their meaning to the browser and developers, while non-semantic elements do not.", "Non-semantic elements are faster to load compared to semantic elements.", "Semantic elements cannot be styled using CSS."],  
+                        answer: 1 
+                    }
                 ]
             },
             {
@@ -36,9 +56,9 @@ class TopicsController {
                 learningMaterials: "/UOH-AWA/components/learning-materials/topic-3.html",
                 test: [
                     { 
-                        question: "What is the minimum contrast ratio recommended by WCAG for normal text?",
-                        options: ["2.1:1", "4.5:1", "3:1"],
-                        answer: 1
+                        question: "Which of the following is NOT a visual cue ?",
+                        options: ["Images", "Links", "Buttons", "Meta"],
+                        answer: 3
                     },
                     {
                         question: "Which attribute is essential for making images accessible to screen readers?",
@@ -49,6 +69,11 @@ class TopicsController {
                         question: "What should you avoid when designing for color-blind users?",
                         options: ["Using patterns", "Using color alone to convey information", "Using bold text"],
                         answer: 1
+                    },
+                    {
+                        question: "What is the main idea of web accessibility for people with visual disabilities?",
+                        options: ["To make websites faster to load", "To enable users to perceive, understand, navigate, interact with, and contribute to the web.", "To make websites more colorful.", "To increase website traffic."],
+                        answer: 1
                     }
                 ]
             },
@@ -57,24 +82,24 @@ class TopicsController {
                 title: "Cognitive Disabilities",
                 image: "/UOH-AWA/assets/images/cognitive-disabilities.webp",
                 description: "A guide to web accessibility for users with cognitive disabilities.",
-                estimatedTime: 35,
+                estimatedTime: 45,
                 prerequisites: [3],
                 learningMaterials: "/UOH-AWA/components/learning-materials/topic-4.html",
                 test: [
                     {
-                        question: "Which of these is most important for users with cognitive disabilities?",
-                        options: ["Fancy animations", "Clear and consistent navigation", "Multiple navigation options"],
+                        question: "Which is the primary focus of cognitive accessibility?",
+                        options: ["Making web pages colorful and attractive", "Designing digital content to be easily understandable and usable by individuals with cognitive disabilities", "Removing all text from web pages", "Increasing the loading speed of a website"],
                         answer: 1
                     },
                     {
-                        question: "What is a good practice for reducing cognitive load?",
-                        options: ["Breaking content into small chunks", "Using complex terminology", "Adding background music"],
-                        answer: 0
+                        question: "Which of the following is a guideline under the Web Content Accessibility Guidelines (WCAG) for cognitive web accessibility?",
+                        options: ["Add complex animations", "Reduce the size of text on web pages", "Provide sufficient time for users to read and use content", "Use abbreviations without definitions"],
+                        answer: 2
                     },
                     {
-                        question: "Which typography practice helps users with cognitive disabilities?",
-                        options: ["Decorative fonts", "Left-aligned text", "Justified text"],
-                        answer: 1
+                        question: "What are the two main classifications of cognitive disabilities mentioned in the document?",
+                        options: ["Physical and Emotional", "Medical and Behavioral", "Visual and Auditory", "Clinical and Functional"],
+                        answer: 3
                     }
                 ]
             },
