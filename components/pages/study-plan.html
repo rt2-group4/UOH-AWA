@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AccessibleWebApp - Study Plan</title>
+    <title></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Flags CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/7.2.3/css/flag-icons.min.css"
           integrity="sha512-bZBu2H0+FGFz/stDN/L0k8J0G8qVsAL0ht1qg5kTwtAheiXwiRKyCq1frwfbSFSJN3jooR5kauE0YjtPzhZtJQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer">
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     <link href="../../css/styles.css" rel="stylesheet">
     <!-- Favicon Link -->
@@ -21,21 +21,21 @@
 
     <!-- Main Content -->
     <main class="container my-5">
-        <h2 class="study-plan-heading">Your Study Plan</h2>
+        <h2 class="mb-4" id="studyPlanHeader"></h2>
 
-        <section class="study-plan-section">
-            <h3 class="h4 mb-4">Studying Now:</h3>
+        <div class="mb-4">
+            <h4 id="studyingNowHeader"></h4>
             <div id="studying-now">
                 <!-- Currently Studying Topic -->
             </div>
-        </section>
+        </div>
 
-        <section class="study-plan-section">
-            <h3 class="h4 mb-4">Studying Next:</h3>
+        <div>
+            <h4 id="studyingNextHeader"></h4>
             <div id="studying-next" class="row row-cols-1 row-cols-md-2 g-4">
                 <!-- Study Plan Topics -->
             </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->

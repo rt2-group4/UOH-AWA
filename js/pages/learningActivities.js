@@ -1,6 +1,10 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 import { createTopicTitle, createTopicImage } from '../utils/topicUtils.js';
+import {translationData} from "../utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 export async function initLearningActivities() {
     const studyingNow = storageController.getStudyingNow();
@@ -16,14 +20,15 @@ export async function initLearningActivities() {
             await renderLearningActivities(topic);
         }
     }
+    translateTexts()
 }
 
 function renderNoTopicMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p>No topic is currently being studied.</p>';
+    document.getElementById('learning-activities').innerHTML = `<p role="alert">${translationData[prefLang]['submitAnswers']['notStudying']}</p>`;
 }
 
 function renderTopicNotFoundMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p>Topic not found.</p>';
+    document.getElementById('learning-activities').innerHTML = `<p role="alert">${translationData[prefLang]['submitAnswers']['missingTopic']}</p>`;
 }
 
 async function renderLearningActivities(topic) {
@@ -33,6 +38,9 @@ async function renderLearningActivities(topic) {
     const imgWrapper = document.createElement('div');
     const img = createTopicImage(topic);
     img.className = 'learning-content-image';
+    // Image properties to comply with WCAG:1.1.1.d
+    img.alt = '';
+    img.setAttribute('role', 'presentation');
     imgWrapper.appendChild(img);
 
     const cardBody = document.createElement('div');
@@ -40,10 +48,11 @@ async function renderLearningActivities(topic) {
 
     const title = createTopicTitle(topic);
     title.className = 'mb-4';
-    
+    title.setAttribute('aria-level', '2');
+
     const learningMaterials = await createLearningMaterials(topic);
     learningMaterials.className = 'learning-materials';
-    
+
     const testSection = createTestSection(topic);
     testSection.className = 'test-section';
 
@@ -57,12 +66,32 @@ async function renderLearningActivities(topic) {
     document.getElementById('learning-activities').appendChild(card);
 }
 
+const processHtmlDocContent = (htmlString, varsValuesObj) => {
+    // this function process content of an HTML string
+    // by replacing variable (e.g {{myVar}}) with the values
+    // stored for those variables in the translation dictionary
+    for (let line of htmlString.split("\n")) {
+        const pattern = /\{\{[\w\-]+}}/g
+        const tempVar = line.match(pattern)
+        if (tempVar) {
+            const tempVarValue = varsValuesObj[tempVar[0]
+                .replaceAll('{', '')
+                .replaceAll('}', '')]
+            htmlString = tempVarValue ? htmlString.replace(tempVar.toString(), tempVarValue) :
+                htmlString.replace(tempVar.toString(), "");
+        }
+    }
+    return htmlString;
+}
+
 async function createLearningMaterials(topic) {
     const learningMaterials = document.createElement('div');
     learningMaterials.className = 'mb-4';
-    
-    const content = await topicsController.getLearningMaterials(topic.id);
-    learningMaterials.innerHTML = `${content}`;
+    learningMaterials.setAttribute('aria-labelledby', 'learning-materials');
+
+    let content = await topicsController.getLearningMaterials(topic.id);
+    const processedContent = processHtmlDocContent(content, topic.learningMaterials['htmlVars'])
+    learningMaterials.innerHTML = `${processedContent}`;
     return learningMaterials;
 }
 
@@ -91,7 +120,7 @@ function createTestForm(topic) {
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.className = 'btn btn-primary';
-    submitBtn.textContent = 'Submit Answers';
+    submitBtn.textContent = translationData[prefLang]["submitAnswers"];
 
     form.appendChild(submitBtn);
 
@@ -108,8 +137,10 @@ function createQuestionDiv(question, index) {
 
     const fieldset = document.createElement('fieldset');
     fieldset.className = 'form-fieldset';
+    fieldset.setAttribute('aria-labelledby', `question-legend-${index}`); // Associate fieldset with legend
 
     const legend = document.createElement('legend');
+    legend.id = `question-legend-${index}`;
     legend.textContent = `${index + 1}. ${question.question}`;
     fieldset.appendChild(legend);
 
@@ -154,6 +185,7 @@ function createResultDiv() {
     const resultDiv = document.createElement('div');
     resultDiv.id = 'test-result';
     resultDiv.className = 'mt-3';
+    resultDiv.setAttribute('aria-live', 'polite');
     return resultDiv;
 }
 
@@ -172,10 +204,14 @@ function handleTestSubmission(event, topic) {
 
     const percentage = (score / topic.test.length) * 100;
     const resultClass = percentage >= 70 ? 'success' : 'warning';
-    
+
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
-        <p>Your score: ${score} / ${topic.test.length} (${percentage}%)</p>
-        <p>${percentage >= 70 ? 'Great job! You\'ve passed the test.' : 'Keep studying and try again!'}</p>
+        <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
+        <p>${percentage >= 70 ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
     `;
+}
+
+const translateTexts = () => {
+    document.title = translationData[prefLang]['learningActTitle'];
 }

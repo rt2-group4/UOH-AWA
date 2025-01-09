@@ -1,3 +1,5 @@
+import { translationData } from "../utils/translations.js";
+
 class TopicsController {
     constructor() {
         this.topics = [
@@ -283,7 +285,7 @@ class TopicsController {
         if (!topic) return null;
         
         try {
-            const response = await fetch(topic.learningMaterials);
+            const response = await fetch(topic.learningMaterials.filePath);
             if (!response.ok) throw new Error('Failed to load learning materials');
             return await response.text();
         } catch (error) {
