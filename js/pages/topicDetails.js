@@ -2,6 +2,10 @@ import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 import { createStartStudyingButton, createStudyLaterButton } from '../utils/buttonUtils.js';
 import { createTopicTitle, createTopicImage } from '../utils/topicUtils.js';
+import { translationData } from "../utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 export function initTopicDetails() {
     const topicId = getTopicIdFromURL();
@@ -24,7 +28,7 @@ function findTopicById(topicId) {
 }
 
 function renderTopicNotFoundMessage() {
-    document.getElementById('topic-details').innerHTML = '<p role="alert">Topic not found.</p>';
+    document.getElementById('topic-details').innerHTML = `<p role="alert">${translationData[prefLang]['missingTopic']}</p>`;
 }
 
 function renderTopicDetails(topic) {
@@ -93,7 +97,7 @@ function createTopicDescription(topic) {
 function createEstimatedTime(topic) {
     const estimatedTime = document.createElement('p');
     estimatedTime.className = 'card-text';
-    estimatedTime.innerHTML = `<strong>Estimated Study Time:</strong> ${topic.estimatedTime} minutes`;
+    estimatedTime.innerHTML = `<strong>${translationData[prefLang]["estimatedStudyTime"]}:</strong> ${topic.estimatedTime} ${translationData[prefLang]["minutes"]}`;
     estimatedTime.setAttribute('aria-label', `Estimated study time: ${topic.estimatedTime} minutes`);
     return estimatedTime;
 }
@@ -103,7 +107,7 @@ function createPrerequisites(topic) {
     prerequisites.className = 'card-text';
 
     if (topic.prerequisites.length > 0) {
-        prerequisites.innerHTML = `<strong>Pre-requisites:</strong> `;
+        prerequisites.innerHTML = `<strong>${translationData[prefLang]['preRequisites']}:</strong> `;
         topic.prerequisites.forEach((preId, index) => {
             const preTopic = topicsController.topics.find(t => t.id === preId);
             if (preTopic) {
@@ -118,7 +122,7 @@ function createPrerequisites(topic) {
             }
         });
     } else {
-        prerequisites.innerHTML = `<strong>Pre-requisites:</strong> None`;
+        prerequisites.innerHTML = `<strong>${translationData[prefLang]['preRequisites']}:</strong> None`;
         prerequisites.setAttribute('aria-label', 'Pre-requisites: None');
     }
 
