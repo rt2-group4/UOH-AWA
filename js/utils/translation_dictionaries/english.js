@@ -187,10 +187,9 @@ export const english = {
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-7.html",
                     "htmlVars": {
-                        "h5-1": "Introduction",
+                        "h3-1": "Introduction",
                         "p-1": "Motor disabilities can be a result of many different causes, causing similar challenges to users when they navigate the web.",
                         "p-2": "The main idea of web accessibility for people with motor disabilities is making websites <strong>Operable</strong> since not everyone can use a mouse, click tiny links, or easily control interactive features. This section will focus on what we can do to build an accessible web product for people with motor disabilities.",
-                        "h3-1": "Assistive Technologies",
                         "p-3": "There are many assistive technologies that can be used to make it easier for people with motor disabilities to navigate through the web. Some of them include:",
                         "ul-1": "<li>Head wands</li>\n" +
                             "            <li>Mouth sticks</li>\n" +
@@ -313,13 +312,13 @@ export const english = {
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-9.html",
                     "htmlVars":{
-                        "h5-1": "Introduction",
+                        "h3-1": "Introduction",
                         "p-1": "There is an obvious ethical argument to make digital content accessible to everyone, regardless of ability.\n" +
                             "        Designing digital technologies for all is even mentioned in several professional Codes of Conduct. However,\n" +
                             "        ethics\n" +
                             "        and the law do not always go hand in hand. This section will focus on the legality surrounding digital\n" +
                             "        accessibility.",
-                        "h5-2": "Convention on the Rights of the Persons with Disabilities (CRPD)",
+                        "h5-1": "Convention on the Rights of the Persons with Disabilities (CRPD)",
                         "p-2": "The CRPD is an international treaty that was adopted by the United Nations General Assembly in 2006. The purpose\n" +
                             "        of the convention is to:",
                         "blq-1": "Promote, protect and ensure the full and equal enjoyment of all human rights and fundamental freedoms by\n" +

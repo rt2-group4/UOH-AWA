@@ -187,10 +187,9 @@ export const french = {
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-7.html",
                     "htmlVars": {
-                        "h5-1": "Introduction",
+                        "h3-1": "Introduction",
                         "p-1": "Les handicaps moteurs peuvent résulter de nombreuses causes différentes, entraînant des difficultés similaires chez les utilisateurs lorsqu’ils naviguent sur le Web.",
                         "p-2": "L'idée principale de l'accessibilité du Web pour les personnes handicapées motrices est de rendre les sites Web <strong>exploitables</strong>, car tout le monde ne peut pas utiliser une souris, cliquer sur de petits liens ou contrôler facilement des fonctionnalités interactives. Cette section se concentrera sur ce que nous pouvons faire pour créer un produit Web accessible aux personnes handicapées motrices.",
-                        "h3-1": "Technologies d'assistance",
                         "p-3": "Il existe de nombreuses technologies d'assistance qui peuvent être utilisées pour faciliter la navigation sur le Web pour les personnes souffrant de handicaps moteurs. En voici quelques-unes :",
                         "ul-1": "<li>Baguettes pour la tête</li>\n" +
                             " <li>Baguettes pour la bouche</li>\n" +
@@ -313,11 +312,11 @@ export const french = {
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-9.html",
                     "htmlVars": {
-                        "h5-1": "Introduction",
+                        "h3-1": "Introduction",
                         "p-1": "Il existe un argument éthique évident pour rendre le contenu numérique accessible à tous, quelles que soient leurs capacités. " +
                             "La conception de technologies numériques pour tous est même mentionnée dans plusieurs codes de conduite professionnels. Cependant, " +
                             "l'éthique et la loi ne vont pas toujours de pair. Cette section se concentrera sur la légalité entourant l'accessibilité numérique.",
-                        "h5-2": "Convention relative aux droits des personnes handicapées (CDPH)",
+                        "h5-1": "Convention relative aux droits des personnes handicapées (CDPH)",
                         "p-2": "La CDPH est un traité international adopté par l’Assemblée générale des Nations Unies en 2006. L’objectif de la convention est de :",
                         "blq-1": "Promouvoir, protéger et assurer la jouissance pleine et égale de tous les droits de l’homme et de toutes les libertés fondamentales " +
                             "par toutes les personnes handicapées, et promouvoir le respect de leur dignité inhérente.",

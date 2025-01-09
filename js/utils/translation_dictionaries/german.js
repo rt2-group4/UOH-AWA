@@ -187,10 +187,9 @@ export const german = {
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-7.html",
                     "htmlVars": {
-                        "h5-1": "Einführung",
+                        "h3-1": "Einführung",
                         "p-1": "Motorische Behinderungen können viele verschiedene Ursachen haben und für Benutzer beim Surfen im Internet zu ähnlichen Herausforderungen führen.",
                         "p-2": "Die Hauptidee der Barrierefreiheit im Internet für Menschen mit motorischen Behinderungen besteht darin, Websites <strong>bedienbar</strong> zu machen, da nicht jeder eine Maus verwenden, auf kleine Links klicken oder interaktive Funktionen problemlos steuern kann. In diesem Abschnitt geht es darum, was wir tun können, um ein barrierefreies Webprodukt für Menschen mit motorischen Behinderungen zu erstellen.",
-                        "h3-1": "Assistierende Technologien",
                         "p-3": "Es gibt viele unterstützende Technologien, die Menschen mit motorischen Behinderungen die Navigation im Internet erleichtern können. Dazu gehören unter anderem:",
                         "ul-1": "<li>Kopfstäbe</li>\n" +
                             " <li>Mundstäbe</li>\n" +
@@ -313,12 +312,12 @@ export const german = {
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-9.html",
                     "htmlVars": {
-                        "h5-1": "Einführung",
+                        "h3-1": "Einführung",
                         "p-1": "Es gibt ein offensichtliches ethisches Argument dafür, digitale Inhalte für alle zugänglich zu machen, unabhängig " +
                             "von ihren Fähigkeiten. Die Entwicklung digitaler Technologien für alle wird sogar in mehreren professionellen " +
                             "Verhaltenskodizes erwähnt. Ethik und Recht gehen jedoch nicht immer Hand in Hand. Dieser Abschnitt konzentriert sich auf " +
                             "die rechtlichen Aspekte der digitalen Zugänglichkeit.",
-                        "h5-2": "Übereinkommen über die Rechte von Menschen mit Behinderungen (CRPD)",
+                        "h5-1": "Übereinkommen über die Rechte von Menschen mit Behinderungen (CRPD)",
                         "p-2": "The CRPD is an international treaty that was adopted by the United Nations General Assembly in 2006. The purpose of the convention is to:",
                         "blq-1": "Förderung, Schutz und Gewährleistung der uneingeschränkten und gleichberechtigten Wahrnehmung aller " +
                             "Menschenrechte und Grundfreiheiten durch alle Menschen mit Behinderungen und Förderung der Achtung ihrer innewohnenden Würde.",

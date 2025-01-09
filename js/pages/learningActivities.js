@@ -149,7 +149,7 @@ function createQuestionDiv(question, index) {
 
     question.options.forEach((option, optIndex) => {
         const optionDiv = createOptionDiv(option, index, optIndex);
-        questionDiv.appendChild(optionDiv);
+        optionsDiv.appendChild(optionDiv);
     });
 
     fieldset.appendChild(optionsDiv);
