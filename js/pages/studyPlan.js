@@ -1,10 +1,15 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
-import { createShowDetailsOrGoToTopicButton } from '../utils/buttonUtils.js';
+import {createShowDetailsOrGoToTopicButton} from '../utils/buttonUtils.js';
+import {translationData} from "../utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 export function initStudyPlan() {
     displayStudyingNow();
     displayStudyPlan();
+    translateTexts()
 }
 
 function displayStudyingNow() {
@@ -18,10 +23,10 @@ function displayStudyingNow() {
             const card = createTopicCard(topic, true, (id) => storageController.removeStudyingNow());
             studyingNowDiv.appendChild(card);
         } else {
-            studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
+            studyingNowDiv.innerHTML = `<p>${translationData[prefLang]['notStudying']}</p>`;
         }
     } else {
-        studyingNowDiv.innerHTML = '<p>No topic is currently being studied.</p>';
+        studyingNowDiv.innerHTML = `<p>${translationData[prefLang]['notStudying']}</p>`;
     }
 }
 
@@ -30,7 +35,7 @@ function displayStudyPlan() {
     const studyPlan = storageController.getStudyPlan();
 
     if (studyPlan.length === 0) {
-        studyingNextDiv.innerHTML = '<p>Your study plan is empty.</p>';
+        studyingNextDiv.innerHTML = `<p>${translationData[prefLang]['emptyStudyPlan']}</p>`;
     } else {
         studyPlan.forEach(topicId => {
             const topic = topicsController.topics.find(t => t.id === topicId);
@@ -104,11 +109,23 @@ function createRemoveButton(topic, studyNow = false, removeCallback) {
     const removeBtn = document.createElement('button');
     removeBtn.className = 'btn btn-danger';
     if (studyNow) {
-        removeBtn.textContent = 'Stop Studying';
+        removeBtn.textContent = translationData[prefLang]['stopStudying'];
     } else {
-        removeBtn.textContent = 'Remove from Study Plan';
+        removeBtn.textContent = translationData[prefLang]['removeFromPlan'];
     }
     removeBtn.onclick = () => removeCallback.bind(storageController)(topic.id);
     removeBtn.setAttribute('aria-label', studyNow ? `Stop studying topic: ${topic.title}` : `Remove topic: ${topic.title} from study plan`);
     return removeBtn;
+}
+
+
+const translateTexts = () => {
+    document.title = translationData[prefLang]['studyPlanTitle'];
+
+    const studyingNowHeader = document.getElementById('studyingNowHeader');
+    studyingNowHeader ? studyingNowHeader.innerText = translationData[prefLang]['studyPlanTxt'] : null;
+
+    const studyingNextHeader = document.getElementById('studyingNextHeader');
+    studyingNextHeader ? studyingNextHeader.innerText = translationData[prefLang]['studyingNextHeader'] : null;
+
 }
