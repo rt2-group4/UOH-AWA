@@ -583,6 +583,12 @@ main {
     color: #856404;
 }
 
+/* contrast complies with WCAG color contrast checker */
+.test-result.incomplete{
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
 @media (max-width: 768px) {
     .learning-content-body {
         padding: 1.5rem;
