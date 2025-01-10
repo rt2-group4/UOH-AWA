@@ -208,7 +208,7 @@ function handleTestSubmission(event, topic) {
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
         <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
-        <p>${percentage >= 70 ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
+        <p>${score === topic.test.length ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
     `;
 }
 

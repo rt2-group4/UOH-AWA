@@ -184,7 +184,7 @@ export const english = {
                     {
                         question: "Which of these is NOT a type of hearing loss?",
                         options: ["Moderate hearing loss", "Severe hearing loss", "Significant hearing loss"],
-                        answer: 1
+                        answer: 2
                     },
                     {
                         question: "What is required for video content to be accessible to deaf users?",
