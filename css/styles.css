@@ -777,5 +777,33 @@ main {
     .carousel-control-icon {
         font-size: 48px;
     }
-    
+
 }
+
+.in-text-a {
+  color: #0044cc;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.in-text-a:visited {
+  color: #6c2eb9;
+}
+
+.in-text-a:hover {
+  color: #002a80;
+  text-decoration: underline;
+}
+
+.in-text-a:focus {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.in-text-a[aria-disabled="true"] {
+  color: #7a7a7a;
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
+
