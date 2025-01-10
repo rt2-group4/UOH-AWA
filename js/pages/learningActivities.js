@@ -203,7 +203,7 @@ function handleTestSubmission(event, topic) {
     });
 
     const percentage = (score / topic.test.length) * 100;
-    const resultClass = percentage >= 70 ? 'success' : 'warning';
+    const resultClass = score === topic.test.length ? 'success' : 'warning';
 
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
