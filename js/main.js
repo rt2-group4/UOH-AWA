@@ -4,17 +4,17 @@ import { initHome } from './pages/home.js';
 import { initStudyPlan } from './pages/studyPlan.js';
 import { initTopicDetails } from './pages/topicDetails.js';
 import { initLearningActivities } from './pages/learningActivities.js';
-import { initLanguage } from "./utils/language.js";
-import { translationData } from "./utils/translations.js";
+import { initLanguage } from './utils/language.js';
+import { translationData } from './utils/translations.js';
 import { initialiseAccessibilityToolbar } from './utils/accessibilityToolbar.js';
 
 //Variables used for logging and retry functions
-const filename = "main.js";
+const filename = 'main.js';
 let retries = 5;
 let delay = 500;
 
 // retrieve user's preferred language
-const prefLang = localStorage["prefLang"];
+const prefLang = localStorage['prefLang'];
 
 /* ==========================================
    Content Loading Functions
@@ -48,8 +48,13 @@ function loadContent() {
 /**
  * Populates navigation links dynamically based on the selected page.
  */
-function populateNavLinks() {
-    const navLinks = document.getElementById('nav-links');
+function populateNavLinks(elementId) {
+    const navLinks = document.getElementById(elementId);
+    if (!navLinks) {
+        console.error(`Element with ID '${elementId}' not found.`);
+        return;
+    }
+
     const topicStudyCount = storageController.getTopicStudyCount();
 
     // Get the current page's URL path
@@ -63,53 +68,45 @@ function populateNavLinks() {
         count: topicStudyCount,
         classes: 'nav-link',
     };
-    const homeLink = { 
-        href: '/UOH-AWA/index.html', 
+    const homeLink = {
+        href: '/UOH-AWA/index.html',
         text: translationData[prefLang]['home'],
-        classes: 'nav-link' 
+        classes: 'nav-link',
     };
 
     // Define links for specific pages
     const links = {
-        '/UOH-AWA/index.html': [
-            studyPlanLink,
-        ],
+        '/UOH-AWA/index.html': [studyPlanLink],
         '/UOH-AWA/components/pages/learning-activities.html': [
             homeLink,
-            studyPlanLink
+            studyPlanLink,
         ],
-        '/UOH-AWA/components/pages/study-plan.html': [
-            homeLink,
-            studyPlanLink
-        ],
+        '/UOH-AWA/components/pages/study-plan.html': [homeLink, studyPlanLink],
         '/UOH-AWA/components/pages/topic-details.html': [
             homeLink,
-            studyPlanLink
+            studyPlanLink,
         ],
     };
 
     // Default navigation links if the current page isn't explicitly listed
-    const defaultLinks = [
-        homeLink,
-        studyPlanLink
-    ];
+    const defaultLinks = [homeLink, studyPlanLink];
 
     // Determine which links to display based on the current page
     const pageLinks = links[currentPage] || defaultLinks;
 
     // Generate and inject the HTML for navigation links
     navLinks.innerHTML = pageLinks
-        .map(link => {
+        .map((link) => {
             if (link.countClass) {
                 // If the link includes a count (e.g., Study Plan with a study count)
                 return `
-                    <a href="${link.href}" class="${link.classes}">
-                        ${link.text} <span class="${link.countClass}">${link.count}</span>
+                    <a href='${link.href}' class='${link.classes}'>
+                        ${link.text} <span class='${link.countClass}'>${link.count}</span>
                     </a>
                 `;
             } else {
                 // Regular navigation link without a count
-                return `<a href="${link.href}" class="${link.classes}">${link.text}</a>`;
+                return `<a href='${link.href}' class='${link.classes}'>${link.text}</a>`;
             }
         })
         .join('');
@@ -128,28 +125,46 @@ async function loadAccessibilityToolbar() {
      * Injects the accessibility toolbar HTML into the toolbar container.
      */
     async function injectToolbar() {
-        const toolbarContainer = document.getElementById('accessibility-toolbar');
-        
+        const toolbarContainer = document.getElementById(
+            'accessibility-toolbar'
+        );
+
         if (!toolbarContainer) {
             if (retries > 0) {
-                console.warn(`[Accessibility Toolbar] Retry loading in ${delay}ms. Retries left: ${retries}`);
-                setTimeout(() => loadAccessibilityToolbar(retries - 1, delay), delay);
+                console.warn(
+                    `[Accessibility Toolbar] Retry loading in ${delay}ms. Retries left: ${retries}`
+                );
+                setTimeout(
+                    () => loadAccessibilityToolbar(retries - 1, delay),
+                    delay
+                );
             } else {
-                console.error('[Accessibility Toolbar] Failed after maximum retries. Aborting...');
+                console.error(
+                    '[Accessibility Toolbar] Failed after maximum retries. Aborting...'
+                );
             }
             return;
         }
 
         try {
-            const response = await fetch('/UOH-AWA/components/shared/accessibility-toolbar.html');
+            const response = await fetch(
+                '/UOH-AWA/components/shared/accessibility-toolbar.html'
+            );
             if (response.ok) {
                 toolbarContainer.innerHTML = await response.text();
-                console.log('[Accessibility Toolbar] Successfully loaded into DOM.');
+                console.log(
+                    '[Accessibility Toolbar] Successfully loaded into DOM.'
+                );
             } else {
-                console.error(`[Accessibility Toolbar] Failed to load. HTTP Status: ${response.status}`);
+                console.error(
+                    `[Accessibility Toolbar] Failed to load. HTTP Status: ${response.status}`
+                );
             }
         } catch (error) {
-            console.error('[Accessibility Toolbar] Fetch Error:', error.message);
+            console.error(
+                '[Accessibility Toolbar] Fetch Error:',
+                error.message
+            );
         }
     }
 
@@ -176,20 +191,29 @@ async function loadAccessibilityToolbar() {
  * @param {number} delay - Delay between retries in milliseconds.
  */
 function populateAccessibilityToolbar() {
-    console.log(`[${filename}] Attempting to initialize Accessibility Toolbar. Retries left: ${retries}`);
+    console.log(
+        `[${filename}] Attempting to initialize Accessibility Toolbar. Retries left: ${retries}`
+    );
 
     const toolbar = document.getElementById('accessibility-toolbar');
 
     if (toolbar) {
-        console.log('[${filename}] Accessibility Toolbar found. Initializing...');
+        console.log(
+            '[${filename}] Accessibility Toolbar found. Initializing...'
+        );
         initialiseAccessibilityToolbar(retries, delay);
-    } 
-    else if (retries > 0) {
-        console.warn(`[Main.js] #accessibility-toolbar not found. Retrying in ${delay}ms...`);
-        setTimeout(() => initialiseAccessibilityToolbar(retries - 1, delay), delay);
-    }
-    else {
-        console.error('[${filename}] Failed to initialize Accessibility Toolbar after maximum retries.');
+    } else if (retries > 0) {
+        console.warn(
+            `[Main.js] #accessibility-toolbar not found. Retrying in ${delay}ms...`
+        );
+        setTimeout(
+            () => initialiseAccessibilityToolbar(retries - 1, delay),
+            delay
+        );
+    } else {
+        console.error(
+            '[${filename}] Failed to initialize Accessibility Toolbar after maximum retries.'
+        );
     }
 }
 
@@ -209,7 +233,8 @@ async function loadHeader() {
             headerContainer.innerHTML = await response.text();
 
             // Customize navigation links and initialize language settings
-            populateNavLinks();
+            populateNavLinks('nav-links');
+            populateNavLinks('nav-links-mobile');
             initLanguage();
         } else {
             console.error('Failed to load header:', response.statusText);
@@ -217,6 +242,51 @@ async function loadHeader() {
     } catch (error) {
         console.error('Error loading header:', error);
     }
+}
+
+function initializeBurgerMenu() {
+    let retries = 5;
+    const burgerMenu = document.getElementById('burger-menu');
+    const mobileNav = document.getElementById('mobile-nav');
+    const closeNav = document.getElementById('close-nav');
+
+    if (!burgerMenu) {
+        if (retries > 0) {
+            setTimeout(() => initializeBurgerMenu(retries - 1), 500);
+        } else {
+            console.error('Burger menu not found in the DOM after retries.');
+        }
+        return;
+    }
+
+    // Function to handle burger menu click
+    function handleBurgerMenuClick() {
+        console.log('Burger menu clicked!');
+        // Add your functionality here, e.g., toggling a menu
+        const navLinks = document.getElementById('nav-links');
+        if (navLinks) {
+            navLinks.classList.toggle('active'); // Assuming you have an 'active' class for visibility
+        }
+    }
+
+    // Function to open the mobile nav
+    function openMobileNav() {
+        mobileNav.classList.add('active');
+    }
+
+    // Function to close the mobile nav
+    function closeMobileNav() {
+        mobileNav.classList.remove('active');
+    }
+
+    burgerMenu.addEventListener('click', openMobileNav);
+    closeNav.addEventListener('click', closeMobileNav);
+
+    burgerMenu.addEventListener('click', handleBurgerMenuClick);
+
+    burgerMenu.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // Prevent focus or text selection on click
+    });
 }
 
 /**
@@ -231,8 +301,12 @@ async function loadFooter() {
             let footerHTML = await response.text();
             // Replace the {{year}} placeholder with the current year
             const currentYear = new Date().getFullYear();
-            footerHTML = footerHTML.replace('{{year}}', currentYear).replace(
-                "{{footer_text}}", translationData[prefLang]['footerTxt']);
+            footerHTML = footerHTML
+                .replace('{{year}}', currentYear)
+                .replace(
+                    '{{footer_text}}',
+                    translationData[prefLang]['footerTxt']
+                );
             footerContainer.innerHTML = footerHTML;
         } else {
             console.error('Failed to load footer:', response.statusText);
@@ -243,11 +317,13 @@ async function loadFooter() {
 }
 
 const translateTexts = () => {
-    document.title = translationData[prefLang]['homeTitle']
+    document.title = translationData[prefLang]['homeTitle'];
 
-    const topicsHeader = document.getElementById("topicsHeader");
-    topicsHeader ? topicsHeader.innerText = translationData[prefLang]['topics'] : null;
-}
+    const topicsHeader = document.getElementById('topicsHeader');
+    topicsHeader
+        ? (topicsHeader.innerText = translationData[prefLang]['topics'])
+        : null;
+};
 
 /* ==========================================
    DOM Content Loaded Event Listener
@@ -263,4 +339,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadAccessibilityToolbar();
     populateAccessibilityToolbar();
     translateTexts();
+    initializeBurgerMenu();
 });
