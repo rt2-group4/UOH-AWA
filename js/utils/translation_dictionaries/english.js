@@ -168,7 +168,7 @@ export const english = {
                     { question: "Which of the following is NOT a visual cue ?", options: ["Image", "Link", "Button", "Meta"], answer: 3 },
                     { question: "Which of the following is an example of an assistive technology for people with visual disabilities?", options: ["Keyboard shortcuts", "Screen readers", "High-speed internet", "Automatic form completion"], answer: 1 },
                     { question: "What should you do to make sure that color combinations on a website are readable?", options: ["Use any color combination you like", "Test colors to ensure they have the proper contrast ratio", "Avoid using any colors", "Make the text the same color as the background"], answer: 1 },
-                    { question: "What is the main idea of web accessibility for people with visual disabilities?", options: ["To make websites faster to load", "To enable users to perceive, understand, navigate, interact with, and contribute to the web.", "To make websites more colorful.", "To increase website traffic."], answer: 1 }
+                    { question: "What is the main idea of web accessibility for people with visual disabilities?", options: ["To make websites faster to load", "To enable users to perceive, understand, navigate, interact with, and contribute to the web", "To make websites more colorful", "To increase website traffic"], answer: 1 }
                 ]
             },
             {
