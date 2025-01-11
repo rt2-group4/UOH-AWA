@@ -1,14 +1,14 @@
 import storageController from '../controllers/storageController.js';
 import { translationMetadata } from "./translations.js";
 
-export function initLanguage(){
-    const languageMenu = document.getElementById('dropdown-menu');
-
+export function initLanguage(elementId, btnId){
+    const languageMenu = document.getElementById(elementId);
+    console.log("Init language")
     // get current language
     const currentLanguage = storageController.getPreferredLanguage()
 
     // Set button text and icon for active translation
-    const menuBtn = document.getElementById("menu-btn")
+    const menuBtn = document.getElementById(btnId)
     menuBtn.setAttribute('aria-haspopup', 'true');
     menuBtn.setAttribute('aria-expanded', 'false'); 
     menuBtn.setAttribute('tabindex', '0'); 

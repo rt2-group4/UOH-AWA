@@ -235,7 +235,8 @@ async function loadHeader() {
             // Customize navigation links and initialize language settings
             populateNavLinks('nav-links');
             populateNavLinks('nav-links-mobile');
-            initLanguage();
+            initLanguage('dropdown-menu', 'menu-btn');
+            initLanguage('dropdown-menu-mobile', 'menu-btn-mobile')
         } else {
             console.error('Failed to load header:', response.statusText);
         }
