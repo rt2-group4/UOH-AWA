@@ -88,8 +88,8 @@ export const english = {
                         "h3-2": "HTML elements",
                         "p-2": "HTML elements are divided into:",
                         "ul-1": "<li>semantic elements</li>\n" +
-                                "    <li>non-semantic elements</li>",
-                        "p-3": "A semantic element clearly describes its meaning to both the browser and the developer.Some examples of semantic elements are :",
+                                "<li>non-semantic elements</li>",
+                        "p-3": "A semantic element clearly describes its meaning to both the browser and the developer. Some examples of semantic elements are :",
                         "ul-2": "<li>&lt;form&gt;</li>\n" +
                             "    <li>&lt;table&gt;</li>\n" +
                             "    <li>&lt;article&gt;</li>",

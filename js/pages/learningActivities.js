@@ -87,7 +87,6 @@ const processHtmlDocContent = (htmlString, varsValuesObj) => {
 async function createLearningMaterials(topic) {
     const learningMaterials = document.createElement('div');
     learningMaterials.className = 'mb-4';
-    learningMaterials.setAttribute('aria-labelledby', 'learning-materials');
 
     let content = await topicsController.getLearningMaterials(topic.id);
     const processedContent = processHtmlDocContent(content, topic.learningMaterials['htmlVars'])
