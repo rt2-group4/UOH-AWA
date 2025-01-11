@@ -132,6 +132,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
     toggleContrastBtn.addEventListener('click', () => {
         settings.highContrast = !settings.highContrast;
         document.body.classList.toggle('high-contrast', settings.highContrast);
+        applyFontSize();
         saveSettings();
     });
 
@@ -218,7 +219,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
     // Adjust font size for headings and buttons
     function adjustFontSizeForElements() {
-        const adjustableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .section-title, #accessibility-toolbar button, #accessibility-toggle');
+        const adjustableElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, .section-title, #accessibility-toolbar button, #accessibility-toggle, button, label, a');
         adjustableElements.forEach(element => {
             // Reset font size to default before applying the new size
             element.style.fontSize = '';

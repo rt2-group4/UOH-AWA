@@ -5,6 +5,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-size: inherit;
 }
 
 main {
@@ -778,6 +779,7 @@ main {
         font-size: 48px;
     }
 }
+
 /* General Accessibility Toolbar Styling */
 #accessibility-toolbar {
     background: #0078D7;
@@ -996,7 +998,6 @@ body.high-contrast p {
 
 body.high-contrast .topic-details-description {
     color: #FFFFFF !important;
-    font-size: 1rem !important;
     line-height: 1.5 !important;
     background-color: #222 !important; 
     padding: 0.5rem !important; 
@@ -1019,7 +1020,6 @@ body.high-contrast .topic-details-meta {
 
 body.high-contrast .topic-details-meta .card-text {
     color: #FFFFFF !important;
-    font-size: 1rem !important; 
     line-height: 1.5 !important;
     margin-bottom: 0.5rem !important;
 }
@@ -1048,7 +1048,6 @@ body.high-contrast .modal-header {
 }
 
 body.high-contrast .modal-title {
-    font-size: 1.25rem !important;
     font-weight: bold !important;
     color: #FFFFFF !important;
 }
@@ -1063,7 +1062,6 @@ body.high-contrast .modal-header .btn-close {
 body.high-contrast .modal-body {
     background-color: #222 !important;
     color: #FFFFFF !important; 
-    font-size: 1rem !important;
     line-height: 1.5 !important;
     padding: 1.25rem !important;
 }
@@ -1075,7 +1073,6 @@ body.high-contrast .modal-footer {
 }
 
 body.high-contrast .modal-footer .btn {
-    font-size: 1rem !important;
     font-weight: bold !important;
     padding: 0.5rem 1rem !important;
     border-radius: 4px !important;
@@ -1144,7 +1141,6 @@ body.high-contrast .test-question {
 
 body.high-contrast .test-options .form-check-label {
     color: #FFFFFF !important; 
-    font-size: 1rem !important;
 }
 
 body.high-contrast .test-options .form-check-input {
@@ -1161,7 +1157,6 @@ body.high-contrast .test-section .btn-primary {
     background-color: #0056b3 !important;
     color: #FFFFFF !important;
     border: 1px solid #FFFFFF !important;
-    font-size: 1rem !important;
     font-weight: bold !important;
     padding: 0.5rem 1rem !important;
     border-radius: 4px !important;
@@ -1237,20 +1232,17 @@ body.high-contrast .study-now-body {
 }
 
 body.high-contrast .study-card-title {
-    font-size: 1.25rem !important;
     font-weight: bold !important;
     color: #FFD700 !important;
     margin-bottom: 0.5rem !important;
 }
 
 body.high-contrast .study-time {
-    font-size: 0.9rem !important;
     color: #FFFFFF !important;
     margin-bottom: 0.75rem !important;
 }
 
 body.high-contrast .btn-study {
-    font-size: 1rem !important;
     font-weight: bold !important;
     padding: 0.5rem 1rem !important;
     border-radius: 4px !important;
@@ -1305,7 +1297,6 @@ body.high-contrast #accessibility-toolbar button {
     background-color: #444 !important;
     color: #FFFFFF !important;
     border: 1px solid #FFD700 !important;
-    font-size: 0.9rem !important;
     font-weight: bold !important;
     padding: 0.5rem 1rem !important;
     margin: 0.25rem !important;
