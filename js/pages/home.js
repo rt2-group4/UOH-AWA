@@ -72,10 +72,6 @@ export function initHome() {
             location.reload();
         }
     });
-
-    equalizeCardHeights();
-
-    window.addEventListener('resize', equalizeCardHeights);
 }
 
 function createTopicCard(topic) {
@@ -191,18 +187,4 @@ function createEstimatedTime(topic) {
     estimatedTime.innerHTML = `<strong>Estimated Time:</strong> ${topic.estimatedTime} ${translationData[prefLang]['minutes']}`;
 
     return estimatedTime;
-}
-
-function equalizeCardHeights() {
-    const cards = document.querySelectorAll('.card');
-    let maxHeight = 0;
-
-    cards.forEach(card => {
-        card.style.height = 'auto';
-        maxHeight = Math.max(maxHeight, card.offsetHeight);
-    });
-
-    cards.forEach(card => {
-        card.style.minHeight = `${maxHeight}px`;
-    });
 }
