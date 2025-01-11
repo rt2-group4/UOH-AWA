@@ -200,7 +200,6 @@ function handleTestSubmission(event, topic) {
         const selected = document.querySelector(`input[name="question${index}"]:checked`);
         if(!selected){
             answered = false;
-            return;
         } else if (selected && parseInt(selected.value) === q.answer) {
             score += 1;
         }
@@ -215,17 +214,17 @@ function handleTestSubmission(event, topic) {
         //used <strong> as well as color contrast in CSS so it can be more visually distinct
         resultDiv.innerHTML = `<p> <strong>Error: </strong> You need to complete all questions before you submit your answers.</p>`;
         return;
-    } 
+    }
 
     resultDiv.removeAttribute('role');
     resultDiv.removeAttribute('aria-live');
-    const percentage = (score / topic.test.length) * 100;
-    const resultClass = percentage >= 70 ? 'success' : 'warning';
+    const percentage = Math.round((score / topic.test.length) * 100);
+    const resultClass = score === topic.test.length ? 'success' : 'warning';
 
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
         <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
-        <p>${percentage >= 70 ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
+        <p>${score === topic.test.length ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
     `;
 }
 
