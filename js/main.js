@@ -7,6 +7,11 @@ import { initLearningActivities } from './pages/learningActivities.js';
 import { initLanguage } from "./utils/language.js";
 import { initialiseAccessibilityToolbar } from './utils/accessibilityToolbar.js';
 
+//Variables used for logging and retry functions
+const filename = "main.js";
+let retries = 5;
+let delay = 500;
+
 /* ==========================================
    Content Loading Functions
 ========================================== */
@@ -113,10 +118,8 @@ function populateNavLinks() {
 /**
  * Dynamically loads the accessibility toolbar into the DOM.
  * Retries loading if the toolbar container isn't found immediately.
- * @param {number} retries - Number of retry attempts remaining.
- * @param {number} delay - Delay between retries in milliseconds.
  */
-async function loadAccessibilityToolbar(retries = 5, delay = 500) {
+async function loadAccessibilityToolbar() {
     /**
      * Injects the accessibility toolbar HTML into the toolbar container.
      */
@@ -168,19 +171,21 @@ async function loadAccessibilityToolbar(retries = 5, delay = 500) {
  * @param {number} retries - Number of retry attempts remaining.
  * @param {number} delay - Delay between retries in milliseconds.
  */
-function InitialiseAccessibilityToolbar(retries = 5, delay = 500) {
-    console.log(`[Main.js] Attempting to initialize Accessibility Toolbar. Retries left: ${retries}`);
+function populateAccessibilityToolbar() {
+    console.log(`[${filename}] Attempting to initialize Accessibility Toolbar. Retries left: ${retries}`);
 
     const toolbar = document.getElementById('accessibility-toolbar');
-    
+
     if (toolbar) {
-        console.log('[Main.js] Accessibility Toolbar found. Initializing...');
-        initialiseAccessibilityToolbar();
-    } else if (retries > 0) {
+        console.log('[${filename}] Accessibility Toolbar found. Initializing...');
+        initialiseAccessibilityToolbar(retries, delay);
+    } 
+    else if (retries > 0) {
         console.warn(`[Main.js] #accessibility-toolbar not found. Retrying in ${delay}ms...`);
-        setTimeout(() => InitialiseAccessibilityToolbar(retries - 1, delay), delay);
-    } else {
-        console.error('[Main.js] Failed to initialize Accessibility Toolbar after maximum retries.');
+        setTimeout(() => initialiseAccessibilityToolbar(retries - 1, delay), delay);
+    }
+    else {
+        console.error('[${filename}] Failed to initialize Accessibility Toolbar after maximum retries.');
     }
 }
 
@@ -244,5 +249,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadFooter();
     loadContent();
     loadAccessibilityToolbar();
-    InitialiseAccessibilityToolbar();
+    populateAccessibilityToolbar();
 });

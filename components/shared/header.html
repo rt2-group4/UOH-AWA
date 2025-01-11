@@ -1,12 +1,14 @@
 <!-- Accessibility Toolbar -->
-<div id="accessibility-toolbar" class="accessibility-toolbar" style="display: none;"></div>
+<div id="accessibility-toolbar" class="accessibility-toolbar" style="display: none;" tabindex="2">
+    <!-- Accessibility toolbar content goes here -->
+</div>
 
 <!-- Header Section -->
 <header class="site-header">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <!-- Site Title / Logo -->
-            <a tabindex="-5" href="/UOH-AWA/index.html" class="text-decoration-none">
+            <a tabindex="1" href="/UOH-AWA/index.html" class="text-decoration-none">
                 <h1 class="site-title">AccessibleWebApp</h1>
             </a>
 
@@ -18,7 +20,7 @@
                 
                 <!-- Language Selector -->
                 <div class="lang-dropdown" id="lang-dropdown">
-                    <button type="button" class="language-selector dropdown-toggle" id="menu-btn" data-bs-toggle="dropdown">
+                    <button type="button" class="language-selector dropdown-toggle" id="menu-btn" data-bs-toggle="dropdown" tabindex="3">
                         🌐 Language
                     </button>
                     <div class="dropdown-menu dropdown-menu-end" id="dropdown-menu">
@@ -27,7 +29,7 @@
                 </div>
 
                 <!-- Accessibility Toolbar Toggle Button -->
-                <button id="accessibility-toggle" class="btn btn-sm btn-primary" title="Toggle Accessibility Toolbar">
+                <button id="accessibility-toggle" class="btn btn-sm btn-primary" title="Toggle Accessibility Toolbar" tabindex="4">
                     Accessibility Toolkit
                 </button>
             </div>

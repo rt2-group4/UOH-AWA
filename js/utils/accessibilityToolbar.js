@@ -1,10 +1,12 @@
+import storageController from '../controllers/storageController.js';
+
 /**
  * @function initialiseAccessibilityToolbar
  * @description Initializes the Accessibility Toolbar with all event listeners and features, retaining settings across sessions.
  * @param {number} retries - Number of retry attempts remaining (default: 5).
  * @param {number} delay - Delay between retries in milliseconds (default: 500).
  */
-export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
+export function initialiseAccessibilityToolbar(retries, delay) {
     console.log('[Accessibility Toolbar] Initialization attempt.');
 
     // Select Toolbar Elements
@@ -20,7 +22,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
 
     // Retry logic if elements are not found
     if (![toolbar, toggleBtn, increaseFontBtn, decreaseFontBtn, resetBtn, toggleContrastBtn, screenMaskBtn, cursorRulerBtn, screenReaderBtn].every(Boolean)) {
-        console.warn('[Accessibility Toolbar] Some elements are missing. Retrying...');
         if (retries > 0) {
             setTimeout(() => initialiseAccessibilityToolbar(retries - 1, delay), delay);
         } else {
@@ -28,8 +29,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         }
         return;
     }
-
-    console.log('[Accessibility Toolbar] All required elements found. Attaching event listeners.');
 
     // Accessibility Settings with Defaults
     let settings = {
@@ -58,8 +57,13 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
      * Updates the list of readable elements for the Screen Reader.
      */
     function updateReadableElements() {
-        readableElements = Array.from(document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, a, button, li, span'));
-        console.log(`[Accessibility Toolbar] Found ${readableElements.length} readable elements.`);
+        readableElements = Array.from(
+            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, a, button, li, span, img')
+        ).filter(element => {
+            // Exclude elements with role="presentation"
+            return element.getAttribute('role') !== 'presentation';
+        });
+            console.log(`[Accessibility Toolbar] Found ${readableElements.length} readable elements.`);
     }
 
     /**
@@ -77,7 +81,9 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         const text = element.innerText || element.getAttribute('alt') || 'No readable text';
 
         const speech = new SpeechSynthesisUtterance(text);
-        speech.lang = 'en-US';
+        const currentLanguage = storageController.getPreferredLanguage()
+        console.log(currentLanguage);
+        speech.lang = currentLanguage;
         speech.rate = 1;
         speech.pitch = 1;
 
@@ -88,8 +94,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
             currentElementIndex = (currentElementIndex + 1) % readableElements.length;
             setTimeout(startScreenReader, 1000);
         };
-
-        console.log(`[Accessibility Toolbar] Screen Reader is reading: "${text}"`);
     }
 
     /**
@@ -115,7 +119,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         settings.fontSize += 1;
         applyFontSize();
         saveSettings();
-        console.log(`[Accessibility Toolbar] Font size increased to ${settings.fontSize}px`);
     });
 
     // Decrease Font Size
@@ -123,7 +126,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         settings.fontSize = Math.max(12, settings.fontSize - 1); // Ensure minimum font size of 12px
         applyFontSize();
         saveSettings();
-        console.log(`[Accessibility Toolbar] Font size decreased to ${settings.fontSize}px`);
     });
 
     // Toggle High Contrast Mode
@@ -131,7 +133,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         settings.highContrast = !settings.highContrast;
         document.body.classList.toggle('high-contrast', settings.highContrast);
         saveSettings();
-        console.log(`[Accessibility Toolbar] High Contrast: ${settings.highContrast}`);
     });
 
     // Reset All Accessibility Settings
@@ -145,7 +146,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         };
         applySettings();
         saveSettings();
-        console.log('[Accessibility Toolbar] Settings reset.');
     });
 
     // Toggle Screen Mask
@@ -153,7 +153,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         settings.screenMask = !settings.screenMask;
         handleScreenMask(settings.screenMask);
         saveSettings();
-        console.log(`[Accessibility Toolbar] Screen Mask: ${settings.screenMask}`);
     });
 
     // Toggle Cursor Ruler
@@ -161,7 +160,6 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         settings.cursorRuler = !settings.cursorRuler;
         initializeCursorRuler(settings.cursorRuler);
         saveSettings();
-        console.log(`[Accessibility Toolbar] Cursor Ruler: ${settings.cursorRuler}`);
     });
 
     // Toggle Screen Reader
@@ -173,16 +171,68 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
             stopScreenReader();
         }
         saveSettings();
-        console.log(`[Accessibility Toolbar] Screen Reader: ${settings.screenReader}`);
     });
 
     // Apply settings upon initialization
     applySettings();
-    console.log('[Accessibility Toolbar] Initialization complete.');
 
     /* ==========================================
        Helper Functions
     ========================================== */
+
+    // Utility function to calculate base font size
+    function calculateBaseFontSize(element, fontSize) {
+        const tag = element.tagName.toLowerCase();
+        let baseFontSize;
+
+        if (tag.startsWith('h')) {
+            const headingLevel = parseInt(tag.replace('h', ''));
+            baseFontSize = fontSize + (6 - headingLevel); // Example: h1 larger than h6
+        } else if (element.classList.contains('section-title')) {
+            baseFontSize = fontSize + 2;
+        } else if (tag === 'button' || element.id === 'accessibility-toggle') {
+            baseFontSize = fontSize;
+        } else {
+            baseFontSize = fontSize;
+        }
+
+        return baseFontSize;
+    }
+
+    // Utility function to adjust padding
+    // Utility function to adjust padding based on original values
+    function adjustPadding(element, fontSize) {
+        // Check if the original padding is already stored
+        if (!element.dataset.originalPadding) {
+            element.dataset.originalPadding = window.getComputedStyle(element).padding;
+        }
+
+        // Retrieve original padding values
+        const originalPadding = element.dataset.originalPadding.split(' ').map(val => parseFloat(val));
+
+        // Adjust padding based on the current font size
+        const adjustedPadding = originalPadding.map(val => Math.max(4, val * (fontSize / 16)));
+        element.style.padding = `${adjustedPadding.join('px ')}px`;
+    }
+
+
+    // Adjust font size for headings and buttons
+    function adjustFontSizeForElements() {
+        const adjustableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .section-title, #accessibility-toolbar button, #accessibility-toggle');
+        adjustableElements.forEach(element => {
+            // Reset font size to default before applying the new size
+            element.style.fontSize = '';
+
+            // Calculate and apply base font size
+            const baseFontSize = calculateBaseFontSize(element, settings.fontSize);
+            element.style.fontSize = `${baseFontSize}px`;
+
+            // Adjust padding for buttons and toggle
+            if (element.tagName.toLowerCase() === 'button' || element.id === 'accessibility-toggle') {
+                adjustPadding(element, settings.fontSize);
+            }
+        });
+    }
 
     /**
      * Applies the current font size settings to the document and relevant elements.
@@ -191,39 +241,8 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
         // Apply font size to the body
         document.body.style.fontSize = `${settings.fontSize}px`;
 
-        // Adjust font size for headings and buttons based on the new font size
-        const adjustableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .section-title, #accessibility-toolbar button, #accessibility-toggle');
-        adjustableElements.forEach(element => {
-            // Reset font size to default before applying the new size
-            element.style.fontSize = '';
-
-            // Calculate the new font size relative to the base
-            const baseFontSize = settings.fontSize; // Base font size
-            const tag = element.tagName.toLowerCase();
-
-            // Define relative font sizes for different elements
-            let relativeSize;
-            if (tag.startsWith('h')) {
-                // Headings: h1 to h6
-                const headingLevel = parseInt(tag.replace('h', ''));
-                relativeSize = settings.fontSize + (6 - headingLevel); // Example: h1 larger than h6
-            } else if (element.classList.contains('section-title')) {
-                relativeSize = settings.fontSize + 2;
-            } else if (tag === 'button' || element.id === 'accessibility-toggle') {
-                relativeSize = settings.fontSize;
-            } else {
-                relativeSize = settings.fontSize;
-            }
-
-            element.style.fontSize = `${relativeSize}px`;
-
-            // Adjust padding proportionally for buttons and toggle
-            if (tag === 'button' || element.id === 'accessibility-toggle') {
-                const currentPadding = window.getComputedStyle(element).padding.split(' ').map(val => parseFloat(val));
-                const adjustedPadding = currentPadding.map(val => Math.max(4, val * (settings.fontSize / 16)));
-                element.style.padding = `${adjustedPadding.join('px ')}px`;
-            }
-        });
+        // Adjust font size for elements
+        adjustFontSizeForElements();
     }
 
     /**
@@ -421,28 +440,7 @@ export function initialiseAccessibilityToolbar(retries = 5, delay = 500) {
             let baseFontSize;
             const tag = element.tagName.toLowerCase();
 
-            if (tag.startsWith('h')) {
-                // Headings: h1 to h6 have varying sizes
-                const headingLevel = parseInt(tag.replace('h', ''));
-                baseFontSize = settings.fontSize + (6 - headingLevel); // Example: h1 larger than h6
-            } else if (element.classList.contains('section-title')) {
-                baseFontSize = settings.fontSize + 2;
-            } else if (tag === 'button' || element.id === 'accessibility-toggle') {
-                baseFontSize = settings.fontSize;
-            } else {
-                baseFontSize = settings.fontSize;
-            }
-
-            element.style.fontSize = `${baseFontSize}px`;
-
-            // Adjust padding proportionally for buttons and toggle
-            if (tag === 'button' || element.id === 'accessibility-toggle') {
-                const currentPadding = window.getComputedStyle(element).padding.split(' ').map(val => parseFloat(val));
-                const adjustedPadding = currentPadding.map(val => Math.max(4, val * (settings.fontSize / 16)));
-                element.style.padding = `${adjustedPadding.join('px ')}px`;
-            }
+            applyFontSize()
         });
-
-        console.log('[Accessibility Toolbar] Settings applied.');
     }
 }
