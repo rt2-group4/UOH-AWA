@@ -6,8 +6,8 @@ import { albanian } from "./translation_dictionaries/albanian.js";
 const translationTexts = {
     "en-GB": english,
     "fr-FR": french,
-    "de-DE":german,
-    "al-AL":albanian
+    "de-DE": german,
+    "al-AL": albanian
 }
 
 // let translationData = {}
