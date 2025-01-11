@@ -29,6 +29,7 @@ export const german = {
         "footerTxt": "AccessibleWebApp Team | Universitätsprojekt",
         "passRemark": "Tolle Arbeit! Sie haben die Prüfung bestanden.",
         "retryRemark": "Lernen Sie weiter und versuchen Sie es erneut!",
+        "testHeading": "Objektiver Test: Erreichen Sie 60 % oder mehr, um zu bestehen",
         "topicsData": [
             {
                 id: 1,

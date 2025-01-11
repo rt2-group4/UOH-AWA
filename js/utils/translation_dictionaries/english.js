@@ -29,6 +29,7 @@ export const english = {
         "footerTxt": "AccessibleWebApp Team | University Project",
         "passRemark": "Great job! You've passed the test.",
         "retryRemark": "Keep studying and try again!",
+        "testHeading": "Objective Test: Achieve 60% or Higher to Pass",
         "topicsData": [
             {
                 id: 1,

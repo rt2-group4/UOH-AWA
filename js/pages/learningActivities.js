@@ -96,7 +96,7 @@ async function createLearningMaterials(topic) {
 
 function createTestSection(topic) {
     const testSection = document.createElement('div');
-    testSection.innerHTML = `<h2>Objective Test</h2>`;
+    testSection.innerHTML = `<h2>${translationData[prefLang]['testHeading']}</h2>`;
 
     const form = createTestForm(topic);
     const resultDiv = createResultDiv();
@@ -218,13 +218,17 @@ function handleTestSubmission(event, topic) {
     resultDiv.removeAttribute('role');
     resultDiv.removeAttribute('aria-live');
     const percentage = Math.round((score / topic.test.length) * 100);
-    const resultClass = score === topic.test.length ? 'success' : 'warning';
+    const resultClass = isTestPassed(score, topic.test.length) ? 'success' : 'warning';
 
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
         <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
-        <p>${score === topic.test.length ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
+        <p>${isTestPassed(score, topic.test.length) ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
     `;
+}
+
+function isTestPassed(score, questions){
+    return score/questions > 0.6;
 }
 
 const translateTexts = () => {
