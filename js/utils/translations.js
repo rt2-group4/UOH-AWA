@@ -5,7 +5,7 @@ import { german } from "./translation_dictionaries/german.js";
 const translationTexts = {
     "en-GB": english,
     "fr-FR": french,
-    "de-DE":german
+    "de-DE": german
 }
 
 // let translationData = {}

@@ -6,6 +6,7 @@ import { initTopicDetails } from './pages/topicDetails.js';
 import { initLearningActivities } from './pages/learningActivities.js';
 import { initLanguage } from "./utils/language.js";
 import { translationData } from "./utils/translations.js";
+import { initialiseAccessibilityToolbar } from './utils/accessibilityToolbar.js';
 
 //Variables used for logging and retry functions
 const filename = "main.js";
@@ -261,4 +262,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadContent();
     loadAccessibilityToolbar();
     populateAccessibilityToolbar();
+    translateTexts();
 });

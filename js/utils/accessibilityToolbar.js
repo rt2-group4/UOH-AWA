@@ -82,7 +82,6 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
         const speech = new SpeechSynthesisUtterance(text);
         const currentLanguage = storageController.getPreferredLanguage()
-        console.log(currentLanguage);
         speech.lang = currentLanguage;
         speech.rate = 1;
         speech.pitch = 1;
@@ -188,7 +187,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
         if (tag.startsWith('h')) {
             const headingLevel = parseInt(tag.replace('h', ''));
-            baseFontSize = fontSize + (6 - headingLevel); // Example: h1 larger than h6
+            baseFontSize = fontSize + (6 - headingLevel) * 2; // Example: h1 larger than h6
         } else if (element.classList.contains('section-title')) {
             baseFontSize = fontSize + 2;
         } else if (tag === 'button' || element.id === 'accessibility-toggle') {
