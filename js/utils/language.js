@@ -50,7 +50,7 @@ export function initLanguage() {
             dropdownItem.setAttribute('role', 'menuitem');
             dropdownItem.setAttribute('tabindex', '0');
             dropdownItem.id = `${val["tagId"]}`;
-            dropdownItem.innerHTML += `<span class="${val["flag"]} role="presentation""></span>&ensp;${val["displayName"]}`;
+            dropdownItem.innerHTML += `<span class="${val["flag"]}" role="presentation"></span>&ensp;${val["displayName"]}`;
             dropdownItem.addEventListener('click', (e) => {
                 storageController.changePreferredLanguage(e.currentTarget.id);
             });
