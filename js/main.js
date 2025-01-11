@@ -5,12 +5,15 @@ import { initStudyPlan } from './pages/studyPlan.js';
 import { initTopicDetails } from './pages/topicDetails.js';
 import { initLearningActivities } from './pages/learningActivities.js';
 import { initLanguage } from "./utils/language.js";
-import { initialiseAccessibilityToolbar } from './utils/accessibilityToolbar.js';
+import { translationData } from "./utils/translations.js";
 
 //Variables used for logging and retry functions
 const filename = "main.js";
 let retries = 5;
 let delay = 500;
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 /* ==========================================
    Content Loading Functions
@@ -54,14 +57,14 @@ function populateNavLinks() {
     // Define individual navigation links
     const studyPlanLink = {
         href: '/UOH-AWA/components/pages/study-plan.html',
-        text: 'Study Plan',
+        text: translationData[prefLang]['studyPlan'],
         countClass: 'study-plan-count',
         count: topicStudyCount,
         classes: 'nav-link',
     };
     const homeLink = { 
         href: '/UOH-AWA/index.html', 
-        text: 'Home', 
+        text: translationData[prefLang]['home'],
         classes: 'nav-link' 
     };
 
@@ -100,7 +103,7 @@ function populateNavLinks() {
                 // If the link includes a count (e.g., Study Plan with a study count)
                 return `
                     <a href="${link.href}" class="${link.classes}">
-                        ${link.text}<span class="${link.countClass}">${link.count}</span>
+                        ${link.text} <span class="${link.countClass}">${link.count}</span>
                     </a>
                 `;
             } else {
@@ -227,7 +230,8 @@ async function loadFooter() {
             let footerHTML = await response.text();
             // Replace the {{year}} placeholder with the current year
             const currentYear = new Date().getFullYear();
-            footerHTML = footerHTML.replace('{{year}}', currentYear);
+            footerHTML = footerHTML.replace('{{year}}', currentYear).replace(
+                "{{footer_text}}", translationData[prefLang]['footerTxt']);
             footerContainer.innerHTML = footerHTML;
         } else {
             console.error('Failed to load footer:', response.statusText);
@@ -235,6 +239,13 @@ async function loadFooter() {
     } catch (error) {
         console.error('Error loading footer:', error);
     }
+}
+
+const translateTexts = () => {
+    document.title = translationData[prefLang]['homeTitle']
+
+    const topicsHeader = document.getElementById("topicsHeader");
+    topicsHeader ? topicsHeader.innerText = translationData[prefLang]['topics'] : null;
 }
 
 /* ==========================================

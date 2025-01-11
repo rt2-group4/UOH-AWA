@@ -1,6 +1,10 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
 import { createTopicTitle, createTopicImage } from '../utils/topicUtils.js';
+import {translationData} from "../utils/translations.js";
+
+// retrieve user's preferred language
+const prefLang = localStorage["prefLang"];
 
 export async function initLearningActivities() {
     const studyingNow = storageController.getStudyingNow();
@@ -16,14 +20,15 @@ export async function initLearningActivities() {
             await renderLearningActivities(topic);
         }
     }
+    translateTexts()
 }
 
 function renderNoTopicMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p role="alert">No topic is currently being studied.</p>';
+    document.getElementById('learning-activities').innerHTML = `<p role="alert">${translationData[prefLang]['submitAnswers']['notStudying']}</p>`;
 }
 
 function renderTopicNotFoundMessage() {
-    document.getElementById('learning-activities').innerHTML = '<p role="alert">Topic not found.</p>';
+    document.getElementById('learning-activities').innerHTML = `<p role="alert">${translationData[prefLang]['submitAnswers']['missingTopic']}</p>`;
 }
 
 async function renderLearningActivities(topic) {
@@ -61,13 +66,32 @@ async function renderLearningActivities(topic) {
     document.getElementById('learning-activities').appendChild(card);
 }
 
+const processHtmlDocContent = (htmlString, varsValuesObj) => {
+    // this function process content of an HTML string
+    // by replacing variable (e.g {{myVar}}) with the values
+    // stored for those variables in the translation dictionary
+    for (let line of htmlString.split("\n")) {
+        const pattern = /\{\{[\w\-]+}}/g
+        const tempVar = line.match(pattern)
+        if (tempVar) {
+            const tempVarValue = varsValuesObj[tempVar[0]
+                .replaceAll('{', '')
+                .replaceAll('}', '')]
+            htmlString = tempVarValue ? htmlString.replace(tempVar.toString(), tempVarValue) :
+                htmlString.replace(tempVar.toString(), "");
+        }
+    }
+    return htmlString;
+}
+
 async function createLearningMaterials(topic) {
     const learningMaterials = document.createElement('div');
     learningMaterials.className = 'mb-4';
     learningMaterials.setAttribute('aria-labelledby', 'learning-materials');
 
-    const content = await topicsController.getLearningMaterials(topic.id);
-    learningMaterials.innerHTML = `${content}`;
+    let content = await topicsController.getLearningMaterials(topic.id);
+    const processedContent = processHtmlDocContent(content, topic.learningMaterials['htmlVars'])
+    learningMaterials.innerHTML = `${processedContent}`;
     return learningMaterials;
 }
 
@@ -96,7 +120,7 @@ function createTestForm(topic) {
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.className = 'btn btn-primary';
-    submitBtn.textContent = 'Submit Answers';
+    submitBtn.textContent = translationData[prefLang]["submitAnswers"];
 
     form.appendChild(submitBtn);
 
@@ -129,6 +153,7 @@ function createQuestionDiv(question, index) {
     });
 
     fieldset.appendChild(optionsDiv);
+
     questionDiv.appendChild(fieldset);
 
     return questionDiv;
@@ -182,7 +207,11 @@ function handleTestSubmission(event, topic) {
 
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
-        <p>Your score: ${score} / ${topic.test.length} (${percentage}%)</p>
-        <p>${percentage >= 70 ? 'Great job! You\'ve passed the test.' : 'Keep studying and try again!'}</p>
+        <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
+        <p>${percentage >= 70 ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
     `;
+}
+
+const translateTexts = () => {
+    document.title = translationData[prefLang]['learningActTitle'];
 }
