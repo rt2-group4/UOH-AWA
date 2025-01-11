@@ -39,11 +39,37 @@ export const english = {
                 prerequisites: [],
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-1.html",
-                    "htmlVars": {}
+                    "htmlVars": {
+                        "h3-1": "Introduction",
+                        "p-1": "Accessibility is making sure people can access the content you create. For every product that you create, you need to make sure that people, disabled or not, can access it.",
+                        "p-2": "Everyone should be ensured to have the opportunity to acquire the same information, engage in the same interactions, and enjoy the same services as a person without a disability in an equally effective and equally integrated manner, with substantially equivalent ease of use.",
+                        "h3-2": "Context of Accessibility",
+                        "p-3": "Accessibility must be considered throughout design, development, content creation, and maintenance of digital assets. But accessibility is not only the right thing to do, <strong>it’s also the law.</strong> Under Section 508 of the Rehabilitation Act of 1973 federal agencies must build websites and digital services that conform to the Revised 508 Standards.",
+                        "p-4": "There are four areas of accessibility that need to be thought about when designing. These four areas are:",
+                        "ul-1": "<li>Physical (motor disabilities)</li>\n" +
+                            "    <li>Cognitive</li>\n" +
+                            "    <li>Auditory (hearing disabilities)</li>\n" +
+                            "    <li>Visual</li>",
+                        "h3-3": "WCAG",
+                        "p-5": "In order have some kind of standard for accessibility, WCAG was created. WCAG stands for The Web Content Accessibility Guidelines. It is a global collaboration on technical standards to make the web more accessible to all individuals everywhere.",
+                        "p-6": "WCAG is based on four main guiding principles of accessibility:",
+                        "ul-2": "<li>Perceivable</li>\n" +
+                            "    <li>Operable</li>\n" +
+                            "    <li>Understandable</li>\n" +
+                            "    <li>Robust</li>",
+                        "p-7": "Following these principles, will mean that:",
+                        "ul-3": "<li>Text is readable and understandable</li>\n" +
+                            "    <li>Content appears and operates in predictable ways</li>\n" +
+                            "    <li>Users are helped to avoid and correct mistakes </li>",
+                        "h3-4": "The Importance of Accessibility",
+                        "blq-1": "“The power of the web is in its universality. Access by everyone regardless of disability is an essential aspect.” <br><span style='font-weight: bold; display: block; margin-top: 10px;'>— Tim Berners-Lee, founder of the Internet</span>",
+                        "h5-1": "Here is a brief video that explains what accessibility is, as well as its uses. You will also learn about assistive technologies and ways they are used."
+                    }
                 },
                 test: [
                     { question: "What does WCAG stand for?", options: ["Web Content Accessibility Guidelines", "Web Content Application Guide", "World Content Accessibility Group"], answer: 0 },
                     { question: "Why is accessibility important?", options: ["Legal compliance", "Inclusive user experience", "Both"], answer: 2 },
+                    { question: "Which is NOT a principle of accessibility in WCAG?", options: ["Perceivable", "Operable", "Sophisticated", "Understandable"], answer: 2 },
                 ]
             },
             {
@@ -55,10 +81,43 @@ export const english = {
                 prerequisites: [1],
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-2.html",
-                    "htmlVars": {}
+                    "htmlVars": {
+                        "h3-1": "Introduction",
+                        "p-1": "On terms of accessibility, semantic HTML gives deeper meaning and relationships to page organization – encouraging website clarity.",
+                        "p-2": "This gives direct accessibility gains allowing disabled users to independently interact with software.",
+                        "h3-2": "HTML elements",
+                        "p-3": "HTML elements are divided into:",
+                        "ul-1": "<li>semantic elements</li>\n" +
+                                "    <li>non-semantic elements</li>",
+                        "p-4": "A semantic element clearly describes its meaning to both the browser and the developer.Some examples of semantic elements are :",
+                        "ul-2": "<li>&lt;form&gt;</li>\n" +
+                            "    <li>&lt;table&gt;</li>\n" +
+                            "    <li>&lt;article&gt;</li>",
+                        "p-5": "Whereas some examples of non-semantic HTML elements are:",
+                        "ul-3": "<li>&lt;div&gt;</li>\n" +
+                            "    <li>&lt;span&gt;</li>",
+                        "h3-3": "HTML &lt;section&gt; Element",
+                        "p-6": "The &lt;section&gt; element defines a section in a document. Some examples where a section tag can be used: ",
+                        "ul-4": "<li>Chapters</li>\n" +
+                            "    <li>Introduction</li>\n" +
+                            "    <li>News items</li>\n" +
+                            "    <li>Contact information</li>",
+                        "h3-4":"HTML &lt;article&gt; Element",
+                        "p-7": "The &lt;article&gt; element specifies independent, self-contained content. An article should make sense on its own, and it should be possible to distribute it independently from the rest of the web site.",
+                        "p-8": "Some examples where you can use an article are: ",
+                        "ul-5": "<li>Forum posts</li>\n" +
+                            "    <li>Blog posts</li>\n" +
+                            "    <li>User comments</li>\n" +
+                            "    <li>Product cards</li>\n" +
+                            "     <li>Newspaper articles</li>",
+                            "h5-1": "Here is a brief video that talks about the reasons why and the cases when semantic HTML elements should be used over the div tag."
+                    }
                 },
-                test: [
+                test : [
                     { question: "Which tag is semantic for navigation?", options: ["<div>", "<nav>", "<span>"], answer: 1 },
+                    { question: "Which of the following is a type of HTML element?", options: ["non-semantic", "semantic", "both", "none"], answer: 2 },
+                    { question: "Which of the following is NOT a semantic element?", options: ["<form>", "<article>", "<div>", "<table>"], answer: 2 },
+                    { question: "What is the difference between semantic and non-semantic elements?", options: ["Semantic elements are only for developers, while non-semantic elements are for users.", "Semantic elements describe their meaning to the browser and developers, while non-semantic elements do not.", "Non-semantic elements are faster to load compared to semantic elements.", "Semantic elements cannot be styled using CSS."], answer: 1 }
                 ]
             },
             {
@@ -70,24 +129,46 @@ export const english = {
                 prerequisites: [2],
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-3.html",
-                    "htmlVars": {}
+                    "htmlVars": {
+                        "h3-1": "Introduction",
+                        "p-1": "Visual disabilities can be a result of many different causes, let them be part of them individual when they are born or developed after a traumatic brain injury, etc. No matter the cause, these disabilities cause similar challenges to users when they navigate the web.",
+                        "p-2": "The main idea of web accessibility for people with visual disabilities is enabling people with disabilities to perceive, understand, navigate, interact with, and contribute to the web.",
+                        "p-3": "This section will focus on what we can do to build an accessible web product for people with visual disabilities.",
+                        "h3-2": "Assistive Technologies",
+                        "p-4": "There are many assistive technologies that can be used to make it easier for people with visual disabilities to navigate through the web. Some of them include:",
+                        "ul-1": "<li>Screen readers</li>\n" +
+                            "            <li>Magnifiers</li>\n" +
+                            "            <li>Voiceover</li>\n" +
+                            "            <li>Braille displays etc.</li>",
+                        "p-5": "However, these assistive technologies alone are not enough to make the web accessible to users with disabilities. Here are four ways to improve accessibility:",
+                        "h3-3": "1. Support Effective Keyboard Navigation",
+                        "p-6": "Keyboard shortcuts can make navigation for visually impaired users far easier. A mouse is not useful for navigating because it requires hand-eye coordination.",
+                        "p-7": "This is especially true for users who:",
+                        "ul-2": "<li>are blind</li>\n" +
+                                "<li>use screen readers to surf the Web.</li>",
+                        "p-8": "For people with low vision, keyboard commands make it possible to navigate a site without having to strenuously focus and follow a mouse cursor across the screen.",
+                        "h3-4": "2. Limit and prioritize color in the interface",
+                        "p-9": "Test colors to make sure they have the proper contrast ratio for readability.",
+                        "p-10": "One tool you may use to test combinations of text color on background color is Stark plugin.",
+                        "p-11": "There are some needed text sizes like: ",
+                        "ul-3": "<li>WCAG 2.0 level AA requires a contrast ratio of 4.5:1 for normal text</li>\n" +
+                            "<li>3:1 for large text</li>",
+                        "h3-5": "3. Don’t rely on color alone to communicate important information",
+                        "p-long": "When it comes to: <ul><li>alerts</li><li>warnings and</li><li>actionable page</li></ul> elements such as textual <ul><li>links and</li> <li>buttons</li> </ul> clarify that these are meaningful to the user by incorporating more than a simple color change.",
+                        "p-12": "Almost universally, people understand that underlined blue text is a link.",
+                        "p-13": "Users will benefit from the use of icons and relevant labels accompanying alerts and actionable page elements. Each page element should have more than one visual cue.",
+                        "p-14": "Some examples of visual cues are:",
+                        "ul-4": "            <li>Images</li>\n" +
+                                 "            <li>Links</li>\n" +
+                            "            <li>Buttons</li>",
+                        "h5-1": "Here is a brief video that talks about the different visual disabilities and how you can use a screen reader as assistive technology and a way to help you navigate through the web."
+                    }
                 },
                 test: [
-                    {
-                        question: "What is the minimum contrast ratio recommended by WCAG for normal text?",
-                        options: ["2.1:1", "4.5:1", "3:1"],
-                        answer: 1
-                    },
-                    {
-                        question: "Which attribute is essential for making images accessible to screen readers?",
-                        options: ["src", "alt", "title"],
-                        answer: 1
-                    },
-                    {
-                        question: "What should you avoid when designing for color-blind users?",
-                        options: ["Using patterns", "Using color alone to convey information", "Using bold text"],
-                        answer: 1
-                    }
+                    { question: "Which of the following is NOT a visual cue ?", options: ["Image", "Link", "Button", "Meta"], answer: 3 },
+                    { question: "Which of the following is an example of an assistive technology for people with visual disabilities?", options: ["Keyboard shortcuts", "Screen readers", "High-speed internet", "Automatic form completion"], answer: 1 },
+                    { question: "What should you do to make sure that color combinations on a website are readable?", options: ["Use any color combination you like", "Test colors to ensure they have the proper contrast ratio", "Avoid using any colors", "Make the text the same color as the background"], answer: 1 },
+                    { question: "What is the main idea of web accessibility for people with visual disabilities?", options: ["To make websites faster to load", "To enable users to perceive, understand, navigate, interact with, and contribute to the web.", "To make websites more colorful.", "To increase website traffic."], answer: 1 }
                 ]
             },
             {
@@ -99,24 +180,46 @@ export const english = {
                 prerequisites: [3],
                 learningMaterials: {
                     "filePath": "/UOH-AWA/components/learning-materials/topic-4.html",
-                    "htmlVars": {}
+                    "htmlVars": {
+                        "h3-1": "Introduction",
+                        "p-1": "Cognitive disability (also known as intellectual disability) is a nebulous term describing a person who has greater difficulty with mental tasks than the average person. Cognitive disabilities are by far the most common type of disability.",
+                        "p-2": "The cause of cognitive disabilities most often is genetics. Another cause of it can be traumatic brain injuries. No matter the reason for these disabilities, it needs to be taken into account the need to create an accessible environment for people with this kind of disabilities.",
+                        "p-3": "This section will teach us more about cognitive disabilities, as well as focus on what we can do to build an accessible web product for people with cognitive disabilities.",
+                        "h3-2": "Cognitive accessibility",
+                        "p-4": "Cognitive accessibility is the practice of designing and developing digital content to make it easily understandable and usable by individuals with cognitive disabilities. These disabilities include:",
+                        "ul-1": "<li>Dyslexia</li>\n" +
+                                "<li>Autism</li>\n" +
+                                "<li>Attention deficit hyperactivity disorder (ADHD)</li>",
+                        "h3-3": "Classifications of cognitive disabilities:",
+                        "p-5": "There are actually two types of classifications of cognitive disabilities",
+                        "ul-2": "<li>Clinical Classifications<p style='margin-left: 20px;'>-Clinical diagnoses may be useful from a medical perspective for treatment, but not for the purposes of web accessibility.</p><ul><li>Autism</li><li>Down syndrome</li><li>Traumatic brain injury (TBI)</li><li>Dementia</li><li>Attention deficit disorder (ADD)</li><li>Dyslexia (difficulty reading)</li><li>Dyscalculia (difficulty with math)</li> </ul> </li> <li>Functional Classifications <p style='margin-left: 20px;'>-We will talk more about this classification in the next section.</p></li>",
+                        "h3-4": "Functional Classifications",
+                        "p-6": "Functional diagnoses are more useful for the purposes of web accessibility since it focuses on the user's abilities and challenges, irrespective of their medical or behavioral causes.",
+                        "p-7": "Multiple functional disabilities can stem from one clinical diagnosis: A person with memory deficits may also have difficulty with attention or problem-solving.",
+                        "p-8": "Functional categories of cognitive disabilities include difficulties with: ",
+                        "ul-2": "<li>Memory</li>\n" +
+                                "<li>Problem-solving</li>\n" +
+                                "<li>Attention</li>\n" +
+                                "<li>Reading, linguistic, and verbal comprehension</li>\n" +
+                                "<li>Math comprehension</li>\n" +
+                                "<li>Visual comprehension</li>",
+                        "p-9": "Functional classifications are useful in web accessibility because they align to concerns of web designers and developers.",
+                        "h3-5": "How to make a website accessible for cognitive disabilities",
+                        "p-10": "The Web Content Accessibility Guidelines (WCAG) include specific requirements for cognitive web accessibility, such as:",
+                        "ul-3": "<li><strong>Adaptability:</strong> Create content that can be presented in different ways (for example, a simpler layout) without losing information or structure. This ensures that users can customize the content presentation to suit their needs.</li>\n" +
+                                "<li><strong>Distinguishability:</strong> Make it easier for users to see and hear content by separating foreground from background. This includes ensuring sufficient contrast and avoiding background audio that interferes with foreground content.</li>\n" +
+                                "<li><strong>Sufficient Time:</strong> Provide users enough time to read and use content. Avoid imposing time limits, or offer options to extend or remove them, accommodating users who may require more time to process information.</li>\n" +
+                                "<li><strong>Readability:</strong> Make text content readable and understandable. Use clear and simple language, define unusual terms, and expand abbreviations to aid comprehension.</li>\n" +
+                                "<li><strong>Predictability:</strong> Create web pages that appear and operate in predictable ways. Consistent navigation and predictable functionality help users understand and interact with the website more easily.</li>\n" +
+                                "<li><strong>Input Assistance:</strong> Help users avoid and correct mistakes. Provide clear instructions, error suggestions, and confirmations to support users in completing forms and other interactive elements.</li>",
+                        "p-11": "Implementing these guidelines can significantly enhance the accessibility of your website for individuals with cognitive disabilities.",
+                        "h5-1": "Here is a brief video that talks about how you can recognize cognitive disabilities and how to accomodate the needs of people with cognitive disabilities."
+                    }
                 },
                 test: [
-                    {
-                        question: "Which of these is most important for users with cognitive disabilities?",
-                        options: ["Fancy animations", "Clear and consistent navigation", "Multiple navigation options"],
-                        answer: 1
-                    },
-                    {
-                        question: "What is a good practice for reducing cognitive load?",
-                        options: ["Breaking content into small chunks", "Using complex terminology", "Adding background music"],
-                        answer: 0
-                    },
-                    {
-                        question: "Which typography practice helps users with cognitive disabilities?",
-                        options: ["Decorative fonts", "Left-aligned text", "Justified text"],
-                        answer: 1
-                    }
+                    { question: "Which is the primary focus of cognitive accessibility?", options: ["Making web pages colorful and attractive", "Designing digital content to be easily understandable and usable by individuals with cognitive disabilities", "Removing all text from web pages", "Increasing the loading speed of a website"], answer: 1 },
+                    { question: "Which of the following is a guideline under the Web Content Accessibility Guidelines (WCAG) for cognitive web accessibility?", options: ["Add complex animations", "Reduce the size of text on web pages", "Provide sufficient time for users to read and use content", "Use abbreviations without definitions"], answer: 2 },
+                    { question: "What are the two main classifications of cognitive disabilities mentioned in the document?", options: ["Physical and Emotional", "Medical and Behavioral", "Visual and Auditory", "Clinical and Functional"], answer: 3 }
                 ]
             },
             {

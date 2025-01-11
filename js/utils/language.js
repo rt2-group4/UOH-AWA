@@ -13,7 +13,7 @@ export function initLanguage(){
     menuBtn.setAttribute('aria-expanded', 'false'); 
     menuBtn.setAttribute('tabindex', '0'); 
     menuBtn.innerHTML = `<span class="${translationMetadata[currentLanguage]['flag']}" 
-                            id="lang-span"></span>&ensp;${translationMetadata[currentLanguage]["displayName"]}`
+                            id="lang-span" role="presentation"></span>&ensp;${translationMetadata[currentLanguage]["displayName"]}`
 
     menuBtn.addEventListener('click', () => {
         e.preventDefault();
@@ -51,7 +51,7 @@ export function initLanguage(){
             dropdownItem.setAttribute('role', 'menuitem');
             dropdownItem.setAttribute('tabindex', '0');
             dropdownItem.id = `${val["tagId"]}`;
-            dropdownItem.innerHTML += `<span class="${val["flag"]}"></span>&ensp;${val["displayName"]}`;
+            dropdownItem.innerHTML += `<span class="${val["flag"]}" role="presentation"></span>&ensp;${val["displayName"]}`;
             dropdownItem.addEventListener('click', (e) => {
                 storageController.changePreferredLanguage(e.currentTarget.id);
             });
@@ -63,7 +63,5 @@ export function initLanguage(){
                 }
             })
             languageMenu.appendChild(dropdownItem);
-        }
-
-    });
-}
+        }});
+    }
