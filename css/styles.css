@@ -1363,7 +1363,7 @@ body.high-contrast #accessibility-toolbar button svg {
     height: 15px;
     background: white;
     text-align: center;
-    font-size: 10px;
+    font-size: 12px;
     color: white;
     transform: translateY(-50%);
 }

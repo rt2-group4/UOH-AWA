@@ -58,7 +58,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
      */
     function updateReadableElements() {
         readableElements = Array.from(
-            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, a, button, li, span, img')
+            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, legend, a, button, li, span, img')
         ).filter(element => {
             // Exclude elements with role="presentation"
             return element.getAttribute('role') !== 'presentation';
@@ -218,7 +218,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
     // Adjust font size for headings and buttons
     function adjustFontSizeForElements() {
-        const adjustableElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, .section-title, #accessibility-toolbar button, #accessibility-toggle, button, label, a');
+        const adjustableElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, legend, .section-title, #accessibility-toolbar button, #accessibility-toggle, button, label, a');
         adjustableElements.forEach(element => {
             // Reset font size to default before applying the new size
             element.style.fontSize = '';
@@ -287,7 +287,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
             const tick = document.createElement('div');
             tick.className = 'ruler-tick-horizontal';
             tick.style.left = `${i}px`;
-            tick.textContent = i; // Display measurement
+            tick.textContent = '\u00A0'+i.toString(); // Display measurement
             horizontalRuler.appendChild(tick);
         }
     }
@@ -431,7 +431,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
         }
 
         // Adjust Font Size for Headings and Buttons
-        const adjustableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .section-title, #accessibility-toolbar button, #accessibility-toggle');
+        const adjustableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, legend, .section-title, #accessibility-toolbar button, #accessibility-toggle');
         adjustableElements.forEach(element => {
             // Reset font size to default before applying the new size
             element.style.fontSize = '';
