@@ -25,5 +25,7 @@ export function initLanguage(){
             })
             languageMenu.appendChild(dropdownItem);
         }
+        
     });
 }
+
