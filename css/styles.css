@@ -1355,6 +1355,10 @@ body.high-contrast #accessibility-toolbar button svg {
 	fill: #ffd700 !important;
 }
 
+body.high-contrast .study-card {
+    background-color: #444;
+}
+
 /* Cursor Ruler Overlay */
 #cursor-ruler-overlay {
 	position: fixed;
