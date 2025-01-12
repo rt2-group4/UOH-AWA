@@ -194,21 +194,37 @@ function handleTestSubmission(event, topic) {
 
     const resultDiv = document.getElementById('test-result');
     let score = 0;
+    let answered = true;
 
     topic.test.forEach((q, index) => {
         const selected = document.querySelector(`input[name="question${index}"]:checked`);
-        if (selected && parseInt(selected.value) === q.answer) {
+        if(!selected){
+            answered = false;
+        } else if (selected && parseInt(selected.value) === q.answer) {
             score += 1;
         }
     });
 
-    const percentage = (score / topic.test.length) * 100;
-    const resultClass = percentage >= 70 ? 'success' : 'warning';
+    if(!answered){
+        resultDiv.className = `test-result incomplete`;
+        //used role so that it can be detectable as an important message
+        resultDiv.setAttribute('role', 'alert');
+        //used so that the message will be immediately announced
+        resultDiv.setAttribute('aria-live', 'assertive');
+        //used <strong> as well as color contrast in CSS so it can be more visually distinct
+        resultDiv.innerHTML = `<p> <strong>Error: </strong> You need to complete all questions before you submit your answers.</p>`;
+        return;
+    }
+
+    resultDiv.removeAttribute('role');
+    resultDiv.removeAttribute('aria-live');
+    const percentage = Math.round((score / topic.test.length) * 100);
+    const resultClass = score === topic.test.length ? 'success' : 'warning';
 
     resultDiv.className = `test-result ${resultClass}`;
     resultDiv.innerHTML = `
         <p>${translationData[prefLang]['yourScore']} ${score} / ${topic.test.length} (${percentage}%)</p>
-        <p>${percentage >= 70 ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
+        <p>${score === topic.test.length ? translationData[prefLang]['passRemark'] : translationData[prefLang]['retryRemark']}</p>
     `;
 }
 

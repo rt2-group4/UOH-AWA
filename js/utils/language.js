@@ -3,15 +3,14 @@ import { translationMetadata } from "./translations.js";
 
 export function initLanguage(elementId, btnId){
     const languageMenu = document.getElementById(elementId);
-    console.log("Init language")
     // get current language
     const currentLanguage = storageController.getPreferredLanguage()
 
     // Set button text and icon for active translation
     const menuBtn = document.getElementById(btnId)
     menuBtn.setAttribute('aria-haspopup', 'true');
-    menuBtn.setAttribute('aria-expanded', 'false'); 
-    menuBtn.setAttribute('tabindex', '0'); 
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('tabindex', '0');
     menuBtn.innerHTML = `<span class="${translationMetadata[currentLanguage]['flag']}" 
                             id="lang-span" role="presentation"></span>&ensp;${translationMetadata[currentLanguage]["displayName"]}`
 
@@ -45,7 +44,7 @@ export function initLanguage(elementId, btnId){
     // Add dropdown options for translation menu
     Object.entries(translationMetadata).map(entry => {
         let val = entry[1];
-        if (entry[0] !== currentLanguage){
+        if (entry[0] !== currentLanguage) {
             const dropdownItem = document.createElement('a');
             dropdownItem.setAttribute('class', 'dropdown-item');
             dropdownItem.setAttribute('role', 'menuitem');
@@ -63,5 +62,6 @@ export function initLanguage(elementId, btnId){
                 }
             })
             languageMenu.appendChild(dropdownItem);
-        }});
-    }
+        }
+    });
+}

@@ -592,6 +592,12 @@ main {
 	color: #721c24;
 }
 
+/* contrast complies with WCAG color contrast checker */
+.test-result.incomplete{
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
 @media (max-width: 768px) {
 	.learning-content-body {
 		padding: 1.5rem;
@@ -1009,7 +1015,7 @@ body.high-contrast p {
 }
 
 body.high-contrast .topic-details-description {
-	color: #ffffff !important;
+  color: #FFD700 !important;
 	line-height: 1.5 !important;
 	background-color: #222 !important;
 	padding: 0.5rem !important;
@@ -1019,6 +1025,7 @@ body.high-contrast .topic-details-description {
 	padding: 0.5rem !important;
 	border-left: 3px solid #ffd700 !important;
 	margin-bottom: 1rem !important;
+  font-weight: 500 !important;
 }
 
 body.high-contrast .topic-details-description:focus {
@@ -1156,7 +1163,12 @@ body.high-contrast .test-question {
 }
 
 body.high-contrast .test-options .form-check-label {
-	color: #ffffff !important;
+	  color: #ffffff !important;
+    background-color: #333 !important;
+    border: 1px solid #FFD700 !important;
+    margin-bottom: 1rem !important;
+    padding: 1rem !important;
+    border-radius: 4px !important;
 }
 
 body.high-contrast .test-options .form-check-input {
@@ -1513,3 +1525,30 @@ body.high-contrast #accessibility-toolbar button svg {
 .mobile-nav a:hover {
 	text-decoration: underline;
 }
+
+.in-text-a {
+  color: #0044cc;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.in-text-a:visited {
+  color: #6c2eb9;
+}
+
+.in-text-a:hover {
+  color: #002a80;
+  text-decoration: underline;
+}
+
+.in-text-a:focus {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.in-text-a[aria-disabled="true"] {
+  color: #7a7a7a;
+  text-decoration: none;
+  cursor: not-allowed;
+}
+

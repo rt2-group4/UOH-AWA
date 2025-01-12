@@ -1,11 +1,13 @@
 import { english } from "./translation_dictionaries/english.js";
 import { french } from "./translation_dictionaries/french.js";
 import { german } from "./translation_dictionaries/german.js";
+import { albanian } from "./translation_dictionaries/albanian.js";
 
 const translationTexts = {
     "en-GB": english,
     "fr-FR": french,
-    "de-DE": german
+    "de-DE": german,
+    "al-AL": albanian
 }
 
 // let translationData = {}

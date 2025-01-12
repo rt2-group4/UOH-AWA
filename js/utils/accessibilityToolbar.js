@@ -228,6 +228,8 @@ export function initialiseAccessibilityToolbar(retries, delay) {
             baseFontSize = fontSize + 2;
         } else if (tag === 'button' || element.id === 'accessibility-toggle') {
             baseFontSize = fontSize;
+        } else if (tag === 'legend') {
+            baseFontSize = fontSize + 2;
         } else {
             baseFontSize = fontSize;
         }
