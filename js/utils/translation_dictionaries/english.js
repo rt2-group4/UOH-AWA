@@ -444,13 +444,12 @@ export const english = {
                         "h3-6": "Offer Customization Options",
                         "p-14": "Customization options can provide flexibility to users and help address a variety of individual needs and preferences, which can vary significantly among users.",
                         "p-15": "In order to allow users to adjust color schemes can make a website more accessible for people with specific needs or preferences.",
-                        "p-16": "In order to make sure that your web product is accessible for everyone, you have to:",
                         "ul-4": "<li>Implement customizable themes</li>\n" +
                             "            <li>Include high-contrast or dark mode options</li>\n" +
                             "            <li>Provide clear instructions on how users can switch between these modes</li>\n" +
                             "            <li>Ensure that these options don’t interfere with content readability or functionality</li>",
                         "h3-7": "Best Practices",
-                        "p-17": "Here is a brief video that discusses the best practices for making your app easier to use and explains how testing for accessibility can improve your app's user experience for all users."
+                        "p-16": "Here is a brief video that discusses the best practices for making your app easier to use and explains how testing for accessibility can improve your app's user experience for all users."
                     }
                 },
                 test: [
