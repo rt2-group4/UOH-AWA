@@ -30,6 +30,7 @@ main {
 .dropdown-menu a {
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		border-color 0.15s ease-in-out;
+	color: black !important;
 }
 
 /* Set dropdown menu hover background to Bootstrap primary */
