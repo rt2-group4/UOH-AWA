@@ -73,6 +73,6 @@ The web pages have been built using a combination of JavaScript, HTML and CSS. A
   - Tickets were created individual pieces of work
   - Members would assign themselves to tickets and move to the correct stage in line with progress
 ## Communication
-- The team conducted regular meetings using Google Meet. Meeting notes can be found **here**
+- The team conducted regular meetings using Google Meet. Meeting notes can be found in 'meeting notes'
 - The team communicated regularly using a group WhatsApp
 
