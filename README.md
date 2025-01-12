@@ -1,8 +1,9 @@
 # Building an accessible web application as a team
-This respository contains all necessary code and documentation for an accessible web application centred around accessibility that meets WCAG standards Level AA. The repository owners (members of Group 4) are as follows: 
+This respository contains all necessary code and documentation for an accessible web application centred around accessibility that meets WCAG Level AA standard. The repository owners (members of Group 4) are as follows: 
 - Alex Jacobs
 - Alisa Shehaj
 - Callum Lovatt
+- Gioele Prete
 - Kyrylo Kostakov
 - Oluwaseyi Daniel
 
