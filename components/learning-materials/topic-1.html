@@ -22,27 +22,31 @@
     <section aria-labelledby="quote-heading">
         <h3 id="quote-heading">{{h3-4}}</h3>
         <a href="https://ialabs.ie/a-history-of-the-wcag/#:~:text=%E2%80%9CThe%20power%20of%20the%20web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect.%E2%80%9D%20Tim%20Berners%2DLee%2C%20founder%20of%20the%20Internet." 
-        style="text-decoration: none;">
-        <blockquote style="
-            font-size: 1.2em; 
-            font-style: italic; 
-            color: #555; 
-            border-left: 4px solid #0078D7; 
-            padding-left: 15px; 
-            margin: 15px 0;
-            line-height: 1.6;
-            transition: color 0.3s, border-left-color 0.3s;
-        " 
-        onmouseover="this.style.color='#0078D7'; this.style.borderLeftColor='#555';"
-        onmouseout="this.style.color='#555'; this.style.borderLeftColor='#0078D7';">
-            {{blq-1}}
-        </blockquote>
-    </a>
-    
+           style="text-decoration: none;"
+           role="link"
+           tabindex="0">
+            <blockquote style="
+                font-size: 1.2em;
+                font-style: italic;
+                color: #555;
+                border-left: 4px solid #0078D7;
+                padding-left: 15px;
+                margin: 15px 0;
+                line-height: 1.6;
+                transition: color 0.3s, border-left-color 0.3s;
+            "
+            onmouseover="this.style.color='#0078D7'; this.style.borderLeftColor='#555';"
+            onmouseout="this.style.color='#555'; this.style.borderLeftColor='#0078D7';"
+            onfocus="this.style.color='#0078D7'; this.style.borderLeftColor='#555';"
+            onblur="this.style.color='#555'; this.style.borderLeftColor='#0078D7';"
+            onkeydown="if(event.key === 'Enter' || event.key === ' ') { window.location.href=this.href; }">
+                {{blq-1}}
+            </blockquote>
+        </a>
     </section>
 
     <section>
-    <h5>{{h5-1}}</h5>
+    <h4>{{h4-1}}</h4>
     <iframe
         class="embed-youtube-video"
         title="Video explaining what accessibility is and also mentioning different types of assistive technologies."
