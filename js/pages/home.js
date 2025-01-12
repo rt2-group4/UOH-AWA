@@ -1,6 +1,6 @@
 import topicsController from '../controllers/topicsController.js';
 import storageController from '../controllers/storageController.js';
-import {translationData} from "../utils/translations.js";
+import { translationData } from "../utils/translations.js";
 
 // retrieve user's preferred language
 const prefLang = localStorage["prefLang"]
@@ -72,6 +72,10 @@ export function initHome() {
             location.reload();
         }
     });
+
+    equalizeCardHeights();
+
+    window.addEventListener('resize', equalizeCardHeights);
 }
 
 function createTopicCard(topic) {
@@ -188,3 +192,18 @@ function createEstimatedTime(topic) {
 
     return estimatedTime;
 }
+
+function equalizeCardHeights() {
+    const cards = document.querySelectorAll('.card');
+    let maxHeight = 0;
+
+    cards.forEach(card => {
+        card.style.height = 'auto';
+        maxHeight = Math.max(maxHeight, card.offsetHeight);
+    });
+
+    cards.forEach(card => {
+        card.style.minHeight = `${maxHeight}px`;
+    });
+}
+
