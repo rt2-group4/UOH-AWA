@@ -29,6 +29,7 @@ export const english = {
         "footerTxt": "AccessibleWebApp Team | University Project",
         "passRemark": "Great job! You've passed the test.",
         "retryRemark": "Keep studying and try again!",
+        "testHeading": "Objective Test: Achieve 60% or Higher to Pass",
         "topicsData": [
             {
                 id: 1,
@@ -88,8 +89,8 @@ export const english = {
                         "h3-2": "HTML elements",
                         "p-2": "HTML elements are divided into:",
                         "ul-1": "<li>semantic elements</li>\n" +
-                                "    <li>non-semantic elements</li>",
-                        "p-3": "A semantic element clearly describes its meaning to both the browser and the developer.Some examples of semantic elements are :",
+                                "<li>non-semantic elements</li>",
+                        "p-3": "A semantic element clearly describes its meaning to both the browser and the developer. Some examples of semantic elements are :",
                         "ul-2": "<li>&lt;form&gt;</li>\n" +
                             "    <li>&lt;table&gt;</li>\n" +
                             "    <li>&lt;article&gt;</li>",
@@ -268,19 +269,19 @@ export const english = {
                             "<li><b>Roger Voice</b></li><ul><li>Allows users to engage in voice calls with real-time " +
                             "subtitles, available on both iOS and Android</li></ul>",
                         "h3-5": "Improving Web Accessibility for Hearing Disabilities",
-                        "ul-4": "<li><h4>Offer Multiple Ways to Get in Touch</h4></li><ul><li>Don't just offer a phone number " +
+                        "ul-4": "<li><b>Offer Multiple Ways to Get in Touch</b></li><ul><li>Don't just offer a phone number " +
                             "in your contact details. Include other options such as an email address, or maybe even " +
                             "Live Chat</li></ul>" +
-                            "<li><h4>Add Media Player Controls</h4></li><ul><li>Ensure that media players have controls " +
+                            "<li><b>Add Media Player Controls</b></li><ul><li>Ensure that media players have controls " +
                             "to allow users to activate captions and adjust volume</li></ul>" +
-                            "<li><h4>Include Subtitles & Captions</h4></li><ul><li>Always provide subtitles or captions " +
+                            "<li><b>Include Subtitles & Captions</b></li><ul><li>Always provide subtitles or captions " +
                             "for audio and video content on your website</li></ul>" +
-                            "<li><h4>Summarise Content</h4></li><ul><li>Provide clear, jargon-free summaries for all " +
+                            "<li><b>Summarise Content</b></li><ul><li>Provide clear, jargon-free summaries for all " +
                             "audio or video content</li></ul>" +
-                            "<li><h4>Stick to Simple Language</h4></li><ul><li>Use simple language to ensure content is " +
+                            "<li><b>Stick to Simple Language</b></li><ul><li>Use simple language to ensure content is " +
                             "understandable for those with hearing impairments or those for whom the content's language " +
                             "is a second language</li></ul>" +
-                            "<li><h4>Ensure Alerts Have Visual Indicators</h4></li><ul><li>Pair audio alerts with " +
+                            "<li><b>Ensure Alerts Have Visual Indicators</b></li><ul><li>Pair audio alerts with " +
                             "visual cues so they are not missed by users with hearing impairments</li></ul>"
                     }
                 },
@@ -339,7 +340,7 @@ export const english = {
                         "h3-5": "3. Add a Search Field to Your Website",
                         "p-8": "Some users with motor disabilities rely on voice recognition systems. While these systems simplify navigation, it’s usually easier to type a phrase into a text field using speech recognition than to select specific elements on the page with voice commands.",
                         "p-9": "Optimize search functionality by ensuring your pages are indexed and search results are sorted in a user-friendly way.",
-                        "h5-1": "Here is a brief video that discusses the best practices for making your app easier to use and talk about testing for accessibility to improve your app's user experience for all users."
+                        "h4-1": "Here is a brief video that discusses the best practices for making your app easier to use and talk about testing for accessibility to improve your app's user experience for all users."
                     }
                 },
                 test: [
@@ -367,16 +368,16 @@ export const english = {
                             "            <li>Sip-and-puff switches</li>\n" +
                             "            <li>Single switches</li>",
                         "p-4": "However, these assistive technologies alone are not enough to make the web accessible to users with disabilities. Here are three ways to improve accessibility:",
-                        "h4-1": "1. Support Effective Keyboard Navigation",
+                        "h3-2": "1. Support Effective Keyboard Navigation",
                         "p-5": "People with motor disabilities often find it impossible to use a mouse. By making your website effectively usable with a keyboard, you open up access to users of these assistive technologies. Specifically, ensure that the keyboard focus elements are visible on your page using CSS.",
-                        "h4-2": "2. Reduce Actions that Require Too Many Keypresses",
+                        "h3-3": "2. Reduce Actions that Require Too Many Keypresses",
                         "p-6": "Most motor-assistive tools rely on small, specific muscle groups. For example:",
                         "ul-2": "<li>Head wand users rely on their neck muscles for every action.</li>\n" +
                             "            <li>Mouth stick users use mouth movements to select keys on a virtual keyboard.</li>",
                         "p-7": "To reduce fatigue, provide practical ways to navigate your site with fewer actions. For example:",
                         "ul-3": "<li>Allow skipping to the end of long pages or lists with a single click.</li>\n" +
                             "            <li>Structure navigation menus as multi-level trees.</li>",
-                        "h4-3": "3. Add a Search Field to Your Website",
+                        "h3-4": "3. Add a Search Field to Your Website",
                         "p-8": "Some users with motor disabilities rely on voice recognition systems. While these systems simplify navigation, it’s usually easier to type a phrase into a text field using speech recognition than to select specific elements on the page with voice commands.",
                         "p-9": "Optimize search functionality by ensuring your pages are indexed and search results are sorted in a user-friendly way.",
                     }
@@ -443,13 +444,13 @@ export const english = {
                         "h3-6": "Offer Customization Options",
                         "p-14": "Customization options can provide flexibility to users and help address a variety of individual needs and preferences, which can vary significantly among users.",
                         "p-15": "In order to allow users to adjust color schemes can make a website more accessible for people with specific needs or preferences.",
+                        "h3-7": "Best Practices",
                         "p-16": "In order to make sure that your web product is accessible for everyone, you have to:",
                         "ul-4": "<li>Implement customizable themes</li>\n" +
                             "            <li>Include high-contrast or dark mode options</li>\n" +
                             "            <li>Provide clear instructions on how users can switch between these modes</li>\n" +
                             "            <li>Ensure that these options don’t interfere with content readability or functionality</li>",
-                        "h3-7": "Best Practices",
-                        "p-17": "Here is a brief video that discusses the best practices for making your app easier to use and explains how testing for accessibility can improve your app's user experience for all users."
+                        "h4-1": "Here is a brief video that discusses the best practices for making your app easier to use and explains how testing for accessibility can improve your app's user experience for all users."
                     }
                 },
                 test: [

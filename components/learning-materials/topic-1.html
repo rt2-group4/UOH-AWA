@@ -1,30 +1,30 @@
 <div id="content-topic-1">
-    <section class="intro-heading">
+    <section class="intro-heading" aria-labelledby="intro-heading">
         <h3 id="intro-heading">{{h3-1}}</h3>
         <p>{{p-1}}</p>
         <p>{{p-2}}</p>
     </section>
+    
     <section aria-labelledby="accessibility-context-heading">
         <h3 id="accessibility-context-heading">{{h3-2}}</h3>
         <p>{{p-3}}</p>
         <p>{{p-4}}</p>
-        <ul>{{ul-1}}</ul>
+        <ul aria-label="List of accessibility areas to be considered during design">{{ul-1}}</ul>
     </section>
+
     <section aria-labelledby="wcag-heading">
         <h3 id="wcag-heading">{{h3-3}}</h3>
-        <p>{{p-}}</p>
+        <p>{{p-5}}</p>
         <p>{{p-6}}</p>
-        <ul>{{ul-2}}</ul>
+        <ul aria-label="List of WCAG principles">{{ul-2}}</ul>
         <p>{{p-7}}</p>
-        <ul>{{ul-3}}</ul>
+        <ul aria-label="Benefits from following these principles">{{ul-3}}</ul>
     </section>
 
     <section aria-labelledby="quote-heading">
         <h3 id="quote-heading">{{h3-4}}</h3>
-        <a href="https://ialabs.ie/a-history-of-the-wcag/#:~:text=%E2%80%9CThe%20power%20of%20the%20web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect.%E2%80%9D%20Tim%20Berners%2DLee%2C%20founder%20of%20the%20Internet." 
-           style="text-decoration: none;"
-           role="link"
-           tabindex="0">
+        <a href="https://ialabs.ie/a-history-of-the-wcag/#:~:text=%E2%80%9CThe%20power%20of%20the%20web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect.%E2%80%9D%20Tim%20Berners%2DLee%2C%20founder%20of%20the%20Internet."
+            style="text-decoration: none;" role="link" tabindex="0" aria-label="Tim Berners-Lee quote on accessibility">
             <blockquote style="
                 font-size: 1.2em;
                 font-style: italic;
@@ -34,25 +34,23 @@
                 margin: 15px 0;
                 line-height: 1.6;
                 transition: color 0.3s, border-left-color 0.3s;
-            "
-            onmouseover="this.style.color='#0078D7'; this.style.borderLeftColor='#555';"
-            onmouseout="this.style.color='#555'; this.style.borderLeftColor='#0078D7';"
-            onfocus="this.style.color='#0078D7'; this.style.borderLeftColor='#555';"
-            onblur="this.style.color='#555'; this.style.borderLeftColor='#0078D7';"
-            onkeydown="if(event.key === 'Enter' || event.key === ' ') { window.location.href=this.href; }">
+            " onmouseover="this.style.color='#0078D7'; this.style.borderLeftColor='#555';"
+                onmouseout="this.style.color='#555'; this.style.borderLeftColor='#0078D7';"
+                onfocus="this.style.color='#0078D7'; this.style.borderLeftColor='#555';"
+                onblur="this.style.color='#555'; this.style.borderLeftColor='#0078D7';"
+                onkeydown="if(event.key === 'Enter' || event.key === ' ') { window.location.href=this.href; }">
                 {{blq-1}}
             </blockquote>
         </a>
     </section>
 
-    <section>
-    <h4>{{h4-1}}</h4>
-    <iframe
-        class="embed-youtube-video"
-        title="Video explaining what accessibility is and also mentioning different types of assistive technologies."
-        src="https://www.youtube.com/embed/pEDl1GPTdzc?si=PocduSBR9_719JZI"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-</section>
+    <section aria-labelledby="video-section-heading">
+        <h4 id="video-section-heading">{{h4-1}}</h4>
+        <iframe class="embed-youtube-video"
+            title="Video explaining what accessibility is and mentioning different types of assistive technologies."
+            src="https://www.youtube.com/embed/pEDl1GPTdzc?si=PocduSBR9_719JZI"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </section>
 </div>

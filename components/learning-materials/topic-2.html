@@ -3,36 +3,37 @@
         <h3 id="intro-heading">{{h3-1}}</h3>
         <p>{{p-1}}</p>
     </section>
+
     <section aria-labelledby="html-elements-heading">
         <h3 id="html-elements-heading">{{h3-2}}</h3>
         <p>{{p-2}}</p>
-        <ul>{{ul-1}}</ul>
+        <ul aria-label="HTML elements are divided into">{{ul-1}}</ul>
         <p>{{p-3}}</p>
-        <ul>{{ul-2}}</ul>
+        <ul aria-label="Examples of semantic HTML elements">{{ul-2}}</ul>
         <p>{{p-4}}</p>
-        <ul>{{ul-3}}</ul>
+        <ul aria-label="Examples of non-semantic HTML elements">{{ul-3}}</ul>
     </section>
+    
     <section aria-labelledby="section-element-heading">
         <h3 id="section-element-heading">{{h3-3}}</h3>
         <p>{{p-5}}</p>
-        <ul>{{ul-4}}</ul>
+        <ul aria-label="Example use-cases for the section element">{{ul-4}}</ul>
     </section>
 
     <section aria-labelledby="article-element-heading">
         <h3 id="article-element-heading">{{h3-4}}</h3>
         <p>{{p-6}}</p>
         <p>{{p-7}}</p>
-        <ul>{{ul-5}}</ul>
+        <ul aria-label="Example use-cases for the article element">{{ul-5}}</ul>
     </section>
 
-    <section>
-    <h4>{{h4-1}}</h4>
-    <iframe
-        class="embed-youtube-video"
-        title="Video explaining reasons why and the cases when semantic HTML elements should be used over the div tag"
-        src="https://www.youtube.com/embed/bOUhq46fd5g?si=A1NDrg5vOfoZNJXl"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-</section>
+    <section aria-labelledby="video-section-heading">
+        <h4 id="video-section-heading">{{h4-1}}</h4>
+        <iframe class="embed-youtube-video"
+            title="Video explaining reasons why and the cases when semantic HTML elements should be used over the div tag"
+            src="https://www.youtube.com/embed/bOUhq46fd5g?si=A1NDrg5vOfoZNJXl"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </section>
 </div>

@@ -29,6 +29,7 @@ export const albanian = {
         "footerTxt": "AccessibleWebApp Team | Projekt Universiteti ",
         "passRemark": "Përgëzime! Ju e keni kaluar testin!",
         "retryRemark": "Vazhdoni te studioni dhe provoni përsëri!",
+        "testHeading": "Testi Objektiv: Arrini 60% ose më Shumë për të Kaluar",
         "topicsData": [
             {
                 id: 1,

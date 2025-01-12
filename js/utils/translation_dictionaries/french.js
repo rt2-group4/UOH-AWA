@@ -29,6 +29,7 @@ export const french = {
         "footerTxt": "AccessibleWebApp Équipe | Projet universitaire",
         "passRemark": "Super travail ! Vous avez réussi le test.",
         "retryRemark": "Continuez à étudier et réessayez!",
+        "testHeading": "Test Objectif : Obtenez 60 % ou Plus pour Réussir",
         "topicsData": [
             {
                 id: 1,

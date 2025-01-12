@@ -1,29 +1,46 @@
 <div id="content-topic-9">
-    <h3>{{h3-1}}</h3>
-    <p>{{p-1}}</p>
-    <h3>{{h3-2}}</h3>
-    <p>{{p-2}}</p>
-    <blockquote><i>{{blq-1}}</i></blockquote>
-    <p>{{p-3}}</p>
-    <ul>{{ul-1}}</ul>
-    <p>{{p-4}}</p>
-    <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/St61pEPUuFw"
+    <section class="intro-heading">
+        <h3 id="intro-heading">{{h3-1}}</h3>
+        <p>{{p-1}}</p>
+    </section>
+
+    <section aria-labelledby="crpd-heading">
+        <h3 id="crpd-heading">{{h3-2}}</h3>
+        <p>{{p-2}}</p>
+        <blockquote aria-label="A quote promoting the rights of persons with disabilities">
+            <i>{{blq-1}}</i>
+        </blockquote>
+        <p>{{p-3}}</p>
+        <ul aria-label="Key principles of the CRPD">{{ul-1}}</ul>
+        <p>{{p-4}}</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/St61pEPUuFw"
+            title="Brief video summarizing the CRPD"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
-    </iframe>
-    <h3>{{h3-3}}</h3>
-    <p>{{p-5}}</p>
-    <h4>{{h4-1}}</h4>
-    <p>{{p-6}}</p>
-    <p>{{ul-2}}</p>
-    <p>{{p-7}}</p>
-    <h4>{{h4-2}}</h4>
-    <p>{{p-8}}</p>
-    <ul>{{ul-3}}</ul>
-    <h3>{{h3-4}}</h3>
-    <p>{{p-9}}</p>
-    <ul>{{ul-4}}</ul>
+        </iframe>
+    </section>
+
+    <section aria-labelledby="equality-act-heading">
+        <h3 id="equality-act-heading">{{h3-3}}</h3>
+        <p>{{p-5}}</p>
+
+        <section aria-labelledby="protected-characteristics-heading">
+            <h4 id="protected-characteristics-heading">{{h4-1}}</h4>
+            <p>{{p-6}}</p>
+            <ul aria-label="Protected characteristics under the Equality Act">{{ul-2}}</ul>
+            <p>{{p-7}}</p>
+        </section>
+
+        <section aria-labelledby="types-of-discrimination-heading">
+            <h4 id="types-of-discrimination-heading">{{h4-2}}</h4>
+            <p>{{p-8}}</p>
+            <ul aria-label="Types of discrimination under the Equality Act">{{ul-3}}</ul>
+        </section>
+    </section>
+
+    <section aria-labelledby="meaning-of-crpd-and-equality-act-heading">
+        <h3 id="meaning-of-crpd-and-equality-act-heading">{{h3-4}}</h3>
+        <p>{{p-9}}</p>
+        <ul aria-label="Tips for complying with the CRPD and Equality Act">{{ul-4}}</ul>
+    </section>
 </div>
