@@ -11,6 +11,8 @@ export function initHome() {
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
 
+    const isMobileView = window.innerWidth < 768;
+
     // Create and append topic cards
     topicsController.topics.forEach(topic => {
         const topicItem = document.createElement('div');
@@ -21,6 +23,25 @@ export function initHome() {
         track.appendChild(topicItem);
     });
 
+    if (!isMobileView) {
+        setupCarousel(track, prevButton, nextButton);
+    } else {
+        // For mobile, no carousel functionality
+        track.style.display = 'block';
+        prevButton.style.display = 'none';
+        nextButton.style.display = 'none';
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const newIsMobileView = window.innerWidth < 768;
+        if (newIsMobileView !== isMobileView) {
+            location.reload();
+        }
+    });
+}
+
+function setupCarousel(track, prevButton, nextButton) {
     let currentIndex = 0;
     const itemsPerView = getItemsPerView();
     const maxIndex = Math.max(0, topicsController.topics.length - itemsPerView);
@@ -37,7 +58,6 @@ export function initHome() {
         track.style.transition = transition ? 'transform 0.5s ease-in-out' : 'none';
         track.style.transform = `translateX(${offset}%)`;
 
-        // Update button states
         prevButton.disabled = currentIndex === 0;
         nextButton.disabled = currentIndex >= maxIndex;
 
@@ -45,7 +65,6 @@ export function initHome() {
         nextButton.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
     }
 
-    // Initial position and button states
     updateCarousel(false);
 
     prevButton.setAttribute('aria-label', 'Previous topics');
@@ -62,14 +81,6 @@ export function initHome() {
         if (currentIndex < maxIndex) {
             currentIndex++;
             updateCarousel();
-        }
-    });
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        const newItemsPerView = getItemsPerView();
-        if (newItemsPerView !== itemsPerView) {
-            location.reload();
         }
     });
 }
@@ -119,44 +130,44 @@ function createCardBody(topic) {
 
     // Create button group container
     const buttonGroup = document.createElement('div');
-    buttonGroup.className = 'button-group';
+    buttonGroup.className = 'button-group'; // Use the button group class for responsive styling
 
     const showDetailsOrGoToTopicBtn = createShowDetailsOrGoToTopicButton(topic);
     const startStudyingBtn = createStartStudyingButton(topic);
 
-    // Check if we're currently studying this topic
     const isStudying = storageController.isStudyingNow(topic.id);
 
     if (isStudying) {
-        // If studying, we only have 2 buttons - stack them vertically
-        showDetailsOrGoToTopicBtn.className = 'btn btn-primary w-100';
+        // When studying, stack the two buttons vertically
+        showDetailsOrGoToTopicBtn.className = 'btn btn-primary w-100'; // Full width
         showDetailsOrGoToTopicBtn.setAttribute('aria-label', `Go to topic content page: ${topic.title}`);
+
+        startStudyingBtn.className = 'btn btn-danger w-100'; // Full width
         startStudyingBtn.setAttribute('aria-label', `Stop studying topic: ${topic.title}`);
+
+        // Append buttons to the button group
         buttonGroup.appendChild(showDetailsOrGoToTopicBtn);
         buttonGroup.appendChild(startStudyingBtn);
     } else {
-        // If not studying, we have 3 buttons - use the original layout
-        const actionRow = document.createElement('div');
-        actionRow.className = 'button-row';
-
+        // For not studying, use horizontal alignment for desktop
         showDetailsOrGoToTopicBtn.className = 'btn btn-primary';
         showDetailsOrGoToTopicBtn.setAttribute('aria-label', `Go to the topic details page: ${topic.title}`);
+
         startStudyingBtn.className = 'btn btn-success';
         startStudyingBtn.setAttribute('aria-label', `Start studying topic: ${topic.title}`);
 
-        actionRow.appendChild(showDetailsOrGoToTopicBtn);
-        actionRow.appendChild(startStudyingBtn);
-        buttonGroup.appendChild(actionRow);
+        // Add the two main buttons
+        buttonGroup.appendChild(showDetailsOrGoToTopicBtn);
+        buttonGroup.appendChild(startStudyingBtn);
 
-        // Create second row for Study Later
-        const studyLaterRow = document.createElement('div');
-        studyLaterRow.className = 'button-row';
+        // Add Study Later button
         const studyLaterBtn = createStudyLaterButton(topic);
+        studyLaterBtn.className = 'btn btn-secondary';
         studyLaterBtn.setAttribute('aria-label', `Add topic: ${topic.title} to study plan`);
-        studyLaterRow.appendChild(studyLaterBtn);
-        buttonGroup.appendChild(studyLaterRow);
+        buttonGroup.appendChild(studyLaterBtn);
     }
 
+    // Append elements to card body
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
     cardBody.appendChild(estimatedTime);

@@ -763,6 +763,7 @@ main {
 	pointer-events: none;
 }
 
+/* Tablet View: Adjust to 2 items per row */
 @media (max-width: 992px) {
 	.topic-item {
 		flex: 0 0 calc(50% - 1rem);
@@ -770,27 +771,34 @@ main {
 	}
 }
 
+/* Mobile View: Show one item per row and hide controls */
 @media (max-width: 768px) {
 	.topic-item {
 		flex: 0 0 calc(100% - 1rem);
 		min-width: calc(100% - 1rem);
 	}
 
+	.topics-track {
+		display: block;
+	}
+
 	.carousel-control {
-		width: 60px;
-		height: 60px;
-	}
-
-	.carousel-control.prev {
-		left: -30px;
-	}
-
-	.carousel-control.next {
-		right: -30px;
+		display: none;
 	}
 
 	.carousel-control-icon {
 		font-size: 48px;
+	}
+
+	.button-group {
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 0.5rem;
+	}
+
+	.button-group .btn {
+		width: 100%;
+		text-align: center;
 	}
 }
 
