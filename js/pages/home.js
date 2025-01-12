@@ -82,6 +82,18 @@ function setupCarousel(track, prevButton, nextButton) {
             updateCarousel();
         }
     });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const newItemsPerView = getItemsPerView();
+        if (newItemsPerView !== itemsPerView) {
+            location.reload();
+        }
+    });
+
+    equalizeCardHeights();
+
+    window.addEventListener('resize', equalizeCardHeights);
 }
 
 function createTopicCard(topic) {
