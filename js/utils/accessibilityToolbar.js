@@ -12,6 +12,9 @@ export function initialiseAccessibilityToolbar(retries, delay) {
     // Select Toolbar Elements
     const toolbar = document.getElementById('accessibility-toolbar');
     const toggleBtn = document.getElementById('accessibility-toggle');
+    const toggleBtnMobile = document.getElementById(
+        'accessibility-toggle-mobile'
+    );
     const increaseFontBtn = document.getElementById('increase-font');
     const decreaseFontBtn = document.getElementById('decrease-font');
     const resetBtn = document.getElementById('reset-accessibility');
@@ -21,22 +24,39 @@ export function initialiseAccessibilityToolbar(retries, delay) {
     const screenReaderBtn = document.getElementById('toggle-screen-reader');
 
     // Retry logic if elements are not found
-    if (![toolbar, toggleBtn, increaseFontBtn, decreaseFontBtn, resetBtn, toggleContrastBtn, screenMaskBtn, cursorRulerBtn, screenReaderBtn].every(Boolean)) {
+    if (
+        ![
+            toolbar,
+            toggleBtn,
+            increaseFontBtn,
+            decreaseFontBtn,
+            resetBtn,
+            toggleContrastBtn,
+            screenMaskBtn,
+            cursorRulerBtn,
+            screenReaderBtn,
+        ].every(Boolean)
+    ) {
         if (retries > 0) {
-            setTimeout(() => initialiseAccessibilityToolbar(retries - 1, delay), delay);
+            setTimeout(
+                () => initialiseAccessibilityToolbar(retries - 1, delay),
+                delay
+            );
         } else {
-            console.error('[Accessibility Toolbar] Initialization failed after retries.');
+            console.error(
+                '[Accessibility Toolbar] Initialization failed after retries.'
+            );
         }
         return;
     }
 
     // Accessibility Settings with Defaults
     let settings = {
-        fontSize: 16,         // Base font size in pixels
-        highContrast: false,  // High contrast mode toggle
-        screenMask: false,    // Screen mask toggle
-        cursorRuler: false,   // Cursor ruler toggle
-        screenReader: false   // Screen reader toggle
+        fontSize: 16, // Base font size in pixels
+        highContrast: false, // High contrast mode toggle
+        screenMask: false, // Screen mask toggle
+        cursorRuler: false, // Cursor ruler toggle
+        screenReader: false, // Screen reader toggle
     };
 
     // Load settings from localStorage if available
@@ -58,12 +78,16 @@ export function initialiseAccessibilityToolbar(retries, delay) {
      */
     function updateReadableElements() {
         readableElements = Array.from(
-            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, legend, a, button, li, span, img')
-        ).filter(element => {
-            // Exclude elements with role="presentation"
+            document.querySelectorAll(
+                'p, h1, h2, h3, h4, h5, h6, legend, a, button, li, span, img'
+            )
+        ).filter((element) => {
+            // Exclude elements with role='presentation'
             return element.getAttribute('role') !== 'presentation';
         });
-            console.log(`[Accessibility Toolbar] Found ${readableElements.length} readable elements.`);
+        console.log(
+            `[Accessibility Toolbar] Found ${readableElements.length} readable elements.`
+        );
     }
 
     /**
@@ -78,10 +102,13 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
         const element = readableElements[currentElementIndex];
         element.classList.add('screen-reader-focus');
-        const text = element.innerText || element.getAttribute('alt') || 'No readable text';
+        const text =
+            element.innerText ||
+            element.getAttribute('alt') ||
+            'No readable text';
 
         const speech = new SpeechSynthesisUtterance(text);
-        const currentLanguage = storageController.getPreferredLanguage()
+        const currentLanguage = storageController.getPreferredLanguage();
         speech.lang = currentLanguage;
         speech.rate = 1;
         speech.pitch = 1;
@@ -90,7 +117,8 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
         speech.onend = () => {
             element.classList.remove('screen-reader-focus');
-            currentElementIndex = (currentElementIndex + 1) % readableElements.length;
+            currentElementIndex =
+                (currentElementIndex + 1) % readableElements.length;
             setTimeout(startScreenReader, 1000);
         };
     }
@@ -100,7 +128,9 @@ export function initialiseAccessibilityToolbar(retries, delay) {
      */
     function stopScreenReader() {
         window.speechSynthesis.cancel();
-        readableElements.forEach(el => el.classList.remove('screen-reader-focus'));
+        readableElements.forEach((el) =>
+            el.classList.remove('screen-reader-focus')
+        );
         currentElementIndex = 0;
     }
 
@@ -110,7 +140,13 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
     // Toggle Toolbar Visibility
     toggleBtn.addEventListener('click', () => {
-        toolbar.style.display = toolbar.style.display === 'flex' ? 'none' : 'flex';
+        toolbar.style.display =
+            toolbar.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    toggleBtnMobile.addEventListener('click', () => {
+        toolbar.style.display =
+            toolbar.style.display === 'flex' ? 'none' : 'flex';
     });
 
     // Increase Font Size
@@ -142,7 +178,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
             highContrast: false,
             screenMask: false,
             cursorRuler: false,
-            screenReader: false
+            screenReader: false,
         };
         applySettings();
         saveSettings();
@@ -206,31 +242,43 @@ export function initialiseAccessibilityToolbar(retries, delay) {
     function adjustPadding(element, fontSize) {
         // Check if the original padding is already stored
         if (!element.dataset.originalPadding) {
-            element.dataset.originalPadding = window.getComputedStyle(element).padding;
+            element.dataset.originalPadding =
+                window.getComputedStyle(element).padding;
         }
 
         // Retrieve original padding values
-        const originalPadding = element.dataset.originalPadding.split(' ').map(val => parseFloat(val));
+        const originalPadding = element.dataset.originalPadding
+            .split(' ')
+            .map((val) => parseFloat(val));
 
         // Adjust padding based on the current font size
-        const adjustedPadding = originalPadding.map(val => Math.max(4, val * (fontSize / 16)));
+        const adjustedPadding = originalPadding.map((val) =>
+            Math.max(4, val * (fontSize / 16))
+        );
         element.style.padding = `${adjustedPadding.join('px ')}px`;
     }
 
-
     // Adjust font size for headings and buttons
     function adjustFontSizeForElements() {
-        const adjustableElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, legend, .section-title, #accessibility-toolbar button, #accessibility-toggle, button, label, a');
-        adjustableElements.forEach(element => {
+        const adjustableElements = document.querySelectorAll(
+            'p, h1, h2, h3, h4, h5, h6, legend, .section-title, #accessibility-toolbar button, #accessibility-toggle, button, label, a'
+        );
+        adjustableElements.forEach((element) => {
             // Reset font size to default before applying the new size
             element.style.fontSize = '';
 
             // Calculate and apply base font size
-            const baseFontSize = calculateBaseFontSize(element, settings.fontSize);
+            const baseFontSize = calculateBaseFontSize(
+                element,
+                settings.fontSize
+            );
             element.style.fontSize = `${baseFontSize}px`;
 
             // Adjust padding for buttons and toggle
-            if (element.tagName.toLowerCase() === 'button' || element.id === 'accessibility-toggle') {
+            if (
+                element.tagName.toLowerCase() === 'button' ||
+                element.id === 'accessibility-toggle'
+            ) {
                 adjustPadding(element, settings.fontSize);
             }
         });
@@ -252,15 +300,17 @@ export function initialiseAccessibilityToolbar(retries, delay) {
      * @param {boolean} active - Whether to activate the ruler.
      */
     function initializeCursorRuler(active) {
-        let cursorRulerOverlay = document.getElementById('cursor-ruler-overlay');
+        let cursorRulerOverlay = document.getElementById(
+            'cursor-ruler-overlay'
+        );
 
         // Create the ruler overlay if it doesn't exist
         if (!cursorRulerOverlay) {
             cursorRulerOverlay = document.createElement('div');
             cursorRulerOverlay.id = 'cursor-ruler-overlay';
             cursorRulerOverlay.innerHTML = `
-                <div class="cursor-ruler-horizontal"></div>
-                <div class="cursor-ruler-measurements"></div>
+                <div class='cursor-ruler-horizontal'></div>
+                <div class='cursor-ruler-measurements'></div>
             `;
             document.body.appendChild(cursorRulerOverlay);
 
@@ -279,7 +329,9 @@ export function initialiseAccessibilityToolbar(retries, delay) {
      * Creates tick marks and labels on the horizontal ruler.
      */
     function populateRuler() {
-        const horizontalRuler = document.querySelector('.cursor-ruler-horizontal');
+        const horizontalRuler = document.querySelector(
+            '.cursor-ruler-horizontal'
+        );
         if (!horizontalRuler) return;
 
         horizontalRuler.innerHTML = ''; // Clear existing ticks
@@ -289,7 +341,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
             const tick = document.createElement('div');
             tick.className = 'ruler-tick-horizontal';
             tick.style.left = `${i}px`;
-            tick.textContent = '\u00A0'+i.toString(); // Display measurement
+            tick.textContent = '\u00A0' + i.toString(); // Display measurement
             horizontalRuler.appendChild(tick);
         }
     }
@@ -299,11 +351,18 @@ export function initialiseAccessibilityToolbar(retries, delay) {
      * @param {MouseEvent} event - The mousemove event.
      */
     function updateRulerPosition(event) {
-        const cursorRulerOverlay = document.getElementById('cursor-ruler-overlay');
-        if (!cursorRulerOverlay || cursorRulerOverlay.style.display !== 'block') return;
+        const cursorRulerOverlay = document.getElementById(
+            'cursor-ruler-overlay'
+        );
+        if (!cursorRulerOverlay || cursorRulerOverlay.style.display !== 'block')
+            return;
 
-        const horizontalLine = cursorRulerOverlay.querySelector('.cursor-ruler-horizontal');
-        const measurements = cursorRulerOverlay.querySelector('.cursor-ruler-measurements');
+        const horizontalLine = cursorRulerOverlay.querySelector(
+            '.cursor-ruler-horizontal'
+        );
+        const measurements = cursorRulerOverlay.querySelector(
+            '.cursor-ruler-measurements'
+        );
 
         if (horizontalLine) {
             horizontalLine.style.top = `${event.clientY}px`;
@@ -367,7 +426,10 @@ export function initialiseAccessibilityToolbar(retries, delay) {
             if (bottomMask) bottomMask.style.display = 'none';
 
             // Remove mousemove listener
-            document.removeEventListener('mousemove', screenMaskMouseMoveHandler);
+            document.removeEventListener(
+                'mousemove',
+                screenMaskMouseMoveHandler
+            );
         }
     }
 
@@ -395,14 +457,17 @@ export function initialiseAccessibilityToolbar(retries, delay) {
             try {
                 settings = JSON.parse(savedSettings);
             } catch (e) {
-                console.error('[Accessibility Toolbar] Failed to parse saved settings:', e);
+                console.error(
+                    '[Accessibility Toolbar] Failed to parse saved settings:',
+                    e
+                );
                 // Reset to defaults if parsing fails
                 settings = {
                     fontSize: 16,
                     highContrast: false,
                     screenMask: false,
                     cursorRuler: false,
-                    screenReader: false
+                    screenReader: false,
                 };
                 saveSettings();
             }
@@ -433,8 +498,10 @@ export function initialiseAccessibilityToolbar(retries, delay) {
         }
 
         // Adjust Font Size for Headings and Buttons
-        const adjustableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, legend, .section-title, #accessibility-toolbar button, #accessibility-toggle');
-        adjustableElements.forEach(element => {
+        const adjustableElements = document.querySelectorAll(
+            'h1, h2, h3, h4, h5, h6, legend, .section-title, #accessibility-toolbar button, #accessibility-toggle'
+        );
+        adjustableElements.forEach((element) => {
             // Reset font size to default before applying the new size
             element.style.fontSize = '';
 
@@ -442,7 +509,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
             let baseFontSize;
             const tag = element.tagName.toLowerCase();
 
-            applyFontSize()
+            applyFontSize();
         });
     }
 }

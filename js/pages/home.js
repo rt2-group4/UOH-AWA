@@ -11,6 +11,8 @@ export function initHome() {
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
 
+    const isMobileView = window.innerWidth < 768;
+
     // Create and append topic cards
     topicsController.topics.forEach(topic => {
         const topicItem = document.createElement('div');
@@ -21,6 +23,24 @@ export function initHome() {
         track.appendChild(topicItem);
     });
 
+    if (!isMobileView) {
+        setupCarousel(track, prevButton, nextButton);
+    } else {
+        track.style.display = 'block';
+        prevButton.style.display = 'none';
+        nextButton.style.display = 'none';
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const newIsMobileView = window.innerWidth < 768;
+        if (newIsMobileView !== isMobileView) {
+            location.reload();
+        }
+    });
+}
+
+function setupCarousel(track, prevButton, nextButton) {
     let currentIndex = 0;
     const itemsPerView = getItemsPerView();
     const maxIndex = Math.max(0, topicsController.topics.length - itemsPerView);
@@ -37,7 +57,6 @@ export function initHome() {
         track.style.transition = transition ? 'transform 0.5s ease-in-out' : 'none';
         track.style.transform = `translateX(${offset}%)`;
 
-        // Update button states
         prevButton.disabled = currentIndex === 0;
         nextButton.disabled = currentIndex >= maxIndex;
 
@@ -45,7 +64,6 @@ export function initHome() {
         nextButton.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
     }
 
-    // Initial position and button states
     updateCarousel(false);
 
     prevButton.setAttribute('aria-label', 'Previous topics');
@@ -114,6 +132,8 @@ function createTopicImage(topic) {
 }
 
 function createCardBody(topic) {
+    const isMobileView = window.innerWidth < 768;
+
     const cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
@@ -141,16 +161,21 @@ function createCardBody(topic) {
     } else {
         // If not studying, we have 3 buttons - use the original layout
         const actionRow = document.createElement('div');
-        actionRow.className = 'button-row';
 
         showDetailsOrGoToTopicBtn.className = 'btn btn-primary';
         showDetailsOrGoToTopicBtn.setAttribute('aria-label', `Go to the topic details page: ${topic.title}`);
         startStudyingBtn.className = 'btn btn-success';
         startStudyingBtn.setAttribute('aria-label', `Start studying topic: ${topic.title}`);
 
-        actionRow.appendChild(showDetailsOrGoToTopicBtn);
-        actionRow.appendChild(startStudyingBtn);
-        buttonGroup.appendChild(actionRow);
+        if(!isMobileView){
+            actionRow.className = 'button-row';
+            actionRow.appendChild(showDetailsOrGoToTopicBtn);
+            actionRow.appendChild(startStudyingBtn);
+            buttonGroup.appendChild(actionRow);
+        }else{
+            buttonGroup.appendChild(showDetailsOrGoToTopicBtn);
+            buttonGroup.appendChild(startStudyingBtn);
+        }
 
         // Create second row for Study Later
         const studyLaterRow = document.createElement('div');
@@ -206,4 +231,3 @@ function equalizeCardHeights() {
         card.style.minHeight = `${maxHeight}px`;
     });
 }
-
