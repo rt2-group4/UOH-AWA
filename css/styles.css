@@ -1762,3 +1762,32 @@ body.high-contrast #accessibility-toolbar button svg {
         justify-content: center;
     }
 }
+
+@media screen and (max-width: 768px) {
+    #dropdown-menu-mobile {
+        background-color: #ffffff; /* Set background to white */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        border-radius: 8px; /* Rounded corners for a modern look */
+        overflow: hidden; /* Ensure content stays within rounded corners */
+    }
+
+    #dropdown-menu-mobile .dropdown-item {
+        color: #ffffff !important; /* Force text color to white */
+        background-color: transparent; /* Transparent background for items */
+        padding: 12px 16px; /* Add padding for neat alignment */
+        font-size: 16px; /* Ensure text is readable on mobile */
+        text-decoration: none; /* Remove underlines from links */
+        display: flex;
+        align-items: center; /* Align flag and text vertically */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #dropdown-menu-mobile .dropdown-item:hover {
+        background-color: #007bff; /* Highlight background on hover */
+        color: #ffffff; /* Ensure text stays white on hover */
+    }
+
+    #dropdown-menu-mobile .fi {
+        margin-right: 8px; /* Add spacing between flag and text */
+    }
+}
