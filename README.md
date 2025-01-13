@@ -8,7 +8,16 @@ This respository contains all necessary code and documentation for an accessible
 - Oluwaseyi Daniel
 
 # Accessibility conformance
-The web pages conform to WCAG Level AA. This has been confirmed using both WAVE and Axe Dev Tools Chrome extensions. A full accessibility report from the final web page versions obtained from Axe Dev Tools can be found **here**.<br><br>
+The final version of each web page conforms to WCAG. This has been confirmed using several conformance tests:
+  - Accessibilitychecker
+    - This paid WCAG conformance software was used to test all pages within the website and confirms WCAG 2.2 conformance
+    - The summary of the check can be found in 'conformance_testing/accessibility_checker'
+  - accessScan
+    - This was also used and confirms WCAG conformance
+      - A full summary and examples of summaries of individual pages can be found in 'conformance_testing/accessScan'
+  - WAVE plugin
+    - This was used throughout development. Some screenshots of example tests on a selection of web pages can be found in 'conformance_testing/WAVE'  
+
 A template was used in pull requests that included a section on accessibility and testing. Testing was conducted throughout the development process. When accessibility issues were identified they were noted and Trello tickets were made to address them where appropriate.
 
 # Summary
@@ -73,6 +82,5 @@ The web pages have been built using a combination of JavaScript, HTML and CSS. A
   - Tickets were created individual pieces of work
   - Members would assign themselves to tickets and move to the correct stage in line with progress
 ## Communication
-- The team conducted regular meetings using Google Meet. Meeting notes can be found in 'meeting notes'
+- The team conducted regular meetings using Google Meet. Meeting notes can be found in 'meeting_notes'
 - The team communicated regularly using a group WhatsApp
-
