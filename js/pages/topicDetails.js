@@ -112,6 +112,7 @@ function createPrerequisites(topic) {
             const preTopic = topicsController.topics.find(t => t.id === preId);
             if (preTopic) {
                 const link = document.createElement('a');
+                link.className = 'in-text-a'
                 link.href = `./topic-details.html?id=${preTopic.id}`;
                 link.textContent = preTopic.title;
                 link.setAttribute('aria-label', `Pre-requisite topic: ${preTopic.title}`);

@@ -190,7 +190,7 @@ async function loadAccessibilityToolbar() {
  * @param {number} retries - Number of retry attempts remaining.
  * @param {number} delay - Delay between retries in milliseconds.
  */
-function populateAccessibilityToolbar() {
+async function populateAccessibilityToolbar() {
     console.log(
         `[${filename}] Attempting to initialize Accessibility Toolbar. Retries left: ${retries}`
     );
@@ -216,6 +216,34 @@ function populateAccessibilityToolbar() {
         );
     }
 }
+
+// Add an event listener for the keydown event
+document.addEventListener('keydown', function(event) {
+	console.log('Keydown event detected'); // Log when a keydown event is captured
+
+	// Check if the event target matches the accessibility toolbar link
+	if (
+		event.target.matches('#accessibility-toolbar-link') &&
+		event.key === 'Enter'
+	) {
+		console.log('Enter key pressed on skip link'); // Log when the Enter key is pressed on the skip link
+
+		event.preventDefault(); // Prevent default behavior
+
+		// Perform the desired action
+		const toolbar = document.getElementById('accessibility-toolbar');
+		if (toolbar) {
+			console.log('Accessibility toolbar found'); // Log when the toolbar is found
+			toolbar.style.display = 'flex'; // Show the toolbar
+			toolbar.focus(); // Focus the toolbar
+			console.log('Accessibility toolbar is now visible and focused'); // Log when the toolbar is focused
+		} else {
+			console.warn('Accessibility toolbar not found'); // Log if the toolbar is not found
+		}
+	} else if (event.target.matches('#accessibility-toolbar-link')) {
+		console.log('Key pressed on skip link but not Enter'); // Log when a different key is pressed on the skip link
+	}
+});
 
 /* ==========================================
    Header and Footer Loading Functions
