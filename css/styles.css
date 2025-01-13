@@ -1561,3 +1561,231 @@ body.high-contrast #accessibility-toolbar button svg {
   cursor: not-allowed;
 }
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 10px;
+  background: #004080;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
+/* Mobile Navigation Container */
+#mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #1e1e2f, #2a2a3b);
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items from the top */
+    align-items: center; /* Center items horizontally */
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+#mobile-nav.active {
+    transform: translateX(0);
+}
+
+
+
+#mobile-nav .nav-link {
+    display: flex; /* Enable flex layout */
+    justify-content: space-between; /* Space between text and badge */
+    align-items: center; /* Vertically align items */
+    width: 100%; /* Full width for consistency */
+    max-width: 400px; /* Optional: Limit width */
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+#mobile-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Styling the Badge */
+#mobile-nav .study-plan-count {
+    margin-left: 8px; /* Add space between text and badge */
+    background-color: #ff6b6b;
+    color: #ffffff;
+    padding: 4px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    display: flex;
+    align-items: center; /* Center badge text vertically */
+    justify-content: center; /* Center badge text horizontally */
+}
+
+/* Language Selector */
+#mobile-nav .lang-dropdown {
+    margin-top: 24px;
+    width: 90%;
+    text-align: center; /* Center the dropdown button */
+}
+
+#mobile-nav .language-selector {
+    width: 100%;
+    max-width: 400px; /* Optional: Limit width for aesthetics */
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#mobile-nav .language-selector:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+#mobile-nav .dropdown-menu {
+    margin-top: 8px;
+    border-radius: 12px;
+    background: #2a2a3b;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+#mobile-nav .dropdown-item {
+    padding: 12px 16px;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center text in dropdown items */
+    transition: background 0.3s ease, color 0.2s ease;
+}
+
+#mobile-nav .dropdown-item:hover {
+    background: #ff6b6b;
+    color: #ffffff;
+}
+
+/* Accessibility Toolbar Button */
+#mobile-nav #accessibility-toggle-mobile {
+    margin-top: 24px;
+    width: 90%;
+    max-width: 400px; /* Limit button width */
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #28a745;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#mobile-nav #accessibility-toggle-mobile:hover {
+    background: #218838;
+    transform: scale(1.03);
+}
+
+@media screen and (max-width: 768px) {
+    /* Ensure #nav-links-mobile centers its children */
+    #nav-links-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Horizontally center child elements */
+        gap: 16px; /* Even spacing between links */
+        width: 100% !important;  /* Ensure container spans the full width */
+		padding: 0 !important;
+		margin: 0 !important;
+    }
+
+    /* Ensure each nav-link is centered */
+    #nav-links-mobile .nav-link {
+        display: flex;
+        justify-content: center; /* Horizontally center content within the link */
+        align-items: center; /* Vertically center text and badge */
+        width: 90%; /* Ensure consistent width relative to the viewport */
+        max-width: 400px; /* Optional: Limit maximum width for aesthetics */
+        padding: 12px 16px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #ffffff;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+        border-radius: 12px; /* Modern rounded corners */
+        transition: background 0.3s ease, transform 0.2s ease;
+        text-align: center; /* Ensure text is centered */
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    #nav-links-mobile .nav-link:hover {
+        background: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    /* Badge styling for Study Plan */
+    #nav-links-mobile .study-plan-count {
+        margin-left: 8px; /* Space between text and badge */
+        background-color: #ff6b6b;
+        color: #ffffff;
+        padding: 4px 10px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 50px; /* Rounded badge */
+        display: flex;
+        align-items: center; /* Vertically align badge text */
+        justify-content: center; /* Horizontally align badge text */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #dropdown-menu-mobile {
+        background-color: #ffffff; /* Set background to white */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        border-radius: 8px; /* Rounded corners for a modern look */
+        overflow: hidden; /* Ensure content stays within rounded corners */
+    }
+
+    #dropdown-menu-mobile .dropdown-item {
+        color: #ffffff !important; /* Force text color to white */
+        background-color: transparent; /* Transparent background for items */
+        padding: 12px 16px; /* Add padding for neat alignment */
+        font-size: 16px; /* Ensure text is readable on mobile */
+        text-decoration: none; /* Remove underlines from links */
+        display: flex;
+        align-items: center; /* Align flag and text vertically */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #dropdown-menu-mobile .dropdown-item:hover {
+        background-color: #007bff; /* Highlight background on hover */
+        color: #ffffff; /* Ensure text stays white on hover */
+    }
+
+    #dropdown-menu-mobile .fi {
+        margin-right: 8px; /* Add spacing between flag and text */
+    }
+}

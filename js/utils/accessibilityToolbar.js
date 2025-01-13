@@ -22,6 +22,7 @@ export function initialiseAccessibilityToolbar(retries, delay) {
     const screenMaskBtn = document.getElementById('screen-mask');
     const cursorRulerBtn = document.getElementById('cursor-ruler');
     const screenReaderBtn = document.getElementById('toggle-screen-reader');
+    const closeBtn = document.getElementById('toggle-accessibility-toolbar');
 
     // Retry logic if elements are not found
     if (
@@ -140,6 +141,11 @@ export function initialiseAccessibilityToolbar(retries, delay) {
 
     // Toggle Toolbar Visibility
     toggleBtn.addEventListener('click', () => {
+        toolbar.style.display =
+            toolbar.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
         toolbar.style.display =
             toolbar.style.display === 'flex' ? 'none' : 'flex';
     });
